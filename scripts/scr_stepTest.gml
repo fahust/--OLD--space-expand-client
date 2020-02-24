@@ -8,28 +8,9 @@ if global.shootaudio > 0 {
     global.shootaudio -= 1*(1+(global.shootaudio/20))
 }
 //TURRET OBJ FAIS TROP RAMER OPTI
-okzone[0] = 0
-okzone[1] = 0
-okzone[2] = 0
-okzone[3] = 0
-okzone[4] = 0
-okzone[5] = 0
-okzone[6] = 0
-okzone[7] = 0
-okzone[8] = 0
-okzone[9] = 0
-okzone[10] = 0
-okzone[11] = 0
-okzone[12] = 0
-okzone[13] = 0
-okzone[14] = 0
-okzone[15] = 0
-okzone[16] = 0
-okzone[17] = 0
-okzone[18] = 0
-okzone[19] = 0
-okzone[20] = 0
-okzone[21] = 0
+for (ifz = 0; ifz < 22; ifz += 1){
+    okzone[ifz] = 0
+}
 
 
 
@@ -1433,288 +1414,305 @@ if ds_grid_get(planetary,204,buildaffect) > 0 {//HP PLANET
     }//if global.loadphp
 }//if ds_grid_get(planetary,204,buildaffect) > 0 {//HP PLANET
 if alarm[4] < 0 && global.modesolo = 0{
-//envoi de troupe dans l'atmo si ship libre encore ,et pour durer de 1000 step en rotation
+    //envoi de troupe dans l'atmo si ship libre encore ,et pour durer de 1000 step en rotation
 
-if device_mouse_check_button_released(0, mb_left) && point_distance(xxmousebase, yymousebase, xxmousefin, yymousefin) < 30 {
-xxmouse = device_mouse_x(0);
-yymouse = device_mouse_y(0);
+    if device_mouse_check_button_released(0, mb_left) && point_distance(xxmousebase, yymousebase, xxmousefin, yymousefin) < 30 {
+        xxmouse = device_mouse_x(0);
+        yymouse = device_mouse_y(0);
 
-notroupe = 0
-if instance_exists(obj_ship){
-with(obj_ship){if suislepatron = 1 {other.notroupe = 1}}}
-
-
-if point_distance(room_width/2,room_height/2,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,7,planetnowid)/25)*optiportabletaille {
-colorrect29 = c_white
-if menuplanet = 0 && notroupe = 0 && echelle = 0 && menuhelp = 0 {
+        notroupe = 0
+        if instance_exists(obj_ship){
+            with(obj_ship){
+                if suislepatron = 1 {other.notroupe = 1}
+            }
+        }
 
 
-var iff;
-for (iff = 0; iff < 8; iff += 1)
-   {
-   randomize();
-if ds_grid_get(planetary,36,planetnowid) > ds_grid_get(planetary,53,planetnowid) &&
-ds_grid_get(planetary,32,planetnowid) = global.idfixe {
-
-//modeship = choose(1,2,3,4,5)
-modeship = 1
-if iff = 1 or iff = 2 {nbrvar = 2}else
-if iff = 3 {nbrvar = 1}else
-{nbrvar = 0}
-if ds_grid_get(planetary,53+iff,planetnowid) < ds_grid_get(planetary,42+iff,planetnowid)  && ds_grid_get(planetary,42+iff,planetnowid) > nbrvar  {modeship = iff}
-
-//if modeship5 > 1 &&  modeship4 > 1  {modeship = choose(modeship5,modeship4)}
-
-
-
-okcreate = 0
-if ds_grid_get(planetary,53+modeship,planetnowid) < ds_grid_get(planetary,42+modeship,planetnowid) {okcreate = 1}
-//if ds_grid_get(planetary,36,buildaffect) > 1 {//vaisseau allie
-if okcreate = 1 && modeship > 0 {
-//ds_grid_add(planetary,53,planetnowid,1) 
-with(instance_create(x,y,obj_ship)){
-//if other.modeship > 5 {show_message(other.modeship)}
-mode = other.modeship
-alarm[6] = 3000
-colorship = ds_grid_get(other.planetary,32,other.planetnowid)
-enemy = ds_grid_get(obj_planetary.planetary,32,other.planetnowid);
-stationaire = 1
-planetparent = other.planetnowid
-rotaaleatdecol = random(360)
-image_angle = point_direction(room_width/2,room_height/2,room_width/2+lengthdir_x(100,rotaaleatdecol),room_height/2+lengthdir_y(100,rotaaleatdecol))
-xx = room_width/2+lengthdir_x((ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*other.optiportabletaille,rotaaleatdecol)
-yy = room_height/2+lengthdir_y((ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*other.optiportabletaille,rotaaleatdecol)
-vargetdsgrid[1] = ds_grid_get(obj_planetary.planetary,51,other.planetnowid)
-vargetdsgrid[2] = ds_grid_get(obj_planetary.planetary,34,other.planetnowid)
-vargetdsgrid[3] = (ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*other.optiportabletaille
-vargetdsgrid[4] = ds_grid_get(obj_planetary.planetary,32,other.planetnowid)
-}}
-}else{iff = 10}
-}
-}
-}else{
-
-}
-}
-if point_distance(room_width/2,room_height/2,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,7,planetnowid)/25)*optiportabletaille {
-colorrect29 = c_white}else{
-colorrect29 = planetarycolor
-}
-
-//selectioner des ship et enregistrer
-
-
-xxmousefin = 0
-yymousefin = 0
-if device_mouse_check_button_pressed(0, mb_left) {
-xxmousebase = device_mouse_x(0);
-yymousebase = device_mouse_y(0);
-}
-
-
-
-if device_mouse_check_button_released(0, mb_left) {
-if alarm[3] < 0 {alarm[3] = 20}else{doubletap = 1}
-xxmousefin = device_mouse_x(0);
-yymousefin = device_mouse_y(0);
-if point_distance(xxmousebase, yymousebase, xxmousefin, yymousefin) < 30 {
-//ENVOYER SUR CIBLE SI PLANETNOW = PARENT
-if instance_exists(obj_ship){
-with(obj_ship){if suislepatron = 1 && planetparent = obj_planetary.planetnowid 
-&& obj_planetary.menuplanet = 0 && obj_planetary.echelle = 0 && obj_planetary.menuhelp = 0 {
-if other.yymousefin > room_height/10 && other.yymousefin < room_height-(room_height/10) && 
-other.xxmousefin > room_width/10 && other.xxmousefin < room_width-room_width/10 {
-vardist2 = point_distance(xxcursor,yycursor,room_width/2,room_height/2)
-
-xxcursor = other.xxmousefin
-yycursor = other.yymousefin
-}
-}}}
-
-xxmousefin = 0
-yymousefin = 0
-xxmousebase = 0
-yymousebase = 0
-}
-}
-
-//double tap pour enlever tout les vaisseau
-if echelle = 0 && menuplanet = 0 && menuhelp = 0 {
-if doubletap = 1 {
-if instance_exists(obj_ship){with(obj_ship){//si trop proche enlever le patron des ship de la planete actuel
-if suislepatron = 1 {suislepatron = 0}
-}}doubletap = 0}}
-
-
-if xxmousefin = 0 {}else{
-if xxmousefin < xxmousebase {xxmousefin2 = xxmousefin;xxmousefin = xxmousebase;xxmousebase = xxmousefin2}
-if yymousefin < yymousebase {yymousefin2 = yymousefin;yymousefin = yymousebase;yymousebase = yymousefin2}
-
-if instance_exists(obj_ship){
-with(obj_ship){
-if point_in_rectangle(xx, yy,other.xxmousebase, other.yymousebase, other.xxmousefin, other.yymousefin) {
-if enemy = global.idfixe && partir = 0 && planetparent = obj_planetary.planetnowid {suislepatron = 1 ;}
-}}}
-xxmousefin = 0
-yymousefin = 0
-xxmousebase = 0
-yymousebase = 0
-}
-
-
-
-//envoyer coloniser ou conquerrir en clickant sur planet non colo en demandant si ship exist tjr
-//si oui envoyer ses ship pour de vrai avec return ,a la fin du compteur les transformer en attaquant 1 sur la planete
-//faire pop par 15 les vaisseau moi je dis
-
-if device_mouse_check_button_released(0, mb_left) && echelle = 0 && menuplanet = 0  && menuhelp = 0 {
-xxmouse = device_mouse_x(0);
-yymouse = device_mouse_y(0);
-
-//MOON
-if point_distance(xxlune1,yylune1,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,83,planetnowid)/25)*optiportabletaille {
-checkok = 0
-if instance_exists(obj_ship){with(obj_ship){if suislepatron = 1 {if planetparent = obj_planetary.planetnowid {
-if type = 5 && other.checkok = 0 {
-ds_grid_add(obj_planetary.planetary,47,planetparent,-1)
-ds_grid_add(obj_planetary.planetary,58,planetparent,-1)
-ds_grid_add(obj_planetary.planetary,53,planetparent,-1)
-partir = 4
-other.checkok += 1 
-suislepatron = 0
-alarm[6] = -1
-}}}}}
-}
-
-//PLANET
-if point_distance(room_width/2,room_height/2,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,7,planetnowid)/25)*optiportabletaille {
-
-if global.phpload = 1 {
-if ds_grid_get(planetary,242,planetnowid) = global.idguild {//ENVOYER FLOTTE A GUILD ALLIE
-
-
-checkok1 = 0
-checkok2 = 0
-checkok3 = 0
-checkok4 = 0
-checkok5 = 0
-checkok6 = 0
-checkok7 = 0
-grandealarm = 0
-if instance_exists(obj_ship){with(obj_ship){if suislepatron = 1 {if planetparent = obj_planetary.planetnowid {}else{
-if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe {
-partir = 5
-if type = 1 {other.checkok1 += 1}
-if type = 2 {other.checkok2 += 1}
-if type = 3 {other.checkok3 += 1}
-if type = 4 {other.checkok4 += 1}
-if type = 5 {other.checkok5 += 1}
-if type = 6 {other.checkok6 += 1}
-if type = 7 {other.checkok7 += 1}
-suislepatron = 0
-destinationship = other.planetnowid
-alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))
-//alarm[7] = 10
-other.grandealarm = alarm[7]}}}}}
-
-
-
-
-
-
-
-}else if ds_grid_get(obj_planetary.planetary,32,planetnowid) = 0 {//coloniser
-if destroyplanetnow = 0 {
-if ds_grid_get(planetary,204,buildaffect) >= 0 {
-checkok = 0
-if instance_exists(obj_ship){with(obj_ship){if suislepatron = 1 {if planetparent = obj_planetary.planetnowid {}else{
-if type = 5 && other.checkok = 0 {
-ds_grid_add(obj_planetary.planetary,47,planetparent,-1)
-ds_grid_add(obj_planetary.planetary,58,planetparent,-1)
-ds_grid_add(obj_planetary.planetary,53,planetparent,-1)
-partir = 1
-other.checkok += 1 
-suislepatron = 0
-alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))}}}}}
-
-//coute 10 vaisseau mode
-//if checkok >= 10 {
-if checkok = 0{}else{
-
-ds_grid_set(planetary,33,planetnowid,(ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10)))//}
-}
-}
-}
-}else if ds_grid_get(obj_planetary.planetary,32,planetnowid) > 0 && ds_grid_get(obj_planetary.planetary,32,planetnowid) > 0 {//attaquer
-
-if ds_grid_get(planetary,36,0) > 5 { //si plus de 5 vaisseau alors attaquer possible
-
-checkok = 0
-type1plus = 0
-type2plus = 0
-type3plus = 0
-type4plus = 0
-type5plus = 0
-type6plus = 0
-type7plus = 0
-alarm7 = 0
-if instance_exists(obj_ship){with(obj_ship){if suislepatron = 1 {if planetparent = obj_planetary.planetnowid {}else{
-partir = 2
-other.checkok += 1 
-global.planetparentship = planetparent;
-if type = 1 {other.type1plus += 1}
-if type = 2 {other.type2plus += 1}
-if type = 3 {other.type3plus += 1}
-if type = 4 {other.type4plus += 1}
-if type = 5 {other.type5plus += 1}
-if type = 6 {other.type6plus += 1}
-if type = 7 {other.type7plus += 1}
-suislepatron = 0
-alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))
-other.alarm7 = alarm[7]}}}}
-if checkok = 0 or menuplanet = 1 or menuhelp = 1 {}else{
-if ds_grid_get(planetary,34,planetnowid) < 6 {
-ds_grid_set(planetary,51,planetnowid,alarm7)
-ds_grid_set(planetary,34,planetnowid,global.idfixe)
-
-ds_grid_set(planetary,52,planetnowid,checkok)
-if type1plus > 0 {ds_grid_set(planetary,231,planetnowid,type1plus)}
-if type2plus > 0 {ds_grid_set(planetary,232,planetnowid,type2plus)}
-if type3plus > 0 {ds_grid_set(planetary,233,planetnowid,type3plus)}
-if type4plus > 0 {ds_grid_set(planetary,234,planetnowid,type4plus)}
-if type5plus > 0 {ds_grid_set(planetary,235,planetnowid,type5plus)}
-if type6plus > 0 {ds_grid_set(planetary,236,planetnowid,type6plus)}
-if type7plus > 0 {ds_grid_set(planetary,237,planetnowid,type7plus)}
-ds_grid_set(planetary,240,planetnowid,floor(ds_grid_get(planetary,37,planetnowid)))
-if global.phpload = 1 {
-    if ds_grid_get(planetary,32,planetnowid) = floor(global.idfixe) {
-        ds_grid_set(planetary,230,planetnowid,global.name)
+        if point_distance(room_width/2,room_height/2,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,7,planetnowid)/25)*optiportabletaille {
+            colorrect29 = c_white
+            if menuplanet = 0 && notroupe = 0 && echelle = 0 && menuhelp = 0 {
+                var iff;
+                for (iff = 0; iff < 8; iff += 1){
+                    randomize();
+                    if ds_grid_get(planetary,36,planetnowid) > ds_grid_get(planetary,53,planetnowid) && ds_grid_get(planetary,32,planetnowid) = global.idfixe {
+                        modeship = 1
+                        if iff = 1 or iff = 2 {
+                            nbrvar = 2
+                        }else if iff = 3 {
+                            nbrvar = 1
+                        }else{
+                            nbrvar = 0
+                        }
+                        if ds_grid_get(planetary,53+iff,planetnowid) < ds_grid_get(planetary,42+iff,planetnowid)  && ds_grid_get(planetary,42+iff,planetnowid) > nbrvar  {
+                            modeship = iff
+                        }
+                        okcreate = 0
+                        if ds_grid_get(planetary,53+modeship,planetnowid) < ds_grid_get(planetary,42+modeship,planetnowid) {okcreate = 1}
+                        if okcreate = 1 && modeship > 0 {
+                            with(instance_create(x,y,obj_ship)){
+                                mode = other.modeship
+                                alarm[6] = 3000
+                                colorship = ds_grid_get(other.planetary,32,other.planetnowid)
+                                enemy = ds_grid_get(obj_planetary.planetary,32,other.planetnowid);
+                                stationaire = 1
+                                planetparent = other.planetnowid
+                                rotaaleatdecol = random(360)
+                                image_angle = point_direction(room_width/2,room_height/2,room_width/2+lengthdir_x(100,rotaaleatdecol),room_height/2+lengthdir_y(100,rotaaleatdecol))
+                                xx = room_width/2+lengthdir_x((ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*other.optiportabletaille,rotaaleatdecol)
+                                yy = room_height/2+lengthdir_y((ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*other.optiportabletaille,rotaaleatdecol)
+                                vargetdsgrid[1] = ds_grid_get(obj_planetary.planetary,51,other.planetnowid)
+                                vargetdsgrid[2] = ds_grid_get(obj_planetary.planetary,34,other.planetnowid)
+                                vargetdsgrid[3] = (ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*other.optiportabletaille
+                                vargetdsgrid[4] = ds_grid_get(obj_planetary.planetary,32,other.planetnowid)
+                            }
+                        }
+                    }else{
+                        iff = 10
+                    }
+                }
+            }
+        }
     }
-    //ET ENVOI NET CODE
-    ds_grid_set(planetary,81,planetnowid,date_current_datetime()*100000)
-    var get1 = floor(ds_grid_get(planetary,51,planetnowid))
-}
+    if point_distance(room_width/2,room_height/2,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,7,planetnowid)/25)*optiportabletaille {
+        colorrect29 = c_white
+    }else{
+        colorrect29 = planetarycolor
+    }
+    //selectioner des ship et enregistrer
+    xxmousefin = 0
+    yymousefin = 0
+    if device_mouse_check_button_pressed(0, mb_left) {
+        xxmousebase = device_mouse_x(0);
+        yymousebase = device_mouse_y(0);
+    }
+    if device_mouse_check_button_released(0, mb_left) {
+        if alarm[3] < 0 {
+            alarm[3] = 20
+        }else{
+            doubletap = 1
+        }
+        xxmousefin = device_mouse_x(0);
+        yymousefin = device_mouse_y(0);
+        if point_distance(xxmousebase, yymousebase, xxmousefin, yymousefin) < 30 {
+            //ENVOYER SUR CIBLE SI PLANETNOW = PARENT
+            if instance_exists(obj_ship){
+                with(obj_ship){
+                    if suislepatron = 1 && planetparent = obj_planetary.planetnowid && obj_planetary.menuplanet = 0 && obj_planetary.echelle = 0 && obj_planetary.menuhelp = 0 {
+                        if other.yymousefin > room_height/10 && other.yymousefin < room_height-(room_height/10) && other.xxmousefin > room_width/10 && other.xxmousefin < room_width-room_width/10 {
+                            vardist2 = point_distance(xxcursor,yycursor,room_width/2,room_height/2)
+                            xxcursor = other.xxmousefin
+                            yycursor = other.yymousefin
+                        }
+                    }
+                }
+            }
+            xxmousefin = 0
+            yymousefin = 0
+            xxmousebase = 0
+            yymousebase = 0
+        }
+    }
+
+    //double tap pour enlever tout les vaisseau
+    if echelle = 0 && menuplanet = 0 && menuhelp = 0 {
+        if doubletap = 1 {
+            if instance_exists(obj_ship){
+                with(obj_ship){//si trop proche enlever le patron des ship de la planete actuel
+                    if suislepatron = 1 {suislepatron = 0}
+                }
+            }
+            doubletap = 0
+        }
+    }
 
 
-}}
-}
+    if xxmousefin = 0 {}else{
+        if xxmousefin < xxmousebase {xxmousefin2 = xxmousefin;xxmousefin = xxmousebase;xxmousebase = xxmousefin2}
+        if yymousefin < yymousebase {yymousefin2 = yymousefin;yymousefin = yymousebase;yymousebase = yymousefin2}
 
-}else if ds_grid_get(obj_planetary.planetary,32,planetnowid) = global.idfixe {//envoyer les vaisseau pour ajouter
-checkok = 0
-if instance_exists(obj_ship){with(obj_ship){if suislepatron = 1 {if planetparent = obj_planetary.planetnowid {}else{
-if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe {
-partir = 3
-other.checkok += 1 
-suislepatron = 0
-destinationship = other.planetnowid
-alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))}}}}}
+        if instance_exists(obj_ship){
+            with(obj_ship){
+                if point_in_rectangle(xx, yy,other.xxmousebase, other.yymousebase, other.xxmousefin, other.yymousefin) {
+                    if enemy = global.idfixe && partir = 0 && planetparent = obj_planetary.planetnowid {suislepatron = 1 ;}
+                }
+            }
+        }
+        xxmousefin = 0
+        yymousefin = 0
+        xxmousebase = 0
+        yymousebase = 0
+    }
 
-}
-}
 
 
+    //envoyer coloniser ou conquerrir en clickant sur planet non colo en demandant si ship exist tjr
+    //si oui envoyer ses ship pour de vrai avec return ,a la fin du compteur les transformer en attaquant 1 sur la planete
+    //faire pop par 15 les vaisseau moi je dis
 
-}}
+    if device_mouse_check_button_released(0, mb_left) && echelle = 0 && menuplanet = 0  && menuhelp = 0 {
+        xxmouse = device_mouse_x(0);
+        yymouse = device_mouse_y(0);
+
+        //MOON
+        if point_distance(xxlune1,yylune1,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,83,planetnowid)/25)*optiportabletaille {
+            checkok = 0
+            if instance_exists(obj_ship){
+                with(obj_ship){
+                    if suislepatron = 1 {
+                        if planetparent = obj_planetary.planetnowid {
+                            if type = 5 && other.checkok = 0 {
+                                ds_grid_add(obj_planetary.planetary,47,planetparent,-1)
+                                ds_grid_add(obj_planetary.planetary,58,planetparent,-1)
+                                ds_grid_add(obj_planetary.planetary,53,planetparent,-1)
+                                partir = 4
+                                other.checkok += 1 
+                                suislepatron = 0
+                                alarm[6] = -1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //PLANET
+        if point_distance(room_width/2,room_height/2,xxmouse,yymouse) < (ds_grid_get(obj_planetary.planetary,7,planetnowid)/25)*optiportabletaille {
+            if global.phpload = 1 {
+                if ds_grid_get(planetary,242,planetnowid) = global.idguild {//ENVOYER FLOTTE A GUILD ALLIE
+                    checkok1 = 0
+                    checkok2 = 0
+                    checkok3 = 0
+                    checkok4 = 0
+                    checkok5 = 0
+                    checkok6 = 0
+                    checkok7 = 0
+                    grandealarm = 0
+                    if instance_exists(obj_ship){
+                        with(obj_ship){
+                            if suislepatron = 1 {
+                                if planetparent = obj_planetary.planetnowid {}else{
+                                    if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe {
+                                    partir = 5
+                                    if type = 1 {other.checkok1 += 1}
+                                    if type = 2 {other.checkok2 += 1}
+                                    if type = 3 {other.checkok3 += 1}
+                                    if type = 4 {other.checkok4 += 1}
+                                    if type = 5 {other.checkok5 += 1}
+                                    if type = 6 {other.checkok6 += 1}
+                                    if type = 7 {other.checkok7 += 1}
+                                    suislepatron = 0
+                                    destinationship = other.planetnowid
+                                    alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))
+                                    //alarm[7] = 10
+                                    other.grandealarm = alarm[7]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if ds_grid_get(obj_planetary.planetary,32,planetnowid) = 0 {//coloniser
+                    if destroyplanetnow = 0 {
+                        if ds_grid_get(planetary,204,buildaffect) >= 0 {
+                            checkok = 0
+                            if instance_exists(obj_ship){
+                                with(obj_ship){
+                                    if suislepatron = 1 {
+                                        if planetparent = obj_planetary.planetnowid {}else{
+                                            if type = 5 && other.checkok = 0 {
+                                                ds_grid_add(obj_planetary.planetary,47,planetparent,-1)
+                                                ds_grid_add(obj_planetary.planetary,58,planetparent,-1)
+                                                ds_grid_add(obj_planetary.planetary,53,planetparent,-1)
+                                                partir = 1
+                                                other.checkok += 1 
+                                                suislepatron = 0
+                                                alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            //coute 10 vaisseau mode
+                            if checkok = 0{}else{
+                                ds_grid_set(planetary,33,planetnowid,(ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10)))
+                            }
+                        }
+                    }
+                }else if ds_grid_get(obj_planetary.planetary,32,planetnowid) > 0 && ds_grid_get(obj_planetary.planetary,32,planetnowid) > 0 {//attaquer
+                    if ds_grid_get(planetary,36,0) > 5 { //si plus de 5 vaisseau alors attaquer possible
+                        checkok = 0
+                        type1plus = 0
+                        type2plus = 0
+                        type3plus = 0
+                        type4plus = 0
+                        type5plus = 0
+                        type6plus = 0
+                        type7plus = 0
+                        alarm7 = 0
+                        if instance_exists(obj_ship){
+                            with(obj_ship){
+                                if suislepatron = 1 {
+                                    if planetparent = obj_planetary.planetnowid {}else{
+                                        partir = 2
+                                        other.checkok += 1 
+                                        global.planetparentship = planetparent;
+                                        if type = 1 {other.type1plus += 1}
+                                        if type = 2 {other.type2plus += 1}
+                                        if type = 3 {other.type3plus += 1}
+                                        if type = 4 {other.type4plus += 1}
+                                        if type = 5 {other.type5plus += 1}
+                                        if type = 6 {other.type6plus += 1}
+                                        if type = 7 {other.type7plus += 1}
+                                        suislepatron = 0
+                                        alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))
+                                        other.alarm7 = alarm[7]
+                                    }
+                                }
+                            }
+                        }
+                        if checkok = 0 or menuplanet = 1 or menuhelp = 1 {}else{
+                            if ds_grid_get(planetary,34,planetnowid) < 6 {
+                                ds_grid_set(planetary,51,planetnowid,alarm7)
+                                ds_grid_set(planetary,34,planetnowid,global.idfixe)
+                                ds_grid_set(planetary,52,planetnowid,checkok)
+                                if type1plus > 0 {ds_grid_set(planetary,231,planetnowid,type1plus)}
+                                if type2plus > 0 {ds_grid_set(planetary,232,planetnowid,type2plus)}
+                                if type3plus > 0 {ds_grid_set(planetary,233,planetnowid,type3plus)}
+                                if type4plus > 0 {ds_grid_set(planetary,234,planetnowid,type4plus)}
+                                if type5plus > 0 {ds_grid_set(planetary,235,planetnowid,type5plus)}
+                                if type6plus > 0 {ds_grid_set(planetary,236,planetnowid,type6plus)}
+                                if type7plus > 0 {ds_grid_set(planetary,237,planetnowid,type7plus)}
+                                ds_grid_set(planetary,240,planetnowid,floor(ds_grid_get(planetary,37,planetnowid)))
+                                if global.phpload = 1 {
+                                    if ds_grid_get(planetary,32,planetnowid) = floor(global.idfixe) {
+                                        ds_grid_set(planetary,230,planetnowid,global.name)
+                                    }
+                                    //ET ENVOI NET CODE
+                                    ds_grid_set(planetary,81,planetnowid,date_current_datetime()*100000)
+                                    var get1 = floor(ds_grid_get(planetary,51,planetnowid))
+                                }
+                            }
+                        }
+                    }
+                }else if ds_grid_get(obj_planetary.planetary,32,planetnowid) = global.idfixe {//envoyer les vaisseau pour ajouter
+                    checkok = 0
+                    if instance_exists(obj_ship){
+                        with(obj_ship){
+                            if suislepatron = 1 {
+                                if planetparent = obj_planetary.planetnowid {}else{
+                                    if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe {
+                                        partir = 3
+                                        other.checkok += 1 
+                                        suislepatron = 0
+                                        destinationship = other.planetnowid
+                                        alarm[7] = (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*1)/(1+(ds_grid_get(obj_planetary.planetary,50,planetparent)/10))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 if planetnowid = buildaffect && planetnowid != 0{
@@ -1727,5 +1725,3 @@ if planetnowid = buildaffect && planetnowid != 0{
         post = http_post_string("http://localhost:3000/universe/loadbyid" , str);
     }
 }
-
-

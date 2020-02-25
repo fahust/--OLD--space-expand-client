@@ -116,7 +116,7 @@ image_yscale = 0
 ds_grid_add(obj_planetary.planetary,53,planetparent,-1)
 ds_grid_add(obj_planetary.planetary,53+type,planetparent,-1)
 
-if soute &gt; 0 {
+if soute &gt; 0 and planetparent = 0{
 ds_grid_add(obj_planetary.planetary,35,planetparent,floor((soute*100)*8))
 ds_grid_add(obj_planetary.planetary,90,planetparent,floor((soute*100)))
 ds_grid_add(obj_planetary.planetary,91,planetparent,floor((soute*100)))
@@ -487,16 +487,18 @@ if ds_grid_get(obj_planetary.planetary,53+type,planetparent) &gt;
             <string>///FIN DE COMMERCE
 //if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy
 //if alarm[1] &gt; 0 {
-ds_grid_add(obj_planetary.planetary,35,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)*8))
-ds_grid_add(obj_planetary.planetary,90,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,91,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,92,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,93,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,94,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,95,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,96,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,97,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
-ds_grid_add(obj_planetary.planetary,98,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+if  planetparent = 0 {
+    ds_grid_add(obj_planetary.planetary,35,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)*8))
+    ds_grid_add(obj_planetary.planetary,90,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,91,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,92,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,93,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,94,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,95,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,96,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,97,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+    ds_grid_add(obj_planetary.planetary,98,planetparent,floor((random_range(1,1.1)*vardist)*(type*5)))
+}
 //}
 /*if ds_grid_get(obj_planetary.planetary,53,planetparent) &gt; 0 {
 ds_grid_add(obj_planetary.planetary,53,planetparent,-1)}*/

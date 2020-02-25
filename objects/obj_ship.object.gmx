@@ -219,7 +219,7 @@ planetparent = other.planetparent
 }
 }
 }else{
-if soute &gt; 0 {
+if soute &gt; 0 and planetparent = 0{
 if enemy = ds_grid_get(obj_planetary.planetary,32,planetparent) {
 ds_grid_add(obj_planetary.planetary,35,planetparent,floor((soute*100)*8))
 ds_grid_add(obj_planetary.planetary,90,planetparent,floor((soute*100)))

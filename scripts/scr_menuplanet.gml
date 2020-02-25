@@ -456,7 +456,7 @@ scalespriteship = 0.9
 scalespriteship2 = 0.7}
 draw_rectangle(widthor0+xxmenulerp,480+ytext-(roll*4),room_width-(room_width/40),520+ytext-(roll*4),false);
 draw_set_color(planetarycolor2);
-if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),650+ytext-(roll*4)) < 100 {colorrect20 = c_white
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),650+ytext-(roll*4)) < 50 {colorrect20 = c_white
    if device_mouse_check_button(0, mb_left) {
 ds_grid_set(planetary,39,planetnowid,0)//STATSressourcevar//JAUGE 
 ds_grid_set(planetary,40,planetnowid,15)//STATSshipsvar//JAUGE 
@@ -472,7 +472,7 @@ draw_text_outline(xxmenulerp+xdisthealth-xplus,750+ytext-(roll*4),"Price : "+str
 draw_set_color(planetarycolor2);
 draw_rectangle(widthor0+xxmenulerp,780+ytext-(roll*4),room_width-(room_width/40),820+ytext-(roll*4),false);
 draw_set_color(planetarycolor2);
-if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),950+ytext-(roll*4)) < 100 {colorrect21 = c_white
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),950+ytext-(roll*4)) < 50 {colorrect21 = c_white
    if device_mouse_check_button(0, mb_left) {
 ds_grid_set(planetary,39,planetnowid,0)//STATSressourcevar//JAUGE 
 ds_grid_set(planetary,40,planetnowid,22)//STATSshipsvar//JAUGE 
@@ -489,7 +489,7 @@ draw_set_color(planetarycolor2);
 draw_rectangle(widthor0+xxmenulerp,1080+ytext-(roll*4),room_width-(room_width/40),1120+ytext-(roll*4),false);
 draw_set_color(planetarycolor2);
 
-if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1250+ytext-(roll*4)) < 100 {colorrect22 = c_white
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1250+ytext-(roll*4)) < 50 {colorrect22 = c_white
    if device_mouse_check_button(0, mb_left) {
 ds_grid_set(planetary,39,planetnowid,0)//STATSressourcevar//JAUGE 
 ds_grid_set(planetary,40,planetnowid,42)//STATSshipsvar//JAUGE 
@@ -505,7 +505,7 @@ draw_text_outline(xxmenulerp+xdisthealth-xplus,1350+ytext-(roll*4),"Price : "+st
 draw_set_color(planetarycolor2);
 draw_rectangle(widthor0+xxmenulerp,1380+ytext-(roll*4),room_width-(room_width/40),1420+ytext-(roll*4),false);
 draw_set_color(planetarycolor2);
-if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1550+ytext-(roll*4)) < 100 {colorrect23 = c_white
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1550+ytext-(roll*4)) < 50 {colorrect23 = c_white
    if device_mouse_check_button(0, mb_left) {
 ds_grid_set(planetary,39,planetnowid,0)//STATSressourcevar//JAUGE 
 ds_grid_set(planetary,40,planetnowid,62)//STATSshipsvar//JAUGE 
@@ -521,7 +521,7 @@ draw_text_outline(xxmenulerp+xdisthealth-xplus,1650+ytext-(roll*4),"Price : "+st
 draw_set_color(planetarycolor2);
 draw_rectangle(widthor0+xxmenulerp,1680+ytext-(roll*4),room_width-(room_width/40),1720+ytext-(roll*4),false);
 draw_set_color(planetarycolor2);
-if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1850+ytext-(roll*4)) < 100 {colorrect24 = c_white
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1850+ytext-(roll*4)) < 50 {colorrect24 = c_white
    if device_mouse_check_button(0, mb_left) {
 ds_grid_set(planetary,39,planetnowid,0)//STATSressourcevar//JAUGE 
 ds_grid_set(planetary,40,planetnowid,100)//STATSshipsvar//JAUGE 
@@ -537,7 +537,7 @@ draw_text_outline(xxmenulerp+xdisthealth-xplus,1950+ytext-(roll*4),"Price : "+st
 draw_set_color(planetarycolor2);
 draw_rectangle(widthor0+xxmenulerp,1980+ytext-(roll*4),room_width-(room_width/40),2020+ytext-(roll*4),false);
 draw_set_color(planetarycolor2);
-if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),2150+ytext-(roll*4)) < 100 {colorrect25 = c_white
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),2150+ytext-(roll*4)) < 50 {colorrect25 = c_white
    if device_mouse_check_button(0, mb_left) {
 ds_grid_set(planetary,39,planetnowid,0)//STATSressourcevar//JAUGE 
 ds_grid_set(planetary,40,planetnowid,100)//STATSshipsvar//JAUGE 
@@ -553,7 +553,7 @@ draw_text_outline(xxmenulerp+xdisthealth-xplus,2250+ytext-(roll*4),"Price : "+st
 draw_set_color(planetarycolor2);
 draw_rectangle(widthor0+xxmenulerp,2280+ytext-(roll*4),room_width-(room_width/40),2320+ytext-(roll*4),false);
 draw_set_color(planetarycolor2);
-if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),2450+ytext-(roll*4)) < 100 {colorrect26 = c_white
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),2450+ytext-(roll*4)) < 50 {colorrect26 = c_white
    if device_mouse_check_button(0, mb_left) {
 ds_grid_set(planetary,39,planetnowid,0)//STATSressourcevar//JAUGE 
 ds_grid_set(planetary,40,planetnowid,100)//STATSshipsvar//JAUGE 
@@ -1039,23 +1039,33 @@ colorrect8 = colorstaticon4
 if point_distance(xxmouse,yymouse,xdisthealth-45,9+15) < 25 {colorrect4 = c_white
 if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 {statschoosemenu = 0}}
 draw_sprite_ext(spr_stats,4,xdisthealth-45+xxmenulerp,19,0.3,0.3,0,colorrect4,1)
+if maitredeslieu = 1 {
 draw_text_outline(xdisthealth+220+xxmenulerp,15,totalstats,planetarycolor2,room_width,fa_bottom,20,true)
+}
 if point_distance(xxmouse,yymouse,xdisthealth-45,59+15) < 25 {colorrect5 = c_white
 if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 {statschoosemenu = 1}}
 draw_sprite_ext(spr_stats,0,xdisthealth-45+xxmenulerp,69,0.3,0.3,0,colorrect5,1)//colorrect4
+if maitredeslieu = 1 {
 draw_text_outline(xdisthealth+220+xxmenulerp,65,string_add_delimiter(ds_grid_get(planetary,35,planetnowid)),planetarycolor2,room_width,fa_bottom,20,true)
+}
  if point_distance(xxmouse,yymouse,xdisthealth-45,109+15) < 25 {colorrect6 = c_white
 if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 {statschoosemenu = 2}}
 draw_sprite_ext(spr_stats,1,xdisthealth-45+xxmenulerp,119,0.3,0.3,0,colorrect6,1)
+if maitredeslieu = 1 {
 draw_text_outline(xdisthealth+220+xxmenulerp,115,string_add_delimiter(ds_grid_get(planetary,36,planetnowid)),planetarycolor2,room_width,fa_bottom,20,true)
+}
 if point_distance(xxmouse,yymouse,xdisthealth-45,159+15) < 25 {colorrect7 = c_white
 if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 { statschoosemenu = 3}}
 draw_sprite_ext(spr_stats,2,xdisthealth-45+xxmenulerp,169,0.3,0.3,0,colorrect7,1)
+if maitredeslieu = 1 {
 draw_text_outline(xdisthealth+220+xxmenulerp,155,string_add_delimiter(ds_grid_get(planetary,37,planetnowid)),planetarycolor2,room_width,fa_bottom,20,true)
+}
 if  point_distance(xxmouse,yymouse,xdisthealth-45,209+15) < 25 {colorrect8 = c_white
 if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 { statschoosemenu = 4}}
 draw_sprite_ext(spr_stats,3,xdisthealth-45+xxmenulerp,219,0.3,0.3,0,colorrect8,1)
+if maitredeslieu = 1 {
 draw_text_outline(xdisthealth+220+xxmenulerp,205,string_add_delimiter(ds_grid_get(planetary,38,planetnowid)),planetarycolor2,room_width,fa_bottom,20,true)
+}
 
 
 
@@ -1148,7 +1158,7 @@ var get1 = floor(ds_grid_get(planetary,51,planetnowid))
 
 //if planetnowid = buildaffect{
     with(obj_highscore){
-        var hiscore_map, i, str;
+       var hiscore_map, i, str;
         hiscore_map = ds_map_create();
         ds_map_set(hiscore_map,'by', global.idfixe);
         
@@ -1163,6 +1173,7 @@ var get1 = floor(ds_grid_get(planetary,51,planetnowid))
         ds_map_set(hiscore_map,'sc5', ds_grid_get(obj_planetary.planetary,47,0));
         ds_map_set(hiscore_map,'sc6', ds_grid_get(obj_planetary.planetary,48,0));
         ds_map_set(hiscore_map,'sc7', ds_grid_get(obj_planetary.planetary,49,0));
+        ds_map_set(hiscore_map,'d', ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid));
         ds_map_set(hiscore_map,'idP', 0);
         ds_map_set(hiscore_map,'id', obj_planetary.planetnowid);
         str = json_encode(hiscore_map);

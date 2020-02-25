@@ -79,6 +79,50 @@ image_yscale = 0.5*obj_planetary.optiportabletaille
         </arguments>
       </action>
     </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if hp &lt;= 0 {
+if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
+            with(obj_highscore){
+                var hiscore_map, i, str;
+                hiscore_map = ds_map_create();
+                ds_map_set(hiscore_map,'id', other.planetparent);
+                str = json_encode(hiscore_map);
+                ds_map_destroy(hiscore_map); 
+                post = http_post_string("http://localhost:3000/universe/deleteDefense" , str);
+            }
+            //defensseur
+        }else if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe {
+            with(obj_highscore){
+                var hiscore_map, i, str;
+                hiscore_map = ds_map_create();
+                ds_map_set(hiscore_map,'id', other.planetparent);
+                str = json_encode(hiscore_map);
+                ds_map_destroy(hiscore_map); 
+                post = http_post_string("http://localhost:3000/universe/deleteDefense" , str);
+            }
+        }
+        }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="4">
       <action>
         <libid>1</libid>

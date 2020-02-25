@@ -3511,7 +3511,7 @@ surface_free(surf2);
 if global.phpload = 0 {
 if alarm[9] &lt; 0 {alarm[9] = 20}
 draw_sprite_ext(spr_loading,0,room_width-150,room_height-150,0.4,0.4,rotaload,c_white,1)}
-
+/*
 draw_sprite_ext(spr_loop,0,(view_xview+room_width/zoomlerp)-(250/zoomlerp),(view_yview)+(40/zoomlerp),0.8/zoomlerp,0.8/zoomlerp,0,c_white,1)
 if device_mouse_check_button_released(0, mb_left) &amp;&amp; menuplanet = 0 &amp;&amp; menuhelp = 0 &amp;&amp; echelle = 0 {
 if point_distance(xxmouse,yymouse,(view_xview+room_width/zoomlerp)-(250/zoomlerp),(view_yview)+(40/zoomlerp)) &lt; 40 {
@@ -3527,7 +3527,7 @@ view_hview = room_height/zoomlerp
 view_yview = 0
 view_xview = 0
 }
-}}
+}}*/
 
 //enlever zoom si menu
 if menuplanet = 0 &amp;&amp; menuhelp = 0{}else{zoom = 1
@@ -4582,6 +4582,7 @@ ds_grid_add(planetary,258,0,100)
           <argument>
             <kind>1</kind>
             <string>if maitredeslieu = 1 {ds_grid_set(planetary,51,planetnowid,1)}
+if maitredeslieu = 1 {ds_grid_set(planetary,52,planetnowid,1)}
 /*with(instance_create(x,y,obj_ship)){
 mode = choose(1,2,3,4,5)
 colorship = ds_grid_get(other.planetary,34,other.planetnowid)

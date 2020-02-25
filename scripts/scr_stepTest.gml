@@ -162,17 +162,19 @@ if buildaffect = lastbuildaffect {}else{
         }//jamais avoir vaisseauen dessous de 0
 
         //RESSOURCE
-        varressource = ds_grid_get(planetary,90,buildaffect)+
-        ds_grid_get(planetary,91,buildaffect)+
-        ds_grid_get(planetary,92,buildaffect)+
-        ds_grid_get(planetary,93,buildaffect)+
-        ds_grid_get(planetary,94,buildaffect)+
-        ds_grid_get(planetary,95,buildaffect)+
-        ds_grid_get(planetary,96,buildaffect)+
-        ds_grid_get(planetary,97,buildaffect)+
-        ds_grid_get(planetary,98,buildaffect)
-
-        ds_grid_set(planetary,35,buildaffect,floor(varressource))
+        if buildaffect = 0{
+            varressource = ds_grid_get(planetary,90,buildaffect)+
+            ds_grid_get(planetary,91,buildaffect)+
+            ds_grid_get(planetary,92,buildaffect)+
+            ds_grid_get(planetary,93,buildaffect)+
+            ds_grid_get(planetary,94,buildaffect)+
+            ds_grid_get(planetary,95,buildaffect)+
+            ds_grid_get(planetary,96,buildaffect)+
+            ds_grid_get(planetary,97,buildaffect)+
+            ds_grid_get(planetary,98,buildaffect)
+    
+            ds_grid_set(planetary,35,buildaffect,floor(varressource))
+        }
 
 
         //calculate defence
@@ -214,7 +216,7 @@ if buildaffect = lastbuildaffect {}else{
         (ds_grid_get(planetary,237,buildaffect))
 
 
-        ds_grid_set(planetary,52,buildaffect,floor(varressource))
+        //ds_grid_set(planetary,52,buildaffect,floor(varressource))
 
         //calculate SCIENCE
         varscience = ds_grid_get(planetary,72,buildaffect)+
@@ -313,234 +315,7 @@ if buildaffect = lastbuildaffect {}else{
 
 
 
-    //PLANET NET
-        if ds_grid_get(planetary,35,buildaffect) >= floor(((1*(typechoose*50000))*typechoose)) {
-            jaugevar2 = c_green
-            alarmjaugevar2 = 100
-            
-            ds_grid_add(planetary,35,buildaffect,-(floor(((1*(typechoose*50000))*typechoose))))
-            ressourcevar = floor(ds_grid_get(planetary,35,buildaffect)/9)
-            if ressourcevar > 0 {}else{ressourcevar = 0}
-            ds_grid_set(planetary,90,buildaffect,ressourcevar)
-            ds_grid_set(planetary,91,buildaffect,ressourcevar)
-            ds_grid_set(planetary,92,buildaffect,ressourcevar)
-            ds_grid_set(planetary,93,buildaffect,ressourcevar)
-            ds_grid_set(planetary,94,buildaffect,ressourcevar)
-            ds_grid_set(planetary,95,buildaffect,ressourcevar)
-            ds_grid_set(planetary,96,buildaffect,ressourcevar)
-            ds_grid_set(planetary,97,buildaffect,ressourcevar)
-            ds_grid_set(planetary,98,buildaffect,ressourcevar)
-
-
-            ds_grid_add(planetary,42+typechoose,buildaffect,1*1)
-            with(obj_highscore){
-                var hiscore_map, i, str;
-                hiscore_map = ds_map_create();
-                ds_map_set(hiscore_map,'cat', other.typechoose);
-                ds_map_set(hiscore_map,'id', other.buildaffect);
-                str = json_encode(hiscore_map);
-                ds_map_destroy(hiscore_map); 
-                post = http_post_string("http://localhost:3000/universe/addship" , str);
-            }
-        }
     }
-
-
-    //ameliorer science
-    if ds_grid_get(planetary,41,buildaffect) > 2  {
-        if ds_grid_get(planetary,41,buildaffect) < 10 {
-            ds_grid_set(planetary,41,buildaffect,10)
-        }
-        ressourcevar = floor(((ds_grid_get(planetary,37,buildaffect)*1000)/9)*ds_grid_get(planetary,41,buildaffect))
-        if ds_grid_get(planetary,37,buildaffect) < 100 {
-            if ds_grid_get(planetary,35,buildaffect) <= floor(((ds_grid_get(planetary,37,buildaffect)*1000)/9)*ds_grid_get(planetary,41,buildaffect)) {
-                if buildaffect = planetnowid {jaugevar3 = c_red ;alarmjaugevar3 = 100}
-            }else{
-                if buildaffect = planetnowid {jaugevar3 = c_green;alarmjaugevar3 = 100}
-                ds_grid_add(planetary,72,buildaffect,ds_grid_get(planetary,41,buildaffect)/1000)
-                ds_grid_add(planetary,73,buildaffect,ds_grid_get(planetary,41,buildaffect)/1000)
-                ds_grid_add(planetary,74,buildaffect,ds_grid_get(planetary,41,buildaffect)/1000)
-                ds_grid_add(planetary,75,buildaffect,ds_grid_get(planetary,41,buildaffect)/1000)
-
-                if buildaffect = planetnowid {
-                    scr_addinfo2(ds_grid_get(planetary,41,buildaffect)/1000,18,buildaffect)
-                }
-
-
-                if ds_grid_get(planetary,90,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,90,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,90,buildaffect,0)
-                }
-                if ds_grid_get(planetary,91,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,91,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,91,buildaffect,0)
-                }
-                if ds_grid_get(planetary,92,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,92,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,92,buildaffect,0)
-                }
-                if ds_grid_get(planetary,93,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,93,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,93,buildaffect,0)
-                }
-                if ds_grid_get(planetary,94,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,94,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,94,buildaffect,0)
-                }
-                if ds_grid_get(planetary,95,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,95,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,95,buildaffect,0)
-                }
-                if ds_grid_get(planetary,96,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,96,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,96,buildaffect,0)
-                }
-                if ds_grid_get(planetary,97,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,97,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,97,buildaffect,0)
-                }
-                if ds_grid_get(planetary,98,buildaffect) > ressourcevar{
-                    ds_grid_add(planetary,98,buildaffect,-ressourcevar)
-                }else{
-                    ds_grid_set(planetary,98,buildaffect,0)
-                }
-            }
-        }
-    }else{
-        ds_grid_set(planetary,41,buildaffect,0)
-    }
-
-    pricestation = 100000//1000
-    //ameliorer defence
-    if ds_grid_get(planetary,42,buildaffect) >= 10 && ds_grid_get(planetary,35,buildaffect) >= ((pricestation/10)*ds_grid_get(planetary,42,buildaffect)){
-        price = ((pricestation/100)*ds_grid_get(planetary,42,buildaffect))
-        totalconstruct = ds_grid_get(planetary,42,buildaffect)/4
-        defconstruct = 0
-        if ds_grid_get(planetary,61,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,61,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,62,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,62,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,63,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,63,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,64,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,64,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,65,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,65,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,66,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,66,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,67,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,67,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-            }
-        if ds_grid_get(planetary,68,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,68,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,69,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,69,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,70,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,70,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,280,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,280,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,281,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,281,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,282,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,282,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,283,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,283,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,284,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,284,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,285,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,285,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,286,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,286,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,287,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,287,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,288,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,288,buildaffect,1);totalconstruct -= 5;defconstruct += 1
-        }
-        if ds_grid_get(planetary,289,buildaffect) = 0 && totalconstruct >= 5 {
-            ds_grid_set(planetary,289,buildaffect,1);defconstruct += 1
-        }
-        
-        if ds_grid_get(planetary,38,buildaffect) <= 100 {
-            ressourcevar = floor((defconstruct*pricestation/10))
-            if ds_grid_get(planetary,90,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,90,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,90,buildaffect,0)
-            }
-            if ds_grid_get(planetary,91,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,91,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,91,buildaffect,0)
-            }
-            if ds_grid_get(planetary,92,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,92,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,92,buildaffect,0)
-            }
-            if ds_grid_get(planetary,93,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,93,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,93,buildaffect,0)
-            }
-            if ds_grid_get(planetary,94,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,94,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,94,buildaffect,0)
-            }
-            if ds_grid_get(planetary,95,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,95,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,95,buildaffect,0)
-            }
-            if ds_grid_get(planetary,96,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,96,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,96,buildaffect,0)
-            }
-            if ds_grid_get(planetary,97,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,97,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,97,buildaffect,0)
-            }
-            if ds_grid_get(planetary,98,buildaffect) > ressourcevar{
-                ds_grid_add(planetary,98,buildaffect,-ressourcevar)
-            }else{
-                ds_grid_set(planetary,98,buildaffect,0)
-            }
-        }
-        jaugevar4 = c_green ;alarmjaugevar4 = 100
-    }else{
-        jaugevar4 = c_red ;alarmjaugevar4 = 100
-    }
-
-    //PLANET NET
-
-
 
 
 
@@ -875,7 +650,7 @@ if buildaffect = lastbuildaffect {}else{
                     ds_grid_set(planetary,36,buildaffect,varship) 
 
                     }
-                    if ds_grid_get(planetary,52,buildaffect) < 2 {ds_grid_set(planetary,52,buildaffect,2)}
+                    //if ds_grid_get(planetary,52,buildaffect) < 2 {ds_grid_set(planetary,52,buildaffect,2)}
                     //RATRAPAGE BATAILLE
                     ///SUPRESSION DES SHIPS PLANET MERE SI ORIGINAIRE D ATTAQUE
                     if ds_grid_get(planetary,34,buildaffect) = global.idfixe {
@@ -1104,7 +879,8 @@ if ds_grid_get(planetary,204,buildaffect) > 0 {//HP PLANET
                 }
     
                 //EVITER BUG CHANGER D ATTAQUANT AU DERNIER MOMENT
-                if ds_grid_get(planetary,51,buildaffect) < 2 {}else{
+                if ds_grid_get(planetary,51,buildaffect) < 2 {
+                        }else{
                     ds_grid_add(planetary,51,buildaffect,-1)
                 }
                 
@@ -1155,6 +931,9 @@ if ds_grid_get(planetary,204,buildaffect) > 0 {//HP PLANET
 
         }else{
             if buildaffect = 0 {
+                prochaineguerre = ds_grid_get(planetary,36,buildaffect)
+                ds_grid_set(planetary,51,buildaffect,prochaineguerre)//fin de guerre relancer tout
+                ds_grid_set(planetary,52,buildaffect,floor((prochaineguerre/2)))
                 if ds_grid_get(planetary,32,buildaffect) = ds_grid_get(planetary,34,buildaffect) &&
                 ds_grid_get(planetary,34,buildaffect) < 5 {
                     ds_grid_set(planetary,34,buildaffect,choose(2,3))
@@ -1222,7 +1001,6 @@ if ds_grid_get(planetary,204,buildaffect) > 0 {//HP PLANET
                     if buildaffect = 0 {
                         if ds_grid_get(planetary,204,buildaffect) <= 0 {}else{
                             if buildaffect = 0 {//si echec planet maire
-                
                                 ressourcevar = floor((ds_grid_get(planetary,35,buildaffect)/2)/9)
                                 if ds_grid_get(planetary,90,buildaffect) > 0{
                                     ds_grid_add(planetary,90,buildaffect,-ressourcevar)
@@ -1720,6 +1498,10 @@ if planetnowid = buildaffect && planetnowid != 0{
         var hiscore_map, i, str;
         hiscore_map = ds_map_create();
         ds_map_set(hiscore_map,'id', other.buildaffect);
+        ds_map_set(hiscore_map,'sr', ds_grid_get(obj_planetary.planetary,39,other.buildaffect));
+        ds_map_set(hiscore_map,'ss', ds_grid_get(obj_planetary.planetary,40,other.buildaffect));
+        ds_map_set(hiscore_map,'st', ds_grid_get(obj_planetary.planetary,41,other.buildaffect));
+        ds_map_set(hiscore_map,'sd', ds_grid_get(obj_planetary.planetary,42,other.buildaffect));
         str = json_encode(hiscore_map);
         ds_map_destroy(hiscore_map); 
         post = http_post_string("http://localhost:3000/universe/loadbyid" , str);

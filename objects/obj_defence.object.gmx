@@ -102,6 +102,7 @@ if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
                 var hiscore_map, i, str;
                 hiscore_map = ds_map_create();
                 ds_map_set(hiscore_map,'id', other.planetparent);
+                ds_map_set(hiscore_map,'cu', global.idfixe);
                 str = json_encode(hiscore_map);
                 ds_map_destroy(hiscore_map); 
                 post = http_post_string("http://localhost:3000/universe/deleteDefense" , str);
@@ -112,6 +113,7 @@ if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
                 var hiscore_map, i, str;
                 hiscore_map = ds_map_create();
                 ds_map_set(hiscore_map,'id', other.planetparent);
+                ds_map_set(hiscore_map,'cu', global.idfixe);
                 str = json_encode(hiscore_map);
                 ds_map_destroy(hiscore_map); 
                 post = http_post_string("http://localhost:3000/universe/deleteDefense" , str);

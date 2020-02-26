@@ -49,10 +49,11 @@ for (i = 0; i < ds_grid_get(planetary,202,planetnowid); i += 1)
             var hiscore_map, i, str;
             hiscore_map = ds_map_create();
             ds_map_set(hiscore_map,'id', obj_planetary.planetnowid);
-            ds_map_set(hiscore_map,'sr', ds_grid_get(obj_planetary.planetary,39,other.buildaffect));
-            ds_map_set(hiscore_map,'ss', ds_grid_get(obj_planetary.planetary,40,other.buildaffect));
-            ds_map_set(hiscore_map,'st', ds_grid_get(obj_planetary.planetary,41,other.buildaffect));
-            ds_map_set(hiscore_map,'sd', ds_grid_get(obj_planetary.planetary,42,other.buildaffect));
+            ds_map_set(hiscore_map,'sr', ds_grid_get(obj_planetary.planetary,39,obj_planetary.planetnowid));
+            ds_map_set(hiscore_map,'ss', ds_grid_get(obj_planetary.planetary,40,obj_planetary.planetnowid));
+            ds_map_set(hiscore_map,'st', ds_grid_get(obj_planetary.planetary,41,obj_planetary.planetnowid));
+            ds_map_set(hiscore_map,'sd', ds_grid_get(obj_planetary.planetary,42,obj_planetary.planetnowid));
+            ds_map_set(hiscore_map,'cu', global.idfixe);
             str = json_encode(hiscore_map);
             ds_map_destroy(hiscore_map); 
             post = http_post_string("http://localhost:3000/universe/loadbyid" , str);

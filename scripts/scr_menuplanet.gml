@@ -258,6 +258,9 @@ if  point_distance(xxmouse,yymouse,50,((3970+50)*xplusrect)-(roll2*6)) < 25 {col
 if device_mouse_check_button_pressed(0, mb_left) {
 if menuplanet = 1 {}else{if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}};instance_create(x,y,obj_highscore);menuplanet = 1;xxmenu = 0;xxmenulerp = 500}
 statschoosemenu = 4}}else{colorrect35 = planetarycolor2 }
+
+
+
 draw_sprite_ext(spr_highscore,0,50,((4570+50)*xplusrect)-(roll2*6),0.8,0.8,0,colorrect36,1)
 if point_distance(xxmouse,yymouse,50,((4570+50)*xplusrect)-(roll2*6)) < 25 {colorrect36 = c_white
 if device_mouse_check_button_pressed(0, mb_left) {
@@ -424,6 +427,201 @@ xdisthealth = widthor0+150+xxmenulerp
 draw = 2
 }
 
+
+
+//SHIPS MENU EN AVANCE POUR CACHER TEXTE SOUS RECTANGLE
+if statschoosemenu = 5 {//ships
+draw_set_color(planetarycolor2);
+if device_mouse_check_button(0, mb_left){
+xxmousefin = device_mouse_x(0);
+    yymousefin = device_mouse_y(0);}
+    draw_rectangle_colour(room_width-(room_width/40),340,room_width,room_height,c_black,c_black,c_black,c_black,false)
+draw_rectangle_colour(room_width-(room_width/40),340+(roll/1),room_width,490+(roll/1),c_white,c_white,c_white,c_white,false)
+   if device_mouse_check_button(0, mb_left) && 
+point_distance(xxmouse,yymouse,room_width,yymouse) < 70 {
+roll = yymouse-400//(470+(roll/10))
+}
+if roll < 1 {roll = 1}
+draw_text_outline(xxmenulerp+xdisthealth-xplus,350+ytext-(roll*4),"Total ships : "+string_add_delimiter(ds_grid_get(planetary,36,planetnowid)),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,2,yygrid,150000000)//distance soleil
+draw_text_outline(xxmenulerp+xdisthealth-xplus,400+ytext-(roll*4),"Ships in flight : "+string_add_delimiter(ds_grid_get(planetary,53,planetnowid)),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,5,yygrid,1)//atmospherevalable //1 ok
+//draw_text_outline(xxmenulerp+xdisthealth-xplus,450+ytext,"Ships type I : "+string(ds_grid_get(planetary,54,planetnowid))+" / "+string(ds_grid_get(planetary,43,planetnowid)),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,8,yygrid,"")//name
+//draw_text_outline(xxmenulerp+xdisthealth-xplus,500+ytext,"Ships type II : "+string(ds_grid_get(planetary,55,planetnowid))+" / "+string(ds_grid_get(planetary,44,planetnowid)),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,9,yygrid,26)//Velocity 26 km/s
+//draw_text_outline(xxmenulerp+xdisthealth-xplus,550+ytext,"Ships type III : "+string(ds_grid_get(planetary,56,planetnowid))+" / "+string(ds_grid_get(planetary,45,planetnowid)),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+//draw_text_outline(xxmenulerp+xdisthealth-xplus,600+ytext,"Ships type IV : "+string(ds_grid_get(planetary,57,planetnowid))+" / "+string(ds_grid_get(planetary,46,planetnowid)),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+//draw_text_outline(xxmenulerp+xdisthealth-xplus,650+ytext,"Ships type V : "+string(ds_grid_get(planetary,58,planetnowid))+" / "+string(ds_grid_get(planetary,47,planetnowid)),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,15,yygrid,12)//Surface temperature 38 °c
+
+if ds_grid_get(planetary,32,planetnowid) = global.idfixe {
+draw_set_color(planetarycolor2);
+if portrait = 0 {scalespriteship = 1.3
+scalespriteship2 = 1
+xiconbigship = room_width-(room_width/1.4)
+}else{xiconbigship = room_width-(room_width/4)
+scalespriteship = 0.9
+scalespriteship2 = 0.7}
+draw_rectangle(widthor0+xxmenulerp,480+ytext-(roll*4),room_width-(room_width/40),520+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+draw_text_outline(xxmenulerp+xdisthealth-xplus,550+ytext-(roll*4),"You can send ship to planet colonized or attack a planet",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+
+/*if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),650+ytext-(roll*4)) < 50 {colorrect20 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 1;
+   keyboard_string = "";
+   global.ssc1 = "0";
+}}else{colorrect20 = planetarycolor2}
+draw_sprite_ext(spr_bigship,0,xiconbigship+(xxmenulerp+xdisthealth-xplus),650+ytext-(roll*4),scalespriteship2,scalespriteship2,0,colorrect20,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus,550+ytext-(roll*4),"I.Horus  ("+string(global.ssc1)+" / "+string_add_delimiter(ds_grid_get(planetary,43,planetnowid))+")",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+*/
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,780+ytext-(roll*4),room_width-(room_width/40),820+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),950+ytext-(roll*4)) < 50 {colorrect21 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 2;
+   keyboard_string = "";
+   global.ssc2 = "0";
+}}else{colorrect21 = planetarycolor2}
+draw_sprite_ext(spr_bigship,1,xiconbigship+(xxmenulerp+xdisthealth-xplus),950+ytext-(roll*4),scalespriteship2,scalespriteship2,0,colorrect21,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus,850+ytext-(roll*4),"II.Eagle  ("+string(global.ssc2)+" / "+string_add_delimiter(ds_grid_get(planetary,44,planetnowid))+")",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+if global.clickss = 2 {
+draw_text_outline(xxmenulerp+xdisthealth-xplus,950+ytext-(roll*4),"Press Enter",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,1080+ytext-(roll*4),room_width-(room_width/40),1120+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1250+ytext-(roll*4)) < 50 {colorrect22 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 3;
+   keyboard_string = "";
+   global.ssc3 = "0";
+}}else{colorrect22 = planetarycolor2}
+draw_sprite_ext(spr_bigship,2,xiconbigship+(xxmenulerp+xdisthealth-xplus),1250+ytext-(roll*4),scalespriteship2,scalespriteship2,0,colorrect22,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus,1150+ytext-(roll*4),"III.Terhen  ("+string(global.ssc3)+" / "+string_add_delimiter(ds_grid_get(planetary,45,planetnowid))+")",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+if global.clickss = 3 {
+draw_text_outline(xxmenulerp+xdisthealth-xplus,1250+ytext-(roll*4),"Press Enter",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,1380+ytext-(roll*4),room_width-(room_width/40),1420+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1550+ytext-(roll*4)) < 50 {colorrect23 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 4;
+   keyboard_string = "";
+   global.ssc4 = "0";
+}}else{colorrect23 = planetarycolor2}
+draw_sprite_ext(spr_bigship,3,xiconbigship+(xxmenulerp+xdisthealth-xplus),1550+ytext-(roll*4),scalespriteship2,scalespriteship2,0,colorrect23,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus,1450+ytext-(roll*4),"IV.Baltyor  ("+string(global.ssc4)+" / "+string_add_delimiter(ds_grid_get(planetary,46,planetnowid))+")",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+if global.clickss = 4 {
+draw_text_outline(xxmenulerp+xdisthealth-xplus,1550+ytext-(roll*4),"Press Enter",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,1680+ytext-(roll*4),room_width-(room_width/40),1720+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),1850+ytext-(roll*4)) < 50 {colorrect24 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 5;
+   keyboard_string = "";
+   global.ssc5 = "0";
+}}else{colorrect24 = planetarycolor2}
+draw_sprite_ext(spr_bigship,4,xiconbigship+(xxmenulerp+xdisthealth-xplus),1850+ytext-(roll*4),scalespriteship2,scalespriteship2,0,colorrect24,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus,1750+ytext-(roll*4),"V.Emperor  ("+string(global.ssc5)+" / "+string_add_delimiter(ds_grid_get(planetary,47,planetnowid))+")",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+if global.clickss = 5 {
+draw_text_outline(xxmenulerp+xdisthealth-xplus,1850+ytext-(roll*4),"Press Enter",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,1980+ytext-(roll*4),room_width-(room_width/40),2020+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),2150+ytext-(roll*4)) < 50 {colorrect25 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 6;
+   keyboard_string = "";
+   global.ssc6 = "0";
+}}else{colorrect25 = planetarycolor2}
+draw_sprite_ext(spr_bigship,5,xiconbigship+(xxmenulerp+xdisthealth-xplus),2150+ytext-(roll*4),scalespriteship,scalespriteship,0,colorrect25,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus,2050+ytext-(roll*4),"VI.Crusader  ("+string(global.ssc6)+" / "+string_add_delimiter(ds_grid_get(planetary,48,planetnowid))+")",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+if global.clickss = 6 {
+draw_text_outline(xxmenulerp+xdisthealth-xplus,2150+ytext-(roll*4),"Press Enter",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,2280+ytext-(roll*4),room_width-(room_width/40),2320+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+if point_distance(xxmouse,yymouse,xiconbigship+(xxmenulerp+xdisthealth-xplus),2450+ytext-(roll*4)) < 50 {colorrect26 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 7;
+   keyboard_string = "";
+   global.ssc8 = "0";
+}}else{colorrect26 = planetarycolor2}//spr_ship
+draw_sprite_ext(spr_bigship,6,xiconbigship+(xxmenulerp+xdisthealth-xplus),2450+ytext-(roll*4),scalespriteship,scalespriteship,0,colorrect26,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus,2350+ytext-(roll*4),"VII.Imperator  ("+string(global.ssc7)+" / "+string_add_delimiter(ds_grid_get(planetary,49,planetnowid))+")",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+if global.clickss = 7 {
+draw_text_outline(xxmenulerp+xdisthealth-xplus,2450+ytext-(roll*4),"Press Enter",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}
+
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,2580+ytext-(roll*4),room_width-(room_width/40),2620+ytext-(roll*4),false);
+draw_set_color(planetarycolor2);
+if point_distance(xxmouse,yymouse,xxmenulerp+xdisthealth-xplus+100,2950+ytext-(roll*4)) < 50 {colorrect26 = c_white
+   if device_mouse_check_button(0, mb_left) {
+   global.clickss = 8;
+   keyboard_string = "";
+   global.to = "0";
+}}else{colorrect26 = ds_grid_get(planetary,30,global.to);}//spr_ship
+nameSendShip = ds_grid_get(planetary,8,global.to);
+if real(global.to) == planetnowid {
+nameSendShip = 'This planet';
+}
+if global.clickss = 8{
+nameSendShip = global.to;
+}
+
+if planetnowid = 0 && ds_grid_get(obj_planetary.planetary,32,global.to) != global.idfixe{
+draw_sprite_ext(spr_action,1,xxmenulerp+xdisthealth-xplus+100,2950+ytext-(roll*4),scalespriteship,scalespriteship,0,colorrect26,1)
+}else{
+draw_sprite_ext(spr_engrenage,1,xxmenulerp+xdisthealth-xplus+100,2950+ytext-(roll*4),scalespriteship,scalespriteship,0,colorrect26,1)
+}
+draw_text_outline(xxmenulerp+xdisthealth-xplus+150,2950+ytext-(roll*4),nameSendShip,planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+
+
+
+if  point_distance(xxmouse,yymouse,xxmenulerp+xdisthealth-xplus+100,2750+ytext-(roll*4)) < 75 {colorrect9 = c_white
+if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 { 
+if global.to != 0{
+    with(obj_highscore){
+        var hiscore_map, i, str;
+        hiscore_map = ds_map_create();
+        ds_map_set(hiscore_map,'id', global.to);
+        ds_map_set(hiscore_map,'sr', ds_grid_get(obj_planetary.planetary,39,global.to));
+        ds_map_set(hiscore_map,'ss', ds_grid_get(obj_planetary.planetary,40,global.to));
+        ds_map_set(hiscore_map,'st', ds_grid_get(obj_planetary.planetary,41,global.to));
+        ds_map_set(hiscore_map,'sd', ds_grid_get(obj_planetary.planetary,42,global.to));
+        ds_map_set(hiscore_map,'cu', global.idfixe);
+        str = json_encode(hiscore_map);
+        ds_map_destroy(hiscore_map); 
+        post = http_post_string("http://localhost:3000/universe/loadbyid" , str);
+    }
+}
+alarm[10] = 10;
+
+}}
+if planetnowid = 0 && ds_grid_get(obj_planetary.planetary,32,global.to) != global.idfixe{
+draw_text_outline(xxmenulerp+xdisthealth-xplus+180,2750+ytext-(roll*4),'attack',planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+draw_sprite_ext(spr_stats,6,xxmenulerp+xdisthealth-xplus+100,2750+ytext-(roll*4),1,1,0,colorrect9,1)
+}else if real(global.to) != planetnowid && ds_grid_get(obj_planetary.planetary,32,global.to) == global.idfixe {
+draw_sprite_ext(spr_stats,6,xxmenulerp+xdisthealth-xplus+100,2750+ytext-(roll*4),1,1,0,colorrect9,1)
+draw_text_outline(xxmenulerp+xdisthealth-xplus+180,2750+ytext-(roll*4),'send ship',planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}else{
+draw_text_outline(xxmenulerp+xdisthealth-xplus+180,2750+ytext-(roll*4),'',planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,11,yygrid,6371 )//  radius km
+}
+
+
+}
+
+draw_set_color(planetarycolor2);
+draw_rectangle(widthor0+xxmenulerp,275,room_width+xxmenulerp,340,false);
+draw_set_color(c_white);
+draw_text_outline(xxmenulerp+xdisthealth-xplus,300,"Ship hangar",planetarycolor2,room_width,fa_bottom,20,true)
+
+}
 
 //SHIPS MENU EN AVANCE POUR CACHER TEXTE SOUS RECTANGLE
 if statschoosemenu = 2 {//ships
@@ -1035,6 +1233,7 @@ colorrect5 = colorstaticon1
 colorrect6 = colorstaticon2
 colorrect7 = colorstaticon3
 colorrect8 = colorstaticon4
+colorrect9 = planetarycolor2
 
 if point_distance(xxmouse,yymouse,xdisthealth-45,9+15) < 25 {colorrect4 = c_white
 if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 {statschoosemenu = 0}}
@@ -1066,6 +1265,10 @@ draw_sprite_ext(spr_stats,3,xdisthealth-45+xxmenulerp,219,0.3,0.3,0,colorrect8,1
 if maitredeslieu = 1 {
 draw_text_outline(xdisthealth+220+xxmenulerp,205,string_add_delimiter(ds_grid_get(planetary,38,planetnowid)),planetarycolor2,room_width,fa_bottom,20,true)
 }
+//draw_sprite_ext(spr_engrenage,0,room_width/12,(room_height/20),1,1,0,planetarycolor2,1)}
+if  point_distance(xxmouse,yymouse,room_width-(room_width/12)-100,(room_height/20)) < 25 {colorrect9 = c_white
+if device_mouse_check_button_pressed(0, mb_left) && xxmenulerp < 1 { statschoosemenu = 5}}
+draw_sprite_ext(spr_stats,6,room_width-(room_width/12)-100,(room_height/20),0.3,0.3,0,colorrect9,1)
 
 
 
@@ -1157,7 +1360,7 @@ var get1 = floor(ds_grid_get(planetary,51,planetnowid))
 
 
 //if planetnowid = buildaffect{
-    with(obj_highscore){
+   /* with(obj_highscore){
        var hiscore_map, i, str;
         hiscore_map = ds_map_create();
         ds_map_set(hiscore_map,'by', global.idfixe);
@@ -1173,6 +1376,7 @@ var get1 = floor(ds_grid_get(planetary,51,planetnowid))
         ds_map_set(hiscore_map,'sc5', ds_grid_get(obj_planetary.planetary,47,0));
         ds_map_set(hiscore_map,'sc6', ds_grid_get(obj_planetary.planetary,48,0));
         ds_map_set(hiscore_map,'sc7', ds_grid_get(obj_planetary.planetary,49,0));
+        ds_map_set(hiscore_map,'cu', global.idfixe);
         ds_map_set(hiscore_map,'d', ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid));
         ds_map_set(hiscore_map,'idP', 0);
         ds_map_set(hiscore_map,'id', obj_planetary.planetnowid);
@@ -1194,7 +1398,7 @@ var get1 = floor(ds_grid_get(planetary,51,planetnowid))
             ds_grid_set(obj_planetary.planetary,49,0,0)
         }
         }
-    }
+    }*/
 //}
 
    //scr_ecritureplanet3(planetnowid,get1,get2,get3,get4,get5,get6,get7,get8,get9,get10,get11,get12,get13,get14);
@@ -1387,13 +1591,19 @@ draw_sprite_ext(spr_build,34,xxmenulerp+xdisthealth-xplus-15,750+ytext,0.65,0.65
 draw_sprite_ext(spr_stats,0,xxmenulerp+xdisthealth-xplus+10,800+ytext,0.3,0.3,0,planetarycolor2,1)
 
 
+
 draw_text_outline(xxmenulerp+xdisthealth-xplus+50,260+ytext,"Military defence",planetarycolor2,room_width,fa_bottom,20,true)
 draw_set_color(planetarycolor2)
 draw_rectangle(xxmenulerp+xdisthealth-150,350+ytext,room_width,390+ytext,false);
 draw_set_color(planetarycolor)
 draw_text_outline(xxmenulerp+xdisthealth-xplus+50,370+ytext,"THREAT : ",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,9,yygrid,26)//Velocity 26 km/s
 draw_set_color(planetarycolor2)
-draw_text_outline(xxmenulerp+xdisthealth-xplus+50,450+ytext,"Enemy fleet's distance : "+string_add_delimiter(ds_grid_get(planetary,51,planetnowid))+"M km",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,2,yygrid,150000000)//distance soleil
+if ds_grid_get(planetary,51,planetnowid) < 0 {
+distantFleet = "0"
+}else{
+distantFleet = string_add_delimiter(ds_grid_get(planetary,51,planetnowid))
+}
+draw_text_outline(xxmenulerp+xdisthealth-xplus+50,450+ytext,"Enemy fleet's distance : "+distantFleet+"M km",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,2,yygrid,150000000)//distance soleil
 draw_text_outline(xxmenulerp+xdisthealth-xplus+50,500+ytext,"Faction attack : "+string(factionattak),planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,5,yygrid,1)//atmospherevalable //1 ok
 draw_text_outline(xxmenulerp+xdisthealth-xplus+50,550+ytext,"Importance of the threat : "+string_add_delimiter(ds_grid_get(planetary,52,planetnowid))+" Ships",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,8,yygrid,"")//name
 draw_text_outline(xxmenulerp+xdisthealth-xplus+50,600+ytext,"Technology of the threat : "+string(ds_grid_get(planetary,240,planetnowid))+" %",planetarycolor2,room_width,fa_bottom,20,false)//ds_grid_add(planetary,9,yygrid,26)//Velocity 26 km/s
@@ -1416,6 +1626,9 @@ draw_text_outline(xxmenulerp+xdisthealth-xplus+50,800+ytext,"Price : "+string_ad
 
 
 }
+
+
+
 
 
 

@@ -184,12 +184,13 @@ if hp &lt;= 0 {
                 ds_map_set(hiscore_map,'cat', other.type);
                 ds_map_set(hiscore_map,'owner', other.enemy);
                 ds_map_set(hiscore_map,'id', other.planetparent);
+                ds_map_set(hiscore_map,'cu', global.idfixe);
                 str = json_encode(hiscore_map);
                 ds_map_destroy(hiscore_map); 
                 post = http_post_string("http://localhost:3000/universe/deleteship" , str);
             }
             //defensseur
-        }else if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe {
+        }else if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe or ds_grid_get(obj_planetary.planetary,32,planetparent) &lt; 7 or ds_grid_get(obj_planetary.planetary,34,planetparent) &lt; 7  {
             with(obj_highscore){
                 var hiscore_map, i, str;
                 hiscore_map = ds_map_create();

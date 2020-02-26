@@ -1502,6 +1502,7 @@ if planetnowid = buildaffect && planetnowid != 0{
         ds_map_set(hiscore_map,'ss', ds_grid_get(obj_planetary.planetary,40,other.buildaffect));
         ds_map_set(hiscore_map,'st', ds_grid_get(obj_planetary.planetary,41,other.buildaffect));
         ds_map_set(hiscore_map,'sd', ds_grid_get(obj_planetary.planetary,42,other.buildaffect));
+        ds_map_set(hiscore_map,'cu', global.idfixe);
         str = json_encode(hiscore_map);
         ds_map_destroy(hiscore_map); 
         post = http_post_string("http://localhost:3000/universe/loadbyid" , str);

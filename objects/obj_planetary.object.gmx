@@ -65,6 +65,7 @@ global.modesolo = 0
 
 global.planetparentship = 0
 
+
 colorrect1 = c_white
 colorrect2 = c_white
 colorrect3 = c_white
@@ -175,6 +176,17 @@ last34 = 0
 ini_close();
 
 
+global.ssc1 = "0";
+global.ssc2 = "0";
+global.ssc3 = "0";
+global.ssc4 = "0";
+global.ssc5 = "0";
+global.ssc6 = "0";
+global.ssc7 = "0";
+global.d = "0";
+global.to = "0";
+global.sscu = global.idfixe;
+global.clickss = 0;
 
 
 global.server = 1
@@ -782,6 +794,125 @@ part_type_blend(particle2,1);
    
    global.surfok = 1
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.idfixe {
+    //if real(global.to) != 0 {show_debug_message('test3')
+        if real(planetnowid) = 0 {
+            ds_grid_add(planetary,43,planetnowid,-global.ssc1)
+            ds_grid_add(planetary,44,planetnowid,-global.ssc2)
+            ds_grid_add(planetary,45,planetnowid,-global.ssc3)
+            ds_grid_add(planetary,46,planetnowid,-global.ssc4)
+            ds_grid_add(planetary,47,planetnowid,-global.ssc5)
+            ds_grid_add(planetary,48,planetnowid,-global.ssc6)
+            ds_grid_add(planetary,49,planetnowid,-global.ssc7)
+        }
+        with(obj_highscore){
+            var hiscore_map, i, str;
+            hiscore_map = ds_map_create();
+            ds_map_set(hiscore_map,'id', other.planetnowid);
+            ds_map_set(hiscore_map,'sc1', global.ssc1);
+            ds_map_set(hiscore_map,'sc2', global.ssc2);
+            ds_map_set(hiscore_map,'sc3', global.ssc3);
+            ds_map_set(hiscore_map,'sc4', global.ssc4);
+            ds_map_set(hiscore_map,'sc5', global.ssc5);
+            ds_map_set(hiscore_map,'sc6', global.ssc6);
+            ds_map_set(hiscore_map,'sc7', global.ssc7);
+            ds_map_set(hiscore_map,'to', global.to);
+            ds_map_set(hiscore_map,'d', ds_grid_get(obj_planetary.planetary,50,global.to));//ds_grid_get(obj_planetary.planetary,50,other.planetnowid)
+            ds_map_set(hiscore_map,'cu', global.idfixe);
+            str = json_encode(hiscore_map);
+            ds_map_destroy(hiscore_map); 
+            http_post_string("http://localhost:3000/universe/transferShip" , str);
+        }
+        if global.to = 0 {
+            ds_grid_add(planetary,43,0,global.ssc1)//shiptype1nbr
+            ds_grid_add(planetary,44,0,global.ssc2)//shiptype2nbr
+            ds_grid_add(planetary,45,0,global.ssc3)//shiptype3nbr
+            ds_grid_add(planetary,46,0,global.ssc4)//shiptype4nbr
+            ds_grid_add(planetary,47,0,global.ssc5)//shiptype5nbr
+            ds_grid_add(planetary,48,0,global.ssc6)//shiptype6nbr
+            ds_grid_add(planetary,49,0,global.ssc7)//shiptype7nbr
+        }
+        global.ssc1 = 0;
+        global.ssc2 = 0;
+        global.ssc3 = 0;
+        global.ssc4 = 0;
+        global.ssc5 = 0;
+        global.ssc6 = 0;
+        global.ssc7 = 0;
+    
+}else if global.to != planetnowid and ds_grid_get(planetary,32,global.to) != global.idfixe and planetnowid = 0 {
+    if global.ssc1+global.ssc2+global.ssc3+global.ssc4+global.ssc5+global.ssc6+global.ssc7 &gt; 5 {
+        with(obj_highscore){
+           var hiscore_map, i, str;
+            hiscore_map = ds_map_create();
+            ds_map_set(hiscore_map,'by', global.idfixe);
+            
+            if ds_grid_get(obj_planetary.planetary,43,0)-10 &gt; 0 {
+            ds_map_set(hiscore_map,'sc1', global.ssc1);
+            }else{
+            ds_map_set(hiscore_map,'sc1', 0);
+            }
+            ds_map_set(hiscore_map,'sc2', global.ssc2);
+            ds_map_set(hiscore_map,'sc3', global.ssc3);
+            ds_map_set(hiscore_map,'sc4', global.ssc4);
+            ds_map_set(hiscore_map,'sc5', global.ssc5);
+            ds_map_set(hiscore_map,'sc6', global.ssc6);
+            ds_map_set(hiscore_map,'sc7', global.ssc7);
+            ds_map_set(hiscore_map,'cu', global.idfixe);
+            ds_map_set(hiscore_map,'d', ds_grid_get(obj_planetary.planetary,50,global.to));
+            ds_map_set(hiscore_map,'idP', 0);
+            ds_map_set(hiscore_map,'id', global.to);
+            str = json_encode(hiscore_map);
+            ds_map_destroy(hiscore_map); 
+            if (ds_grid_get(obj_planetary.planetary,43,0)-10)+ds_grid_get(obj_planetary.planetary,44,0)+
+            ds_grid_get(obj_planetary.planetary,45,0)+ds_grid_get(obj_planetary.planetary,46,0)+
+            ds_grid_get(obj_planetary.planetary,47,0)+ds_grid_get(obj_planetary.planetary,48,0)+
+            ds_grid_get(obj_planetary.planetary,49,0) &gt; 0 {
+            //show_debug_message(ds_grid_get(obj_planetary.planetary,34,obj_planetary.planetnowid));
+            if ds_grid_get(obj_planetary.planetary,34,obj_planetary.planetnowid) &lt; 7 {
+                post = http_post_string("http://localhost:3000/universe/launchattack" , str);
+                ds_grid_set(obj_planetary.planetary,43,0,10)
+                ds_grid_set(obj_planetary.planetary,44,0,0)
+                ds_grid_set(obj_planetary.planetary,45,0,0)
+                ds_grid_set(obj_planetary.planetary,46,0,0)
+                ds_grid_set(obj_planetary.planetary,47,0,0)
+                ds_grid_set(obj_planetary.planetary,48,0,0)
+                ds_grid_set(obj_planetary.planetary,49,0,0)
+            }
+            }
+        }
+        
+        global.ssc1 = 0;
+        global.ssc2 = 0;
+        global.ssc3 = 0;
+        global.ssc4 = 0;
+        global.ssc5 = 0;
+        global.ssc6 = 0;
+        global.ssc7 = 0;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -3047,6 +3178,28 @@ colorrect27 = planetarycolor2
 colorrect28 = planetarycolor2
 colorrect29 = planetarycolor2
 colorrect30 = planetarycolor2*/
+
+if statschoosemenu = 5 {
+if global.clickss = 1 {global.ssc1 = real(keyboard_string);}
+if global.clickss = 2 {global.ssc2 = real(keyboard_string);}
+if global.clickss = 3 {global.ssc3 = real(keyboard_string);}
+if global.clickss = 4 {global.ssc4 = real(keyboard_string);}
+if global.clickss = 5 {global.ssc5 = real(keyboard_string);}
+if global.clickss = 6 {global.ssc6 = real(keyboard_string);}
+if global.clickss = 7 {global.ssc7 = real(keyboard_string);}
+if global.clickss = 8 {global.to = real(keyboard_string);}
+}else{
+global.ssc1 = 0;
+global.ssc2 = 0;
+global.ssc3 = 0;
+global.ssc4 = 0;
+global.ssc5 = 0;
+global.ssc6 = 0;
+global.ssc7 = 0;
+global.to = 0;
+}
+
+
 colorrect14 = c_black
 colorrect15 = c_black
 colorrect16 = c_black
@@ -3285,7 +3438,7 @@ if roll2 &gt; 0 {roll2 -= 20}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if maitredeslieu = 1 {
+            <string>/*if maitredeslieu = 1 {
 if instance_exists(obj_shipcommand){}else{
 optiportabletaille = 0.3
 optiportabletaillevar = 0.3
@@ -3316,7 +3469,7 @@ vargetdsgrid[4] = ds_grid_get(obj_planetary.planetary,32,other.planetnowid)
 image_angle = 0
 enemy = global.idfixe
 planetparent = other.planetnowid
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -3378,6 +3531,15 @@ update_score(global.name,scoretotal,global.idfixe,scoreressvalid,scoreshipsvalid
 }}}
 if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
 }
+/*if menuplanet = 5 {
+if keyboard_string = "" or keyboard_string = " " {}else{
+if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
+if menuplanet3 = 2 {send_message(keyboard_string,global.lastprivatemessage,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
+else if menuplanet3 = 3 {send_message(keyboard_string,global.idguild,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
+else {send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
+}}
+keyboard_string = "";
+}*/
 /*if menuplanet = 3 {
 if menuplanet3 &gt; 0 {
 send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)
@@ -4764,6 +4926,37 @@ update_score(global.name,scoretotal,global.idfixe,scoreressvalid,scoreshipsvalid
 }}}
 if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
 }
+if statschoosemenu = 5 {
+if keyboard_string = "" or keyboard_string = " " {}else{
+if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
+/*if global.clickss = 1 {global.ssc1 = real(keyboard_string);}
+if global.clickss = 2 {global.ssc2 = real(keyboard_string);}
+if global.clickss = 3 {global.ssc3 = real(keyboard_string);}
+if global.clickss = 4 {global.ssc4 = real(keyboard_string);}
+if global.clickss = 5 {global.ssc5 = real(keyboard_string);}
+if global.clickss = 6 {global.ssc6 = real(keyboard_string);}
+if global.clickss = 7 {global.ssc7 = real(keyboard_string);}
+if global.clickss = 8 {global.to = real(keyboard_string);}*/
+global.clickss = 0
+if global.to &gt; 500 {global.to = 500}else if global.to &lt; 0 {global.to = 0}
+if real(global.ssc1) &gt; ds_grid_get(planetary,43,planetnowid)-10{global.ssc1 = ds_grid_get(planetary,43,planetnowid)-10
+}else if real(global.ssc1) &lt; 0 {global.ssc1 = 0}
+if real(global.ssc2) &gt; ds_grid_get(planetary,44,planetnowid){global.ssc2 = ds_grid_get(planetary,44,planetnowid)
+}else if real(global.ssc2) &lt; 0 {global.ssc2 = 0}
+if real(global.ssc3) &gt; ds_grid_get(planetary,45,planetnowid){global.ssc3 = ds_grid_get(planetary,45,planetnowid)
+}else if real(global.ssc3) &lt; 0 {global.ssc3 = 0}
+if real(global.ssc4) &gt; ds_grid_get(planetary,46,planetnowid){global.ssc4 = ds_grid_get(planetary,46,planetnowid)
+}else if real(global.ssc4) &lt; 0 {global.ssc4 = 0}
+if real(global.ssc5) &gt; ds_grid_get(planetary,47,planetnowid){global.ssc5 = ds_grid_get(planetary,47,planetnowid)
+}else if real(global.ssc5) &lt; 0 {global.ssc5 = 0}
+if real(global.ssc6) &gt; ds_grid_get(planetary,48,planetnowid){global.ssc6 = ds_grid_get(planetary,48,planetnowid)
+}else if real(global.ssc6) &lt; 0 {global.ssc6 = 0}
+if real(global.ssc7) &gt; ds_grid_get(planetary,49,planetnowid){global.ssc7 = ds_grid_get(planetary,49,planetnowid)
+}else if real(global.ssc7) &lt; 0 {global.ssc7 = 0}
+}
+}
+keyboard_string = "";
+}
 /*if menuplanet = 3 {
 if menuplanet3 &gt; 0 {
 send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)
@@ -4798,7 +4991,7 @@ keyboard_string = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if menuplanet = 3 {}else{
+            <string>/*if menuplanet = 3 {}else{
 if menuplanet = 2 {menuplanet = 0}else{
 echelle = 0 
 menuplanet = 2
@@ -4807,7 +5000,7 @@ systemstellairenow = 1
 }
 }
 
-
+*/
 </string>
           </argument>
         </arguments>

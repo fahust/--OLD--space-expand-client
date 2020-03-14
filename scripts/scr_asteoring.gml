@@ -56,7 +56,7 @@ for (i = 0; i < ds_grid_get(planetary,202,planetnowid); i += 1)
             ds_map_set(hiscore_map,'cu', global.idfixe);
             str = json_encode(hiscore_map);
             ds_map_destroy(hiscore_map); 
-            post = http_post_string("http://localhost:3000/universe/loadbyid" , str);
+            post = http_post_string(addr+"universe/loadbyid" , str);
         }
     }
 

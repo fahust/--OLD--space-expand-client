@@ -10,4 +10,4 @@
 
 var name = url_encode(base64_encode(string(argument0)));
 var args = "id="+string(argument0)+"&type="+string(argument1)+"&hash=1234";
-get_highscores = http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/displaychat.php", args);
+//get_highscores = http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/displaychat.php", args);

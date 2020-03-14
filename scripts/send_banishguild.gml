@@ -12,5 +12,5 @@ var name = url_encode(base64_encode(string(argument0)));
 //show_message(global.idfixe)
 var args = "guildname="+string(0)+"guildid="+string(argument1)+"guildinvit=0$0"+"&id="+string(argument1)+"&hash=1234";
 if global.server = 1 {
-http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/guildkick.php", args);
+//http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/guildkick.php", args);
 }

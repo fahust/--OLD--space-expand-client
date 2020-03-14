@@ -12,5 +12,5 @@
 //show_message(global.idfixe)
 if global.server = 1 {
 var args = "guildinvit="+string(argument0)+"$"+string(argument1)+"&id="+string(argument2)+"&hash=1234";
-http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/guildinvit.php", args);
+//http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/guildinvit.php", args);
 }

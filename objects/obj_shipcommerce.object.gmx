@@ -28,6 +28,7 @@
             <string>//Decolage
 plusdecol = 0
 toutcequeturate = 1
+particlelife = 1
 rotaaleatdecol = random(360)
 vardist = 0
 planetparent = 0
@@ -65,7 +66,7 @@ colorshiprgb = c_white
 //alarm[8] = random_range(1,10)
 okdraw = 0
 alarmshootvar = 3
-alarm[4] = 1
+alarm[4] = 2
 trace = 1
 tracelerp = 1
 hp = 30
@@ -112,7 +113,7 @@ image_yscale = 0
           <argument>
             <kind>1</kind>
             <string>//remet les ship au sol
-//if partir = 0 {
+if partir != 2 {
 ds_grid_add(obj_planetary.planetary,53,planetparent,-1)
 ds_grid_add(obj_planetary.planetary,53+type,planetparent,-1)
 
@@ -128,8 +129,32 @@ ds_grid_add(obj_planetary.planetary,96,planetparent,floor((soute*100)))
 ds_grid_add(obj_planetary.planetary,97,planetparent,floor((soute*100)))
 ds_grid_add(obj_planetary.planetary,98,planetparent,floor((soute*100)))
 }
+}
 
-
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DESTROY TRAVEL
+instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -232,12 +257,13 @@ modeplus = ((vargetdsgrid[4])-1)*5//(ds_grid_get(obj_planetary.planetary,32,plan
 depth = -5
 
 
-
+//if mode = 1 {
 mode = choose(1,1,1,1,1,1,1,1,1,1,1,1,
 2,2,2,2,2,2,2,2,
 3,3,3,3,3,
 4,4,
 5)
+//}
 
 if modeplus &gt; 30 {
 
@@ -439,6 +465,268 @@ if ds_grid_get(obj_planetary.planetary,53+type,planetparent) &gt;
  instance_destroy();
  }}
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DEMARAGE MODE
+
+//alarm[4] = random_range(1,obj_planetary.nbrdobjship)
+modeplus = ((vargetdsgrid[4])-1)*5//(ds_grid_get(obj_planetary.planetary,32,planetparent)-1)*5
+depth = -5
+
+
+//if mode = 1 {
+mode = modenew
+//}
+
+if modeplus &gt; 30 {
+
+}else{
+mode += modeplus}
+
+distdetir = 250
+if mode = 1 {
+particlelife = 0.2
+type = 1
+hp = 30
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red
+distdetir = 250}
+
+if mode = 2 {particlelife = 0.3
+type = 2
+hp = 50
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red}
+if mode = 3 {particlelife = 0.7
+type = 3
+hp = 70
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 2}
+if mode = 4 {particlelife = 1
+type = 4
+hp = 210
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 3
+colorshoot = c_red}
+if mode = 5 {particlelife = 1.3
+type = 5
+hp = 550
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 10
+colorshoot = c_red}
+
+//dominion
+if mode = 6 {particlelife = 0.2
+type = 1
+hp = 30
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red
+distdetir = 250}
+if mode = 7 {particlelife = 0.3
+type = 2
+hp = 50
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red}
+if mode = 8 {particlelife = 0.7
+type = 3
+hp = 70
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 2}
+if mode = 9 {particlelife = 1
+type = 4
+hp = 210
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 3
+colorshoot = c_red}
+if mode = 10 {particlelife = 1.3
+type = 5
+hp = 550
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 10
+colorshoot = c_red}
+
+//alien hostile
+if mode = 11 {particlelife = 0.2
+type = 1
+hp = 30
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red
+distdetir = 250}
+if mode = 12 {particlelife = 0.3
+type = 2
+hp = 50
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red}
+if mode = 13 {particlelife = 0.7
+type = 3
+hp = 70
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 2}
+if mode = 14 {particlelife = 1
+type = 4
+hp = 210
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 3
+colorshoot = c_red}
+if mode = 15 {particlelife = 1.3
+type = 5
+hp = 550
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 10
+colorshoot = c_red}
+
+//alien passif
+if mode = 16 {particlelife = 0.2
+type = 1
+hp = 30
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red
+distdetir = 250}
+if mode = 17 {particlelife = 0.3
+type = 2
+hp = 50
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 0
+colorshoot = c_red}
+if mode = 18 {particlelife = 0.7
+type = 3
+hp = 70
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 2}
+if mode = 9 {particlelife = 1
+type = 4
+hp = 210
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 3
+colorshoot = c_red}
+if mode = 20 {particlelife = 1.3
+type = 5
+hp = 550
+vitesseship = 2*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vitessedetir = 10
+tourelleauto = 10
+colorshoot = c_red}
+
+
+ vargetdsgrid[1] = ds_grid_get(obj_planetary.planetary,51,planetparent)
+vargetdsgrid[2] = ds_grid_get(obj_planetary.planetary,34,planetparent)
+vargetdsgrid[3] = ((ds_grid_get(obj_planetary.planetary,7,planetparent)/25)*obj_planetary.optiportabletaille)
+//vargetdsgrid[4] = ds_grid_get(obj_planetary.planetary,32,planetparent)
+
+vargetdsgrid[5] = ds_grid_get(obj_planetary.planetary,72,planetparent)
+vargetdsgrid[6] = ds_grid_get(obj_planetary.planetary,73,planetparent)
+vargetdsgrid[7] = (1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+vargetdsgrid[8] = ds_grid_get(obj_planetary.planetary,75,planetparent)
+
+colorshiprgb = ds_grid_get(obj_planetary.planetary,30,planetparent)
+//ds_grid_add(obj_planetary.planetary,53+mode,planetparent,1)
+sprite_index = spr_ship
+image_index = mode-1
+image_xscale = 1
+image_yscale = 1
+
+if fuyard = 0 {
+ds_grid_add(obj_planetary.planetary,53+type,planetparent,1)
+if ds_grid_get(obj_planetary.planetary,53+type,planetparent) &gt;
+ ds_grid_get(obj_planetary.planetary,42+type,planetparent) {
+ instance_destroy();
+ }}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///ALARM DEMARAGE DE LOIN
+xx = xx3
+yy = yy3
+xxdecol = xx3
+yydecol = yy3
+xx2 = xx3
+yy2 = yy3
 </string>
           </argument>
         </arguments>
@@ -789,7 +1077,8 @@ with(other){instance_destroy();}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if view = 1 {audio_sound_gain(snd_quantum2,1*obj_planetary.optiportabletaille,0)
+            <string>
+if view = 1 {audio_sound_gain(snd_quantum2,1*obj_planetary.optiportabletaille,0)
 if alarm[1] &gt; 0 {plusdecol += ((vitesseship*toutcequeturate)*vargetdsgrid[7])*trace;distvitmax = 5000;distvitmin = 750}else{plusdecol -= ((vitesseship*toutcequeturate)*vargetdsgrid[7])*trace;distvitmax = 8000;distvitmin = 3000};toutcequeturate = 1
 if point_distance(xxdecol,yydecol,room_width/2,room_height/2) &gt; distvitmin*obj_planetary.optiportabletaille &amp;&amp; 
 point_distance(xxdecol,yydecol,room_width/2,room_height/2) &lt; distvitmax*obj_planetary.optiportabletaille{
@@ -814,7 +1103,6 @@ part_particles_create(obj_planetary.Snamec,xxdecol,yydecol,obj_planetary.particl
 xxdecol = room_width/2+lengthdir_x((vargetdsgrid[3]+plusdecol)*obj_planetary.optiportabletaille,rotaaleatdecol)
 yydecol = room_height/2+lengthdir_y((vargetdsgrid[3]+plusdecol)*obj_planetary.optiportabletaille,rotaaleatdecol)
 draw_sprite_ext(spr_ship,modenow,xxdecol,yydecol,scale,scale,rotaaleatdecol+rotanow,colorshiprgb,1)}}
-
 
 
 

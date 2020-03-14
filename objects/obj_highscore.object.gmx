@@ -27,17 +27,29 @@
             <kind>1</kind>
             <string>/// Initialise loading the online highscores
 post = '';
-alarm[0] = 10;
-/*player_name = global.idfixe;
-alarm[5] = 70
+post2 = '';
+postGuild = '';
+//alarm[0] = 10;
+
+addr = "http://localhost:31095/"
+//addr = "http://fosthome.synology.me:31095/"
+player_name = global.idfixe;
+//alarm[5] = 70
 get_highscores = ""
-alarm[6] = 4000
+array_sample = 0
+//alarm[6] = 4000
 //get_planet(obj_planetary.buildaffect2);
     //get_scores(player_name,3);
-
+alarm[8] = 10
 text = "Please wait for the highscores to load...";
 //send_score(global.name,0);
-text2 = "";
+textChat = "-----------|"
+text2 = "-----------|
+-----------|
+-----------"
+str4 = "-----------|
+-----------|
+-----------"
 randomize();
     //if obj_planetary.menuplanet = 3 {
     //alarm[1] = 1//room_speed;//}
@@ -98,6 +110,66 @@ get_planet(obj_planetary.buildaffect2);
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="8">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if obj_planetary.menuplanet = 3 &amp;&amp; obj_planetary.menuplanet3 &gt; 0  {
+if obj_planetary.guildchannel = 0 &amp;&amp; obj_planetary.menuplanet3 = 3{
+    var hiscore_map, i, str;
+    hiscore_map = ds_map_create();
+    ds_map_set(hiscore_map,'id', obj_planetary.buildaffect);
+    ds_map_set(hiscore_map,'gn', global.idguildname);
+    str = json_encode(hiscore_map);
+    ds_map_destroy(hiscore_map); 
+    post2 = http_post_string(addr+"universe/loadusersguild" , str);
+}else{
+    var hiscore_map, i, str;
+    hiscore_map = ds_map_create();
+    ds_map_set(hiscore_map,'id', obj_planetary.buildaffect);
+    if obj_planetary.menuplanet3 = 1 {
+    ds_map_set(hiscore_map,'g', "");
+    }else{
+    ds_map_set(hiscore_map,'g', global.idguild);
+    }
+    ds_map_set(hiscore_map,'t', obj_planetary.menuplanet3);
+    str = json_encode(hiscore_map);
+    ds_map_destroy(hiscore_map); 
+    post2 = http_post_string(addr+"universe/loadlasttenmessage" , str);
+}
+}
+
+if obj_planetary.menuplanet = 3 &amp;&amp; obj_planetary.menuplanet3 = 3{
+    var hiscore_map, i, str;
+    hiscore_map = ds_map_create();
+    ds_map_set(hiscore_map,'n', global.idguildname);
+    ds_map_set(hiscore_map,'cu', global.idfixe);
+    str = json_encode(hiscore_map);
+    ds_map_destroy(hiscore_map); 
+    postGuild = http_post_string(addr+"universe/loadGuild" , str);
+}
+    
+    alarm[8] = 25;
+    
+    
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="7">
       <action>
         <libid>1</libid>
@@ -116,7 +188,7 @@ get_planet(obj_planetary.buildaffect2);
           <argument>
             <kind>1</kind>
             <string>///
-instance_destroy();
+/*instance_destroy();
 instance_create(x,y,obj_highscore)
 </string>
           </argument>
@@ -143,7 +215,8 @@ instance_create(x,y,obj_highscore)
             <string>if obj_planetary.menuplanet = 3 {
 obj_planetary.menuplanet = 0
 scr_addinfo(" ",9,0)
-instance_destroy();}
+//instance_destroy();
+}
 alarm[6] = 3000
 </string>
           </argument>
@@ -330,91 +403,251 @@ alarm[0] = 20
 //show_debug_message(post)
 
 var r_str = "null";
+if ds_map_find_value(async_load, "id") == postGuild
+   {
+   if ds_map_find_value(async_load, "status") == 0
+      {
+        r_str = ds_map_find_value(async_load, "result");
+        resultMap = json_decode(r_str)
+        if !is_undefined(resultMap[? "cg"]){//createguild
+            if resultMap[? "cg"] = 1 {
+                global.idguildname = string(resultMap[? "n"]);
+                global.idguild = resultMap[? "idg"]
+            }
+        }
+        
+        
+        if !is_undefined(resultMap[? "n"]) {
+            global.idguildname = resultMap[? "n"]
+            global.idguild = resultMap[? "idg"]
+        }
+       
+        if !is_undefined(resultMap[? "icu"]){
+            global.idguildinvitname = resultMap[? "icu"]
+        }
+                    
+      }
+      
+   }
+
+var r_str = "null";
+if ds_map_find_value(async_load, "id") == post2
+   {
+   if ds_map_find_value(async_load, "status") == 0
+      {
+      r_str = ds_map_find_value(async_load, "result");
+    resultMap = json_decode(r_str)
+    if resultMap[? "chat"] != ""
+        obj_highscore.textChat = resultMap[? "chat"];
+                    
+      }
+      
+   }
 if ds_map_find_value(async_load, "id") == post
    {
    if ds_map_find_value(async_load, "status") == 0
       {
       r_str = ds_map_find_value(async_load, "result");
             var resultMap = json_decode(r_str);
-            if resultMap[? "id"] != 0 {
-                ds_grid_set(obj_planetary.planetary,43,resultMap[? "id"],real(resultMap[? "sc1"]))
-                ds_grid_set(obj_planetary.planetary,44,resultMap[? "id"],real(resultMap[? "sc2"]))
-                ds_grid_set(obj_planetary.planetary,45,resultMap[? "id"],real(resultMap[? "sc3"]))
-                ds_grid_set(obj_planetary.planetary,46,resultMap[? "id"],real(resultMap[? "sc4"]))
-                ds_grid_set(obj_planetary.planetary,47,resultMap[? "id"],real(resultMap[? "sc5"]))
-                ds_grid_set(obj_planetary.planetary,48,resultMap[? "id"],real(resultMap[? "sc6"]))
-                ds_grid_set(obj_planetary.planetary,49,resultMap[? "id"],real(resultMap[? "sc7"]))
-                ds_grid_set(obj_planetary.planetary,51,resultMap[? "id"],real(resultMap[? "tba"]))
-                ds_grid_set(obj_planetary.planetary,52,resultMap[? "id"],real(resultMap[? "tbe"]))
-                ds_grid_set(obj_planetary.planetary,34,resultMap[? "id"],real(resultMap[? "aby"]))
-                ds_grid_set(obj_planetary.planetary,231,resultMap[? "id"],real(resultMap[? "asc1"]))
-                ds_grid_set(obj_planetary.planetary,232,resultMap[? "id"],real(resultMap[? "asc2"]))
-                ds_grid_set(obj_planetary.planetary,233,resultMap[? "id"],real(resultMap[? "asc3"]))
-                ds_grid_set(obj_planetary.planetary,234,resultMap[? "id"],real(resultMap[? "asc4"]))
-                ds_grid_set(obj_planetary.planetary,235,resultMap[? "id"],real(resultMap[? "asc5"]))
-                ds_grid_set(obj_planetary.planetary,236,resultMap[? "id"],real(resultMap[? "asc6"]))
-                ds_grid_set(obj_planetary.planetary,237,resultMap[? "id"],real(resultMap[? "asc7"]))
-                ds_grid_set(obj_planetary.planetary,32,resultMap[? "id"],real(resultMap[? "o"]))
-                ds_grid_set(obj_planetary.planetary,37,resultMap[? "id"],real(resultMap[? "t"]))
-                ds_grid_set(obj_planetary.planetary,38,resultMap[? "id"],real(resultMap[? "d"]))
-                varshipattack = real(resultMap[? "asc1"])+real(resultMap[? "asc2"])+real(resultMap[? "asc3"])+real(resultMap[? "asc4"])+real(resultMap[? "asc5"])+real(resultMap[? "asc6"])+real(resultMap[? "asc7"]);
-                if(resultMap[? "ua"] == 1){
-                    ds_grid_set(obj_planetary.planetary,51,resultMap[? "id"],0)
-                    ds_grid_set(obj_planetary.planetary,52,resultMap[? "id"],varshipattack)
-                }else{show_debug_message(date_current_datetime());
-                    ds_grid_set(obj_planetary.planetary,51,resultMap[? "id"],-floor(real(resultMap[? "dba"])/100))
-                    ds_grid_set(obj_planetary.planetary,52,resultMap[? "id"],varshipattack)
+            
+            if resultMap[? "id"]{
+                if resultMap[? "id"] != 0 {
+                    /*if resultMap[? "sc1"]*/ ds_grid_set(obj_planetary.planetary,43,resultMap[? "id"],real(resultMap[? "sc1"]))
+                    /*if resultMap[? "sc2"]*/ ds_grid_set(obj_planetary.planetary,44,resultMap[? "id"],real(resultMap[? "sc2"]))
+                    /*if resultMap[? "sc3"]*/ ds_grid_set(obj_planetary.planetary,45,resultMap[? "id"],real(resultMap[? "sc3"]))
+                    /*if resultMap[? "sc4"]*/ ds_grid_set(obj_planetary.planetary,46,resultMap[? "id"],real(resultMap[? "sc4"]))
+                    /*if resultMap[? "sc5"]*/ ds_grid_set(obj_planetary.planetary,47,resultMap[? "id"],real(resultMap[? "sc5"]))
+                    /*if resultMap[? "sc6"]*/ ds_grid_set(obj_planetary.planetary,48,resultMap[? "id"],real(resultMap[? "sc6"]))
+                    /*if resultMap[? "sc7"]*/ ds_grid_set(obj_planetary.planetary,49,resultMap[? "id"],real(resultMap[? "sc7"]))
+                    /*if resultMap[? "dba"]*/ ds_grid_set(obj_planetary.planetary,51,resultMap[? "id"],real(resultMap[? "dba"]))
+                    /*if resultMap[? "tbe"]*/ ds_grid_set(obj_planetary.planetary,52,resultMap[? "id"],real(resultMap[? "tbe"]))
+                    /*if resultMap[? "aby"]*/ ds_grid_set(obj_planetary.planetary,34,resultMap[? "id"],real(resultMap[? "aby"]))
+                    /*if resultMap[? "asc1"]*/ ds_grid_set(obj_planetary.planetary,231,resultMap[? "id"],real(resultMap[? "asc1"]))
+                    /*if resultMap[? "asc2"]*/ ds_grid_set(obj_planetary.planetary,232,resultMap[? "id"],real(resultMap[? "asc2"]))
+                    /*if resultMap[? "asc3"]*/ ds_grid_set(obj_planetary.planetary,233,resultMap[? "id"],real(resultMap[? "asc3"]))
+                    /*if resultMap[? "asc4"]*/ ds_grid_set(obj_planetary.planetary,234,resultMap[? "id"],real(resultMap[? "asc4"]))
+                    /*if resultMap[? "asc5"]*/ ds_grid_set(obj_planetary.planetary,235,resultMap[? "id"],real(resultMap[? "asc5"]))
+                    /*if resultMap[? "asc6"]*/ ds_grid_set(obj_planetary.planetary,236,resultMap[? "id"],real(resultMap[? "asc6"]))
+                    /*if resultMap[? "asc7"]*/ ds_grid_set(obj_planetary.planetary,237,resultMap[? "id"],real(resultMap[? "asc7"]))
+                    /*if resultMap[? "o"]*/ ds_grid_set(obj_planetary.planetary,32,resultMap[? "id"],real(resultMap[? "o"]))
+                    /*if resultMap[? "t"]*/ ds_grid_set(obj_planetary.planetary,37,resultMap[? "id"],real(resultMap[? "t"]))
+                    /*if resultMap[? "d"]*/ ds_grid_set(obj_planetary.planetary,38,resultMap[? "id"],real(resultMap[? "d"]))
+                                            //ds_grid_set(obj_planetary.planetary,89,resultMap[? "id"],real(resultMap[? "at0"]))//shield bonus
+                                            ds_grid_set(obj_planetary.planetary,101,resultMap[? "id"],real(resultMap[? "at0"]))//atk t0
+                                            ds_grid_set(obj_planetary.planetary,102,resultMap[? "id"],real(resultMap[? "at2"]))//atk t2
+                                            ds_grid_set(obj_planetary.planetary,103,resultMap[? "id"],real(resultMap[? "at3"]))//atk t3
+                                            ds_grid_set(obj_planetary.planetary,104,resultMap[? "id"],real(resultMap[? "at4"]))//atk t4
+                                            ds_grid_set(obj_planetary.planetary,105,resultMap[? "id"],real(resultMap[? "at5"]))//atk t5
+                                            ds_grid_set(obj_planetary.planetary,106,resultMap[? "id"],real(resultMap[? "at6"]))//atk t6
+                                            ds_grid_set(obj_planetary.planetary,242,resultMap[? "id"],real(resultMap[? "g"]))//guild
+                    /*if resultMap[? "dn"]*/ global.dateNow = resultMap[? "dn"]
+                    if !is_undefined(resultMap[? "t0"]) ds_grid_set(obj_planetary.planetary,72,resultMap[? "id"],real(resultMap[? "t0"]))
+                    //if !is_undefined(resultMap[? "t2"]) 
+                    if !is_undefined(resultMap[? "t3"]) ds_grid_set(obj_planetary.planetary,89,resultMap[? "id"],real(resultMap[? "t3"]))
+                    if !is_undefined(resultMap[? "t4"]) ds_grid_set(obj_planetary.planetary,75,resultMap[? "id"],real(resultMap[? "t4"]))
+                    //if !is_undefined(resultMap[? "t5"]) 
+                    if !is_undefined(resultMap[? "t6"]) ds_grid_set(obj_planetary.planetary,74,resultMap[? "id"],real(resultMap[? "t6"]))
+                    global.resultMapId = real(resultMap[? "id"])
+                    if is_undefined(resultMap[? "aopsc2"]){}else{
+                            maxSendShipTravel = 0
+                        for (var i = 0; i &lt; 5; i += 1)
+                        {
+                            global.il = i;
+                            if i = 0 {shipCatCreate = resultMap[? "aopsc2"]}
+                            if i = 1 {shipCatCreate = resultMap[? "aopsc3"]}
+                            if i = 2 {shipCatCreate = resultMap[? "aopsc4"]}
+                            if i = 3 {shipCatCreate = resultMap[? "aopsc5"]}
+                            if i = 4 {shipCatCreate = resultMap[? "aopsc6"]}
+                            if i = 5 {shipCatCreate = resultMap[? "aopsc7"]}
+                            for (i2 = 0; i2 &lt; shipCatCreate; i2 += 1)
+                                {
+                                    maxSendShipTravel += 1
+                                    if maxSendShipTravel &lt; 500 {
+                                        with(instance_create(x,y,obj_shipcommerce)){
+                                            modenew = global.il+2
+                                            fuyard = 1
+                                            partir = 2
+                                            planetparent = global.resultMapId
+                                            colorshiprgb = ds_grid_get(obj_planetary.planetary,30,planetparent)
+                                            colorship = ds_grid_get(obj_planetary.planetary,32,planetparent);enemy = 0
+                                            vardist = ds_grid_get(obj_planetary.planetary,39,planetparent)
+                                            alarm[0] = (3000/(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/100)))*(1+(20/50))
+                                            alarm[1] = 1
+                                            alarm[3] = 4
+                                            alarm[7] = 5000
+                                            rotaaleatdecol = random(360)
+                                            trace = 5
+                                            plusdecol = random_range(2000,2500)*obj_planetary.optiportabletaille
+                                            xx = room_width/2+lengthdir_x(random_range(1400,1800)*obj_planetary.optiportabletaille,rotaaleatdecol)
+                                            yy = room_height/2+lengthdir_y(random_range(1400,1800)*obj_planetary.optiportabletaille,rotaaleatdecol)
+                                            vargetdsgrid[1] = ds_grid_get(obj_planetary.planetary,51,planetparent)
+                                            vargetdsgrid[2] = ds_grid_get(obj_planetary.planetary,34,planetparent)
+                                            vargetdsgrid[3] = ((ds_grid_get(obj_planetary.planetary,7,planetparent)/25)*obj_planetary.optiportabletaille)
+                                            vargetdsgrid[4] = ds_grid_get(obj_planetary.planetary,32,planetparent)
+                                        }
+                                    }else{break;}
+                                }
+                            
+                        }
+                        
+                    }
+                    
+                    if resultMap[? "lts"] != "" &amp;&amp; resultMap[? "lts"] != "none" &amp;&amp; !is_undefined(resultMap[? "lts"]) {
+                        global.lts = resultMap[? "lts"]
+                    }else if resultMap[? "lts"] = "" or resultMap[? "lts"] = "none" {
+                        global.lts = "none|"
+                    }
+                    if resultMap[? "lfs"] != "" &amp;&amp; resultMap[? "lfs"] != "none" &amp;&amp; !is_undefined(resultMap[? "lfs"]){
+                        global.lfs = resultMap[? "lfs"]
+                    }else if resultMap[? "lfs"] = "" or resultMap[? "lfs"] = "none" {
+                        global.lfs = "none|"
+                    }
+                    
+                    
+                    
+                    /*var count = string_count("|",str);
+                    var str2 = string_split("|",str,true);
+                    
+                    for(var i=0; i&lt;count+1; i+=1)
+                    {
+                    var count2 = string_count("-",str3[i]);
+                    var str4 = string_split("-",str3[i],false);
+                    for(var i=0; i&lt;count; i+=1)
+                    {
+                        str3[i+1] = str2[i];
+                    } 
+                    }*/
+                    //show_debug_message(resultMap[? "tsl"]);
+                    if resultMap[? "tsl"]{
+                        for (i = 0; i &lt; 20; i += 1)
+                        {
+                        obj_planetary.listPlanetOwned[i] = -1
+                        }
+                        obj_planetary.scoresciencevalid = resultMap[? "tsl"];
+                        for (var i = array_length_1d(obj_planetary.listPlanetOwned) - 1; i &gt; -1; i--;)
+                        {
+                           obj_planetary.listPlanetOwned[i] = -1;
+                        }
+                        i2 = 1;
+                        for (i = 1; i &lt; 500; i += 1)
+                        {
+                            if(resultMap[? string(i)]){//show_debug_message(i);
+                                ds_grid_set(obj_planetary.planetary,32,i,global.idfixe);
+                                obj_planetary.listPlanetOwned[i2] = i
+                                i2 += 1;
+                                
+                                
+                            }
+                        }
+                    }
+                    varshipattack = real(resultMap[? "asc1"])+real(resultMap[? "asc2"])+real(resultMap[? "asc3"])+real(resultMap[? "asc4"])+real(resultMap[? "asc5"])+real(resultMap[? "asc6"])+real(resultMap[? "asc7"]);
+                    if(resultMap[? "ua"] == 1){
+                        ds_grid_set(obj_planetary.planetary,51,resultMap[? "id"],0)
+                        ds_grid_set(obj_planetary.planetary,52,resultMap[? "id"],varshipattack)
+                    }else{//show_debug_message(date_current_datetime());
+                        ds_grid_set(obj_planetary.planetary,51,resultMap[? "id"],-floor(real(resultMap[? "dba"])/1000))
+                        ds_grid_set(obj_planetary.planetary,52,resultMap[? "id"],varshipattack)
+                    }
+                    if(!is_undefined(resultMap[? "on"])){
+                        ds_grid_set(obj_planetary.planetary,230,resultMap[? "id"],resultMap[? "on"])
+                    }
+                    
+                    if(!is_undefined(resultMap[? "score"])){//show_debug_message(resultMap[? "score"])
+                        obj_highscore.text2 = resultMap[? "score"];
+                    }
+                    
+                    
+                    
+                    ds_grid_set(obj_planetary.planetary,35,resultMap[? "id"],real(resultMap[? "r"]))
+                    ressourcevar = floor(ds_grid_get(obj_planetary.planetary,35,resultMap[? "id"])/9)
+                    
+                    if ressourcevar &gt; 0 {}else{ressourcevar = 0}
+                    ds_grid_set(obj_planetary.planetary,90,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,91,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,92,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,93,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,94,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,95,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,96,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,97,resultMap[? "id"],ressourcevar)
+                    ds_grid_set(obj_planetary.planetary,98,resultMap[? "id"],ressourcevar)
+                //show_debug_message(ds_grid_get(obj_planetary.planetary,32,resultMap[? "id"]))
+                //show_debug_message(ds_grid_get(obj_planetary.planetary,34,resultMap[? "id"]))
+                
+                
+                    varship = ds_grid_get(obj_planetary.planetary,43,resultMap[? "id"])+
+                    ds_grid_get(obj_planetary.planetary,44,resultMap[? "id"])+
+                    ds_grid_get(obj_planetary.planetary,45,resultMap[? "id"])+
+                    ds_grid_get(obj_planetary.planetary,46,resultMap[? "id"])+
+                    ds_grid_get(obj_planetary.planetary,47,resultMap[? "id"])+
+                    ds_grid_get(obj_planetary.planetary,48,resultMap[? "id"])+
+                    ds_grid_get(obj_planetary.planetary,49,resultMap[? "id"])
+                    ds_grid_set(obj_planetary.planetary,36,resultMap[? "id"],varship) 
+                    
+                    //DEFENSE
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 5 {ds_grid_set(obj_planetary.planetary,61,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,61,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 10 {ds_grid_set(obj_planetary.planetary,62,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,62,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 15 {ds_grid_set(obj_planetary.planetary,63,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,63,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 20 {ds_grid_set(obj_planetary.planetary,64,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,64,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 25 {ds_grid_set(obj_planetary.planetary,65,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,65,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 30 {ds_grid_set(obj_planetary.planetary,66,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,66,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 35 {ds_grid_set(obj_planetary.planetary,67,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,67,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 40 {ds_grid_set(obj_planetary.planetary,68,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,68,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 45 {ds_grid_set(obj_planetary.planetary,69,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,69,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 50 {ds_grid_set(obj_planetary.planetary,70,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,70,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 55 {ds_grid_set(obj_planetary.planetary,280,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,280,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 60 {ds_grid_set(obj_planetary.planetary,281,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,281,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 65 {ds_grid_set(obj_planetary.planetary,282,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,282,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 70 {ds_grid_set(obj_planetary.planetary,283,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,283,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 75 {ds_grid_set(obj_planetary.planetary,284,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,284,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 80 {ds_grid_set(obj_planetary.planetary,285,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,285,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 85 {ds_grid_set(obj_planetary.planetary,286,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,286,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 90 {ds_grid_set(obj_planetary.planetary,287,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,287,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 95 {ds_grid_set(obj_planetary.planetary,288,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,288,resultMap[? "id"],0)}
+                    if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt;= 100 {ds_grid_set(obj_planetary.planetary,289,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,289,resultMap[? "id"],0)}
+                    
+            
                 }
-                
-                ds_grid_set(obj_planetary.planetary,35,resultMap[? "id"],real(resultMap[? "r"]))
-                ressourcevar = floor(ds_grid_get(obj_planetary.planetary,35,resultMap[? "id"])/9)
-                
-                if ressourcevar &gt; 0 {}else{ressourcevar = 0}
-                ds_grid_set(obj_planetary.planetary,90,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,91,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,92,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,93,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,94,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,95,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,96,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,97,resultMap[? "id"],ressourcevar)
-                ds_grid_set(obj_planetary.planetary,98,resultMap[? "id"],ressourcevar)
-            //show_debug_message(ds_grid_get(obj_planetary.planetary,32,resultMap[? "id"]))
-            //show_debug_message(ds_grid_get(obj_planetary.planetary,34,resultMap[? "id"]))
-            
-            
-                varship = ds_grid_get(obj_planetary.planetary,43,resultMap[? "id"])+
-                ds_grid_get(obj_planetary.planetary,44,resultMap[? "id"])+
-                ds_grid_get(obj_planetary.planetary,45,resultMap[? "id"])+
-                ds_grid_get(obj_planetary.planetary,46,resultMap[? "id"])+
-                ds_grid_get(obj_planetary.planetary,47,resultMap[? "id"])+
-                ds_grid_get(obj_planetary.planetary,48,resultMap[? "id"])+
-                ds_grid_get(obj_planetary.planetary,49,resultMap[? "id"])
-                ds_grid_set(obj_planetary.planetary,36,resultMap[? "id"],varship) 
-                
-                //DEFENSE
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 5 {ds_grid_set(obj_planetary.planetary,61,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,61,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 10 {ds_grid_set(obj_planetary.planetary,62,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,62,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 15 {ds_grid_set(obj_planetary.planetary,63,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,63,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 20 {ds_grid_set(obj_planetary.planetary,64,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,64,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 25 {ds_grid_set(obj_planetary.planetary,65,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,65,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 30 {ds_grid_set(obj_planetary.planetary,66,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,66,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 35 {ds_grid_set(obj_planetary.planetary,67,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,67,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 40 {ds_grid_set(obj_planetary.planetary,68,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,68,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 45 {ds_grid_set(obj_planetary.planetary,69,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,69,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 50 {ds_grid_set(obj_planetary.planetary,70,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,70,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 55 {ds_grid_set(obj_planetary.planetary,280,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,280,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 60 {ds_grid_set(obj_planetary.planetary,281,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,281,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 65 {ds_grid_set(obj_planetary.planetary,282,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,282,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 70 {ds_grid_set(obj_planetary.planetary,283,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,283,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 75 {ds_grid_set(obj_planetary.planetary,284,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,284,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 80 {ds_grid_set(obj_planetary.planetary,285,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,285,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 85 {ds_grid_set(obj_planetary.planetary,286,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,286,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 90 {ds_grid_set(obj_planetary.planetary,287,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,287,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt; 95 {ds_grid_set(obj_planetary.planetary,288,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,288,resultMap[? "id"],0)}
-                if ds_grid_get(obj_planetary.planetary,38,resultMap[? "id"]) &gt;= 100 {ds_grid_set(obj_planetary.planetary,289,resultMap[? "id"],1)}else{ds_grid_set(obj_planetary.planetary,289,resultMap[? "id"],0)}
-                
-        
             }
             ds_map_destroy(resultMap);
             
@@ -478,15 +711,15 @@ if ds_map_find_value(async_load, "id") == get_highscores
             <string>/// Drawing the highscores if available
 //draw_set_valign(fa_bottom);
 //get_planet(obj_planetary.buildaffect);
-/*
-if obj_planetary.menuplanet3 = 3 {}else{
-if obj_planetary.guildchannel = 0 {obj_planetary.guildchannel = 1;if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}}}
+
+/*if obj_planetary.menuplanet3 = 3 {}else{
+if obj_planetary.guildchannel = 0 {obj_planetary.guildchannel = 1;if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}}}*/
 
 if obj_planetary.menuplanet = 3 {
 if obj_planetary.menuplanet3 = 0 {
 draw_set_colour(c_black);
 //draw_set_font(fnt_poly);
-if text == "Ready"
+/*if text == "Ready"
 {
 //show_message("ready")
 alarm[2] = 10
@@ -495,25 +728,27 @@ alarm[2] = 10
 else
 {
     draw_text(room_width/2-110, 50, text);
-}
+}*/    
+draw_text_highscore(0, 50, "line", "Name", "Score", string(text2), player_name, c_green,"RESS","SHIP","SCIENCE","DEF","guildname","guildid","guildinvit","grade");
+
 }
 if obj_planetary.menuplanet3 &gt; 0 {
 draw_set_colour(c_black);
 //draw_set_font(fnt_poly);
-if text == "Ready"
-{
+//if text == "Ready"
+//{
 //show_message("ready")
 //alarm[2] = 10
 if obj_planetary.menuplanet3 &gt; 0 {
 //send_message("teststr",global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,1)
 //get_chat(global.idfixe,1);
 }
-    draw_text_chat(0, 50,string(text2));
-}
+    draw_text_chat(0, 50,string(textChat));
+/*}
 else
 {
     draw_text(room_width/2-110, 50, text);
-}
+}*/
 }
 }else{
 

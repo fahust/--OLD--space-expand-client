@@ -286,11 +286,12 @@ str = ""
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if alarm[1] &lt; 0 &amp;&amp; obj_planetary.zoom = 1 {
+            <string>
+if alarm[1] &lt; 0 &amp;&amp; obj_planetary.zoom = 1 {
 
 color1 = ds_grid_get(obj_planetary.planetary,30,planet[1])
 color2 = ds_grid_get(obj_planetary.planetary,31,planet[1])
-
+/*
 if info1[1] = "" {xlerp = 5000}else{
 if alarm[0] &lt; 0 {alarm[0] = 600}
 
@@ -301,11 +302,11 @@ if alarm[0] &lt; 100 {xlerp = 5000}else{xlerp = 0}
 if obj_planetary.portrait = 1 {draw_set_font(fntpolylitlle)}
 
 draw_set_colour(color1);
-if mode[1] = 1 {str = "During your absence you brought back "+string(info1[1])+" resources on your home planet"}
-if mode[1] = 2 {str = "During your absence you built "+string(info1[1])+" ships on your home planet"}
-if mode[1] = 3 {str = "During your absence you lost "+string(info1[1])+" ships on your home planet"}
-if mode[1] = 4 {str = string(info1[1])+" is under attack !"}
-if mode[1] = 5 {str = string(info1[1])+" has been conquered "}
+if mode[1] = 1 {str = "During your absence you brought back "+string(info1[1])+" resources"}
+if mode[1] = 2 {str = "During your absence you built "+string(info1[1])+" ships"}
+if mode[1] = 3 {str = "During your absence you lost "+string(info1[1])+" ships"}
+if mode[1] = 4 {str = string(info1[1])+" is under attack!"}
+if mode[1] = 5 {str = string(info1[1])+" has been conquered"}
 if mode[1] = 6 {str = "You colonized "+string(info1[1])+""}
 if mode[1] = 7 {str = "Your ships have arrived on "+string(info1[1])+""}
 if mode[1] = 8 {str = "Terraformation of "+string(info1[1])+" in progress"}
@@ -313,7 +314,7 @@ if mode[1] = 9 {str = "if you stay too long in the players' menu, then multiplay
 
 if obj_planetary.menuplanet = 0 {
 if device_mouse_check_button_pressed(0, mb_left) &amp;&amp; 
-point_distance(obj_planetary.xxmouse,obj_planetary.yymouse,room_width-(room_width/12),(room_height/6)) &lt; 70 {
+point_distance(obj_planetary.xxmouse,obj_planetary.yymouse,room_width-(room_width/12)+xlerp2,(room_height/6)) &lt; 70 {
 obj_planetary.systemstellairenow = ds_grid_get(obj_planetary.planetary,28,planet[1])
 obj_planetary.planetnowid = planet[1];
 obj_planetary.echelle = 0 ;if surface_exists(obj_planetary.surf){surface_free(obj_planetary.surf)}
@@ -321,13 +322,13 @@ obj_planetary.echelle = 0 ;if surface_exists(obj_planetary.surf){surface_free(ob
 }
 xlerp2 = lerp(xlerp2,xlerp,0.1)
 draw_set_colour(color2);
-draw_rectangle(0+xlerp2,room_height/4,room_width+xlerp2,(room_height/10),false);
+draw_rectangle(0+xlerp2-50,room_height/4,room_width+xlerp2,(room_height/10),false);
 draw_sprite_ext(spr_engrenage,1,(room_width-(room_width/12))+xlerp2,(room_height/6),1,1,0,color1,1)
 
 draw_set_colour(color1);
 draw_set_halign(fa_center);
 draw_text_outline((room_width/2)+xlerp2,room_height/6,str,color1,room_width/1.3,fa_center,room_height/20,false)
-draw_set_halign(fa_left);
+draw_set_halign(fa_left);*/
 //mode 1 //if rattrapage &gt; 240 {if buildaffect = 0 {show_message("Pendant votre absence vous avez ramener "+string(rattrapagevar*9)+" ressources sur votre planète mère")}}
 //mode 2 //if rattrapage &gt; 240 {if buildaffect = 0 {show_message("Pendant votre absence vous avez construis "+string(nbrshipbuild)+" vaisseau sur votre planète mère")}}
 //mode 3 //if rattrapage &gt; 240 {if buildaffect = 0 {show_message("Pendant votre absence vous avez perdu "+string(shiploose)+" vaisseau sur votre planète mère")}
@@ -366,14 +367,18 @@ if bmode[1] = 12 {bstr = ""+string(binfo1[1])+" EMPEROR Destroy"}
 if bmode[1] = 13 {bstr = ""+string(binfo1[1])+" CRUSADER Destroy"}
 if bmode[1] = 14 {bstr = ""+string(binfo1[1])+" IMPERATOR Destroy"}
 if bmode[1] = 15 {bstr = ""+string(binfo1[1])+" Resource bring back "}
-if bmode[1] = 16 {bstr = "A planetary turret a was built"}
-if bmode[1] = 17 {bstr = "An orbital turret a was built"}
-if bmode[1] = 18 {bstr = "The technology has been improved (+ "+string(binfo1[1])+" %)"}
+if bmode[1] = 16 {bstr = "A planetary turret was built"}
+if bmode[1] = 17 {bstr = "An orbital turret was built"}
+if bmode[1] = 18 {bstr = "Technology improvement (+ "+string(binfo1[1])+" %)"}
+if bmode[1] = 19 {bstr = "You created guild"}
+if bmode[1] = 20 {bstr = "You invited a player"}
+if bmode[1] = 21 {bstr = "You attack planet"+string(binfo1[1])}
+if bmode[1] = 22 {bstr = "You send ship to planet"+string(binfo1[1])}
 
 
 if obj_planetary.menuplanet = 0 {
 if device_mouse_check_button_pressed(0, mb_left) &amp;&amp; 
-point_distance(obj_planetary.xxmouse,obj_planetary.yymouse,room_width-(room_width/12),(room_height/6)) &lt; 70 {
+point_distance(obj_planetary.xxmouse,obj_planetary.yymouse,room_width-(room_width/12)+xlerp2,(room_height/6)) &lt; 70 {
 obj_planetary.systemstellairenow = ds_grid_get(obj_planetary.planetary,28,bplanet[1])
 obj_planetary.planetnowid = bplanet[1];
 obj_planetary.echelle = 0 ;if surface_exists(obj_planetary.surf){surface_free(obj_planetary.surf)}
@@ -382,7 +387,7 @@ obj_planetary.echelle = 0 ;if surface_exists(obj_planetary.surf){surface_free(ob
 bxlerp2 = lerp(bxlerp2,bxlerp,0.1)
 draw_set_colour(color2);
 draw_set_alpha(alarm[4]/100);
-draw_roundrect((room_width-string_width(bstr))+bxlerp2,room_height-65,room_width+bxlerp2+50,room_height,false);
+draw_roundrect((room_width-string_width(bstr))+bxlerp2-50,room_height-65,room_width+bxlerp2+50,room_height,false);
 //draw_sprite_ext(spr_engrenage,1,(room_width-(room_width/12))+bxlerp2,(room_height/6),1,1,0,color1,1)
 
 draw_set_colour(color1);

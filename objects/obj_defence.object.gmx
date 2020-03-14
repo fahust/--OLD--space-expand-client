@@ -97,7 +97,7 @@ image_yscale = 0.5*obj_planetary.optiportabletaille
           <argument>
             <kind>1</kind>
             <string>if hp &lt;= 0 {
-if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
+if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe  or ds_grid_get(obj_planetary.planetary,32,planetparent) &lt; 7 or ds_grid_get(obj_planetary.planetary,34,planetparent) &lt; 7{
             with(obj_highscore){
                 var hiscore_map, i, str;
                 hiscore_map = ds_map_create();
@@ -105,10 +105,10 @@ if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
                 ds_map_set(hiscore_map,'cu', global.idfixe);
                 str = json_encode(hiscore_map);
                 ds_map_destroy(hiscore_map); 
-                post = http_post_string("http://localhost:3000/universe/deleteDefense" , str);
+                post = http_post_string(addr+"universe/deleteDefense" , str);
             }
             //defensseur
-        }else if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe {
+        }else if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe  or ds_grid_get(obj_planetary.planetary,32,planetparent) &lt; 7 or ds_grid_get(obj_planetary.planetary,34,planetparent) &lt; 7{
             with(obj_highscore){
                 var hiscore_map, i, str;
                 hiscore_map = ds_map_create();
@@ -116,7 +116,7 @@ if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
                 ds_map_set(hiscore_map,'cu', global.idfixe);
                 str = json_encode(hiscore_map);
                 ds_map_destroy(hiscore_map); 
-                post = http_post_string("http://localhost:3000/universe/deleteDefense" , str);
+                post = http_post_string(addr+"universe/deleteDefense" , str);
             }
         }
         }
@@ -142,9 +142,15 @@ if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hp = hp*(1+(technow/25))
-dgt = dgt*(1+(technow/25))
-hpshield = hp
+            <string>if enemy = global.idfixe{
+hp = hp*(1+(obj_planetary.techArray[5]/25))
+dgt = dgt*(1+(obj_planetary.techArray[1]/25))
+hpshield = hp*(1+(obj_planetary.techArray[4]/25))
+}else{
+hp = hp*(1+(ds_grid_get(obj_planetary.planetary,73,planetparent)/25))
+dgt = dgt*(1+(ds_grid_get(obj_planetary.planetary,72,planetparent)/25))
+hpshield = hp*(1+(ds_grid_get(obj_planetary.planetary,89,planetparent)/25))
+}
 //dir = ((zone*36)+obj_planetary.rotaplanet)
 </string>
           </argument>

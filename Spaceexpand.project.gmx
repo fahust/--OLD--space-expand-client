@@ -56,6 +56,8 @@
     <sprite>sprites\spr_debris</sprite>
     <sprite>sprites\spr_arrow</sprite>
     <sprite>sprites\spr_loop</sprite>
+    <sprite>sprites\spr_deathstar</sprite>
+    <sprite>sprites\spr_tech</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -99,6 +101,8 @@
     <script>scripts\scr_laser.gml</script>
     <script>scripts\scr_meetlaser.gml</script>
     <script>scripts\scr_stepTest.gml</script>
+    <script>scripts\scr_quest.gml</script>
+    <script>scripts\scr_save.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\sdh_radiant.shader</shader>
@@ -110,6 +114,7 @@
   <objects name="objects">
     <object>objects\obj_planetary</object>
     <object>objects\obj_ship</object>
+    <object>objects\obj_deathstar</object>
     <object>objects\obj_shipcommand</object>
     <object>objects\obj_shipcommerce</object>
     <object>objects\obj_defence</object>

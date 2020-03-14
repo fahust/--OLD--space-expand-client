@@ -13,5 +13,5 @@
 var args = "dated="+string(argument0)+"&envoyeurid="+string(argument1)
 +"&hash=1234";
 if global.server = 1 {//show_message(args)
-http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/destroymessage.php", args);
+//http_post_string("https://snowashland.000webhostapp.com/OnlineHighscores/destroymessage.php", args);
 }

@@ -177,7 +177,7 @@ ds_grid_add(obj_planetary.planetary,53+type,planetparent,-1)
 if hp &lt;= 0 {
     if planetparent != 0 {
         //attaquant
-        if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe {
+        if ds_grid_get(obj_planetary.planetary,34,planetparent) = global.idfixe or ds_grid_get(obj_planetary.planetary,32,planetparent) &lt; 7 or ds_grid_get(obj_planetary.planetary,34,planetparent) &lt; 7 {
             with(obj_highscore){
                 var hiscore_map, i, str;
                 hiscore_map = ds_map_create();
@@ -187,7 +187,7 @@ if hp &lt;= 0 {
                 ds_map_set(hiscore_map,'cu', global.idfixe);
                 str = json_encode(hiscore_map);
                 ds_map_destroy(hiscore_map); 
-                post = http_post_string("http://localhost:3000/universe/deleteship" , str);
+                postDeleteShip = http_post_string(addr+"universe/deleteship" , str);
             }
             //defensseur
         }else if ds_grid_get(obj_planetary.planetary,32,planetparent) = global.idfixe or ds_grid_get(obj_planetary.planetary,32,planetparent) &lt; 7 or ds_grid_get(obj_planetary.planetary,34,planetparent) &lt; 7  {
@@ -197,9 +197,10 @@ if hp &lt;= 0 {
                 ds_map_set(hiscore_map,'cat', other.type);
                 ds_map_set(hiscore_map,'owner', other.enemy);
                 ds_map_set(hiscore_map,'id', other.planetparent);
+                ds_map_set(hiscore_map,'cu', global.idfixe);
                 str = json_encode(hiscore_map);
                 ds_map_destroy(hiscore_map); 
-                post = http_post_string("http://localhost:3000/universe/deleteship" , str);
+                postDeleteShip = http_post_string(addr+"universe/deleteship" , str);
             }
         }
     }
@@ -220,19 +221,26 @@ planetparent = other.planetparent
 }
 }
 }else{
-if soute &gt; 0 and planetparent = 0{
-if enemy = ds_grid_get(obj_planetary.planetary,32,planetparent) {
-ds_grid_add(obj_planetary.planetary,35,planetparent,floor((soute*100)*8))
-ds_grid_add(obj_planetary.planetary,90,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,91,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,92,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,93,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,94,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,95,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,96,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,97,planetparent,floor((soute*100)))
-ds_grid_add(obj_planetary.planetary,98,planetparent,floor((soute*100)))}
-}}
+if soute &gt; 0{
+    if planetparent = 0{
+    if enemy = ds_grid_get(obj_planetary.planetary,32,planetparent) {
+    ds_grid_add(obj_planetary.planetary,35,planetparent,floor((soute*100)*8))
+    ds_grid_add(obj_planetary.planetary,90,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,91,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,92,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,93,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,94,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,95,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,96,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,97,planetparent,floor((soute*100)))
+    ds_grid_add(obj_planetary.planetary,98,planetparent,floor((soute*100)))
+    }
+    }else{
+    ds_grid_add(obj_planetary.planetary,290,planetparent,floor((soute*100)))
+        
+    }
+}
+}
 
 
 if partir = 4 {}else{
@@ -254,6 +262,29 @@ ds_grid_add(obj_planetary.planetary,53,0,-1)}//}
 //}
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_destroy();
 </string>
           </argument>
         </arguments>
@@ -464,10 +495,35 @@ scienceflotte = ds_grid_get(obj_planetary.planetary,240,planetparent)}else{
 scienceflotte = ds_grid_get(obj_planetary.planetary,37,planetparent)
 }
 if scienceflotte &lt; 1 {scienceflotte = 1}else if scienceflotte &gt; 100 {scienceflotte = 100}
- vargetdsgrid[5] = ds_grid_get(obj_planetary.planetary,72,planetparent)
-vargetdsgrid[6] = ds_grid_get(obj_planetary.planetary,73,planetparent)
-vargetdsgrid[7] = (1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
-vargetdsgrid[8] = ds_grid_get(obj_planetary.planetary,75,planetparent)
+if enemy =  ds_grid_get(obj_planetary.planetary,34,planetparent) {
+if enemy &gt; 6{
+        vargetdsgrid[5] = ds_grid_get(obj_planetary.planetary,101,planetparent)//ds_grid_get(obj_planetary.planetary,72,planetparent)//dgt
+        vargetdsgrid[6] = ds_grid_get(obj_planetary.planetary,106,planetparent)//ds_grid_get(obj_planetary.planetary,73,planetparent)//vie
+        vargetdsgrid[7] = (1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+        vargetdsgrid[8] = ds_grid_get(obj_planetary.planetary,75,planetparent)
+        vargetdsgrid[9] = ds_grid_get(obj_planetary.planetary,105,planetparent) // shield
+    }else{
+        vargetdsgrid[5] = 1//ds_grid_get(obj_planetary.planetary,72,planetparent)
+        vargetdsgrid[6] = 1//ds_grid_get(obj_planetary.planetary,73,planetparent)
+        vargetdsgrid[7] = 1//(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+        vargetdsgrid[8] = 1//ds_grid_get(obj_planetary.planetary,75,planetparent)
+        vargetdsgrid[9] = 1//ds_grid_get(obj_planetary.planetary,89,planetparent)
+    }
+}else{
+    if enemy = global.idfixe{
+        vargetdsgrid[5] = obj_planetary.techArray[1]//ds_grid_get(obj_planetary.planetary,72,planetparent)//dgt
+        vargetdsgrid[6] = obj_planetary.techArray[5]//ds_grid_get(obj_planetary.planetary,73,planetparent)//vie
+        vargetdsgrid[7] = (1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+        vargetdsgrid[8] = ds_grid_get(obj_planetary.planetary,75,planetparent)
+        vargetdsgrid[9] = obj_planetary.techArray[4] // shield
+    }else{
+        vargetdsgrid[5] = ds_grid_get(obj_planetary.planetary,72,planetparent)
+        vargetdsgrid[6] = ds_grid_get(obj_planetary.planetary,73,planetparent)
+        vargetdsgrid[7] = (1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
+        vargetdsgrid[8] = ds_grid_get(obj_planetary.planetary,75,planetparent)
+        vargetdsgrid[9] = ds_grid_get(obj_planetary.planetary,89,planetparent)
+    }
+}
 
 if enemy = 2 or enemy = 1 or enemy = 3 or enemy = 4 {
 if mode &gt; 5 {mode = 5}
@@ -496,8 +552,8 @@ type = 1
 hp = 10
 dgt = 1
 if enemy &gt; 0  {
-hp = (10*(vargetdsgrid[6]/25))
-dgt = (1*(vargetdsgrid[5]/25))
+hp = (10*(1+(vargetdsgrid[6]/25)))
+dgt = (1*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 
@@ -510,8 +566,8 @@ distdetir = 250}
 if mode = 2 {particlelife = 0.3
 type = 2
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (30*(vargetdsgrid[6]/25))
-dgt = (2*(vargetdsgrid[5]/25))
+hp = (30*(1+(vargetdsgrid[6]/25)))
+dgt = (2*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 30
@@ -524,8 +580,8 @@ colorshoot = c_red}
 if mode = 3 {particlelife = 0.7
 type = 3
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (50*(vargetdsgrid[6]/25))
-dgt = (3*(vargetdsgrid[5]/25))
+hp = (50*(1+(vargetdsgrid[6]/25)))
+dgt = (3*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.7,1.2)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 50
@@ -537,8 +593,8 @@ tourelleauto = 2}
 if mode = 4 {particlelife = 1
 type = 4
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (220*(vargetdsgrid[6]/25))
-dgt = (4*(vargetdsgrid[5]/25))
+hp = (220*(1+(vargetdsgrid[6]/25)))
+dgt = (4*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.3,0.5)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 220
@@ -551,8 +607,8 @@ colorshoot = c_red}
 if mode = 5 {particlelife = 1.3
 type = 5
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (550*(vargetdsgrid[6]/25))
-dgt = (5*(vargetdsgrid[5]/25))
+hp = (550*(1+(vargetdsgrid[6]/25)))
+dgt = (5*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.2,4)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 550
@@ -567,8 +623,8 @@ colorshoot = c_red}
 if mode = 6 {particlelife = 0.2
 type = 1
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (10*(vargetdsgrid[6]/25))
-dgt = (1*(vargetdsgrid[5]/25))
+hp = (10*(1+(vargetdsgrid[6]/25)))
+dgt = (1*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 10
@@ -582,8 +638,8 @@ distdetir = 250}
 if mode = 7 {particlelife = 0.3
 type = 2
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (30*(vargetdsgrid[6]/25))
-dgt = (2*(vargetdsgrid[5]/25))
+hp = (30*(1+(vargetdsgrid[6]/25)))
+dgt = (2*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 30
@@ -596,8 +652,8 @@ colorshoot = c_red}
 if mode = 8 {particlelife = 0.7
 type = 3
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (50*(vargetdsgrid[6]/25))
-dgt = (3*(vargetdsgrid[5]/25))
+hp = (50*(1+(vargetdsgrid[6]/25)))
+dgt = (3*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.7,1.2)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 50
@@ -609,8 +665,8 @@ tourelleauto = 2}
 if mode = 9 {particlelife = 1
 type = 4
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (220*(vargetdsgrid[6]/25))
-dgt = (4*(vargetdsgrid[5]/25))
+hp = (220*(1+(vargetdsgrid[6]/25)))
+dgt = (4*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.3,0.5)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 220
@@ -623,8 +679,8 @@ colorshoot = c_red}
 if mode = 10 {particlelife = 1.3
 type = 5
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (550*(vargetdsgrid[6]/25))
-dgt = (5*(vargetdsgrid[5]/25))
+hp = (550*(1+(vargetdsgrid[6]/25)))
+dgt = (5*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.2,4)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 550
@@ -639,8 +695,8 @@ colorshoot = c_red}
 if mode = 11 {particlelife = 0.2
 type = 1
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (10*(vargetdsgrid[6]/25))
-dgt = (1*(vargetdsgrid[5]/25))
+hp = (10*(1+(vargetdsgrid[6]/25)))
+dgt = (1*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 10
@@ -654,8 +710,8 @@ distdetir = 250}
 if mode = 12 {particlelife = 0.3
 type = 2
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (30*(vargetdsgrid[6]/25))
-dgt = (2*(vargetdsgrid[5]/25))
+hp = (30*(1+(vargetdsgrid[6]/25)))
+dgt = (2*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 30
@@ -668,8 +724,8 @@ colorshoot = c_red}
 if mode = 13 {particlelife = 0.7
 type = 3
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (50*(vargetdsgrid[6]/25))
-dgt = (3*(vargetdsgrid[5]/25))
+hp = (50*(1+(vargetdsgrid[6]/25)))
+dgt = (3*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.7,1.2)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 50
@@ -681,8 +737,8 @@ tourelleauto = 2}
 if mode = 14 {particlelife = 1
 type = 4
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (220*(vargetdsgrid[6]/25))
-dgt = (4*(vargetdsgrid[5]/25))
+hp = (220*(1+(vargetdsgrid[6]/25)))
+dgt = (4*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.3,0.5)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 220
@@ -695,8 +751,8 @@ colorshoot = c_red}
 if mode = 15 {particlelife = 1.3
 type = 5
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (550*(vargetdsgrid[6]/25))
-dgt = (5*(vargetdsgrid[5]/25))
+hp = (550*(1+(vargetdsgrid[6]/25)))
+dgt = (5*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.2,4)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 550
@@ -711,8 +767,8 @@ colorshoot = c_red}
 if mode = 16 {particlelife = 0.2
 type = 1
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (10*(vargetdsgrid[6]/25))
-dgt = (1*(vargetdsgrid[5]/25))
+hp = (10*(1+(vargetdsgrid[6]/25)))
+dgt = (1*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 10
@@ -726,8 +782,8 @@ distdetir = 250}
 if mode = 17 {particlelife = 0.3
 type = 2
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (30*(vargetdsgrid[6]/25))
-dgt = (2*(vargetdsgrid[5]/25))
+hp = (30*(1+(vargetdsgrid[6]/25)))
+dgt = (2*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.5,1)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.012*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 30
@@ -740,8 +796,8 @@ colorshoot = c_red}
 if mode = 18 {particlelife = 0.7
 type = 3
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (50*(vargetdsgrid[6]/25))
-dgt = (3*(vargetdsgrid[5]/25))
+hp = (50*(1+(vargetdsgrid[6]/25)))
+dgt = (3*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.7,1.2)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.009*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 50
@@ -753,8 +809,8 @@ tourelleauto = 2}
 if mode = 19 {particlelife = 1
 type = 4
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (220*(vargetdsgrid[6]/25))
-dgt = (4*(vargetdsgrid[5]/25))
+hp = (220*(1+(vargetdsgrid[6]/25)))
+dgt = (4*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.3,0.5)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.005*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 220
@@ -767,8 +823,8 @@ colorshoot = c_red}
 if mode = 20 {particlelife = 1.3
 type = 5
 if ds_grid_get(obj_planetary.planetary,32,planetparent) = enemy or enemy = global.idfixe {
-hp = (550*(vargetdsgrid[6]/25))
-dgt = (5*(vargetdsgrid[5]/25))
+hp = (550*(1+(vargetdsgrid[6]/25)))
+dgt = (5*(1+(vargetdsgrid[5]/25)))
 vitesseship = random_range(0.2,0.4)*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))
 accellerationship = 0.001*(1+(ds_grid_get(obj_planetary.planetary,74,planetparent)/50))}
 hp = 550
@@ -871,7 +927,7 @@ ds_grid_add(obj_planetary.planetary,53,planetparent,1)
 }
  }
  
-hpshield = hp 
+hpshield = hp*(1+(vargetdsgrid[9]/25))
 
 alarm[9] += (type*75)
 
@@ -1022,7 +1078,10 @@ if instance_exists(obj_ship){
     
     }
     if i2 &lt;= 11 or i2 &gt; 0 {
-    if objprocheid[i2] &gt; 0 &amp;&amp; instance_exists(objprocheid[i2]){
+    if objprocheid[i2] &gt; 0 &amp;&amp; instance_exists(objprocheid[i2]) {
+    /*if objprocheid[i2] &gt; 1 {absAngle = image_angle}else{
+    absAngle = point_direction(x,y,objprocheid[i2].xx,objprocheid[i2].yy)}*/
+    if (abs(angle_difference(image_angle, image_angle)) &lt; 20) {
     //varxshoot = objprocheid[i2].xx
     //varyshoot = objprocheid[i2].yy
     varxshoot = objprocheid[i2].xx+((objprocheid[i2].xx2*obj_planetary.optiportabletaille)*20)
@@ -1041,17 +1100,17 @@ audio_play_sound(lasersound,2,false);}
     image_angle = point_direction(other.xxshootlength,other.yyshootlength,
     other.varxshoot,other.varyshoot)
     alarm[0] = 30
-    }}
+    }}}
     }
  }
- alarm[2] = alarmshootvar//2
+ alarm[2] = random_range(alarmshootvar*2,alarmshootvar*3)//2
 }
 
 
 if tourelleauto &lt; 1 {
 ///SHOOT
 if cible &gt; 0 &amp;&amp; instance_exists(cible){
-if (abs(angle_difference(dir, image_angle)) &lt; 25) &amp;&amp; point_distance(xx,yy,cible.xx,cible.yy) &lt; 350*obj_planetary.optiportabletaille {
+if (abs(angle_difference(point_direction(xx,yy,cible.xx,cible.yy), image_angle)) &lt; 20) &amp;&amp; point_distance(xx,yy,cible.xx,cible.yy) &lt; 350*obj_planetary.optiportabletaille {
 if obj_planetary.echelle = 0 &amp;&amp; planetparent = obj_planetary.planetnowid {
 lasersound = choose(snd_lasera)//,snd_laserb,snd_laserc,snd_laserd,snd_lasere,snd_laserf,snd_laserg,snd_laserh,snd_laseri,snd_laserj)
 global.shootaudio += 2//(1+(global.shootaudio/20))
@@ -1066,7 +1125,7 @@ image_angle = other.image_angle
 alarm[0] = 30
 }}
 }
-alarm[2] = alarmshootvar*5
+alarm[2] = random_range(alarmshootvar*5,alarmshootvar*7)
 //alarm[2] = alarmshootvar*15//random_range(10,15)
 }else{
 ///ROCKET
@@ -1081,7 +1140,7 @@ audio_sound_gain(lasersound,(1/(1+(global.shootaudio/20)))*obj_planetary.optipor
 audio_play_sound(lasersound,2,false);
 }*/
 with(instance_create(xx,yy,obj_rocket)){
-dgt = other.dgt
+dgt = other.dgt*(1+(obj_planetary.techArray[0]/25))
 planetparent = other.planetparent
 enemy = other.enemy
 image_angle = other.image_angle
@@ -1835,6 +1894,9 @@ yy = yydecol}}else{
    
 x = xx
 y = yy
+dirext = point_direction(xx,yy,room_width/2,room_height/2);
+ditint = point_direction(room_width/2,room_height/2,xx,yy);
+distoutofscreen = point_distance(room_width/2,room_height/2,xx,yy);
 if obj_planetary.echelle = 0 {
 if obj_planetary.planetnowid = planetparent {
 if xxcursor &gt; 0 {
@@ -1871,20 +1933,9 @@ if enemy = vargetdsgrid[2] or attakguy = 1 {//ATTAQUANT
 if floor(vargetdsgrid[1]) &lt;= 0 or eventenemy = 1 {
 if alarm[3] &lt;= 0 {
 if instance_exists(obj_ship){
-dir = point_direction(xx,yy,room_width/2,room_height/2)
+dir = dirext
 distenemy = 30000
 with(obj_ship){if planetparent = other.planetparent &amp;&amp; enemy &gt; 0 { 
-distvaropti = point_distance(other.xx, other.yy, xx, yy)
-if enemy = vargetdsgrid[2] or other.distenemy &lt; distvaropti {}else{
-other.cible = id
-other.dir = point_direction(other.xx, other.yy, xx, yy)
-other.distenemy = distvaropti
-}}
-}}
-if instance_exists(obj_shipcommand){
-dir = point_direction(xx,yy,room_width/2,room_height/2)
-distenemy = 30000
-with(obj_shipcommand){if planetparent = other.planetparent &amp;&amp; enemy &gt; 0 { 
 distvaropti = point_distance(other.xx, other.yy, xx, yy)
 if enemy = vargetdsgrid[2] or other.distenemy &lt; distvaropti {}else{
 other.cible = id
@@ -1911,9 +1962,9 @@ if obj_planetary.menuplanet = 0 &amp;&amp; obj_planetary.planetnowid = planetpar
 stationaire = 0;suislepatron = 0}}
 
 if xxcursor &gt; 0 {
-if point_distance(xx,yy,xxcursor,yycursor) &lt; 50 {
+if point_distance(xx,yy,xxcursor,yycursor) &gt;= 50 {
 //xxcursor = 0;yycursor = 0
-}else{
+//}else{
 dir = point_direction(xx,yy,xxcursor,yycursor)
 }}
 
@@ -1922,20 +1973,20 @@ dir = point_direction(xx,yy,xxcursor,yycursor)
 //remonte trop bas trop haut
 if suislepatron = 0  &amp;&amp; xxcursor = 0{
 if vardist2 &lt; (vargetdsgrid[3]+30){//*obj_planetary.optiportabletaille {
-dir = point_direction(room_width/2,room_height/2,xx,yy)}
+dir = ditint}
 if vardist2 &gt; (vargetdsgrid[3]+1800){//*obj_planetary.optiportabletaille {
-dir = point_direction(xx,yy,room_width/2,room_height/2)}
+dir = dirext}
 }else{alarm[6] += 1.1;stationaire = 1
 if vardist2 &lt; (vargetdsgrid[3]+20){//*obj_planetary.optiportabletaille {
-dir = point_direction(room_width/2,room_height/2,xx,yy)}
+dir = ditint}
 if vardist2 &gt; (vargetdsgrid[3]+2500){//*obj_planetary.optiportabletaille {
-dir = point_direction(xx,yy,room_width/2,room_height/2)}
+dir = dirext}
 }
 
 }else{suislepatron = 0
-dir = point_direction(room_width/2,room_height/2,xx,yy)
-if point_distance(room_width/2,room_height/2,xx,yy) &gt; 4500*obj_planetary.optiportabletaille {instance_destroy();}
-if point_distance(room_width/2,room_height/2,xx,yy) &gt; vargetdsgrid[7]+(1000*obj_planetary.optiportabletaille) {
+dir = ditint
+if distoutofscreen &gt; 4500*obj_planetary.optiportabletaille {instance_destroy();}
+if distoutofscreen &gt; vargetdsgrid[7]+(1000*obj_planetary.optiportabletaille) {
 if tracelerp &lt; 50 {tracelerp += 1}
 if tracelerp &gt; 5 &amp;&amp; obj_planetary.planetnowid = planetparent &amp;&amp; obj_planetary.echelle = 0 {
 part_type_shape(obj_planetary.particlec,pt_shape_flare);
@@ -1950,14 +2001,14 @@ part_particles_create(obj_planetary.Snamec,xx,yy,obj_planetary.particlec,trace);
 }
 if alarm[7] &gt; 0  &amp;&amp; eventenemy = 0 {
 suislepatron = 0
-dir = point_direction(room_width/2,room_height/2,xx,yy)
+dir = ditint
 }
 if alarm[9] &lt;= 700{//TROP LONGTEMPS QUE T EN ATAK FAIS RAMER
 suislepatron = 0
-dir = point_direction(room_width/2,room_height/2,xx,yy)
-if point_distance(room_width/2,room_height/2,xx,yy) &lt; 2000*obj_planetary.optiportabletaille {if tracelerp &lt; 50 {tracelerp += 0.01}}else{
+dir = ditint
+if distoutofscreen &lt; 2000*obj_planetary.optiportabletaille {if tracelerp &lt; 50 {tracelerp += 0.01}}else{
 if tracelerp &lt; 50 {tracelerp += 1}}
-if point_distance(room_width/2,room_height/2,xx,yy) &gt; 5000*obj_planetary.optiportabletaille {instance_destroy();}
+if distoutofscreen &gt; 5000*obj_planetary.optiportabletaille {instance_destroy();}
 if tracelerp &gt; 5 &amp;&amp; obj_planetary.planetnowid = planetparent &amp;&amp; obj_planetary.echelle = 0 {
 part_type_shape(obj_planetary.particlec,pt_shape_flare);
 part_type_color3(obj_planetary.particlec,c_white,c_blue,c_white);//33023,255,65535);
@@ -1970,8 +2021,10 @@ part_type_direction(obj_planetary.particlec,dir+177,dir+183,0,0);
 part_particles_create(obj_planetary.Snamec,xx,yy,obj_planetary.particlec,trace);}
 }
 image_angle += sin(degtorad(dir - image_angle)) * (random_range(1,2)*(vitesseship*trace));
-if xx2 &lt; lengthdir_x(vitesseship*vargetdsgrid[7],image_angle) {xx2 += accellerationship*vargetdsgrid[7]}else if xx2 &gt; lengthdir_x(vitesseship*vargetdsgrid[7],image_angle){xx2 -= accellerationship*vargetdsgrid[7]}
-if yy2 &lt; lengthdir_y(vitesseship*vargetdsgrid[7],image_angle) {yy2 += accellerationship*vargetdsgrid[7]}else if yy2 &gt; lengthdir_y(vitesseship*vargetdsgrid[7],image_angle){yy2 -= accellerationship*vargetdsgrid[7]}
+lengthdirx = lengthdir_x(vitesseship*vargetdsgrid[7],image_angle)
+lengthdiry = lengthdir_y(vitesseship*vargetdsgrid[7],image_angle)
+if xx2 &lt; lengthdirx {xx2 += accellerationship*vargetdsgrid[7]}else if xx2 &gt; lengthdirx{xx2 -= accellerationship*vargetdsgrid[7]}
+if yy2 &lt; lengthdiry {yy2 += accellerationship*vargetdsgrid[7]}else if yy2 &gt; lengthdiry{yy2 -= accellerationship*vargetdsgrid[7]}
 //yy2 = lengthdir_y(vitesseship,image_angle)
 trace = lerp(trace,tracelerp,0.1)
 xx += (xx2*obj_planetary.optiportabletaille)*trace
@@ -1993,7 +2046,7 @@ image_yscale = 1*obj_planetary.optiportabletaille
 //cherche ship
 
 if alarm[3] &lt;= 0 {
-dir = point_direction(xx,yy,room_width/2,room_height/2)
+dir = dirext
 distenemy = 1200
 
 if instance_exists(obj_ship){
@@ -2029,7 +2082,7 @@ dir = point_direction(xx,yy,dirstatiox,dirstatioy)
 
 if enemy = ds_grid_get(obj_planetary.planetary,32,planetparent) {if vardist2 &lt; vargetdsgrid[3]-(10*obj_planetary.optiportabletaille) {instance_destroy();}}
 if distenemy = 1200 {
-dir = point_direction(xx,yy,room_width/2,room_height/2)
+dir = dirext
 
 }else{
 //SUIS LE CURSEUR TEST
@@ -2051,22 +2104,21 @@ dir = point_direction(xx,yy,xxcursor,yycursor)
 //remonte trop bas trop haut
 if suislepatron = 0 &amp;&amp; xxcursor = 0{
 if vardist2 &lt; (vargetdsgrid[3]+30){//*obj_planetary.optiportabletaille {
-dir = point_direction(room_width/2,room_height/2,xx,yy)}
+dir = ditint}
 if vardist2 &gt; (vargetdsgrid[3]+1800){//*obj_planetary.optiportabletaille {
-dir = point_direction(xx,yy,room_width/2,room_height/2)}
+dir = dirext}
 }else{alarm[6] += 1;stationaire = 1
 if vardist2 &lt; (vargetdsgrid[3]+20){//*obj_planetary.optiportabletaille {
-dir = point_direction(room_width/2,room_height/2,xx,yy)}
+dir = ditint}
 if vardist2 &gt; (vargetdsgrid[3]+2500){//*obj_planetary.optiportabletaille {
-dir = point_direction(xx,yy,room_width/2,room_height/2)}
+dir = dirext}
 }
 }
 
-if alarm[7] &gt; 0 {dir = point_direction(room_width/2,room_height/2,xx,yy)}
+if alarm[7] &gt; 0 {dir = ditint}
 
-//if alarm[9] &lt;= 500 {dir = point_direction(xx,yy,room_width/2,room_height/2)}
 if alarm[9] &gt; 0 {alarm[9] += 1 }
-if alarm[6] &lt; 0 {dir = point_direction(xx,yy,room_width/2,room_height/2)} //rentrer a la base trop long que t la
+if alarm[6] &lt; 0 {dir = dirext} //rentrer a la base trop long que t la
 if partir = 4 {dir = point_direction(xx,yy,obj_planetary.xxlune1,obj_planetary.yylune1)}
 
 
@@ -2088,14 +2140,14 @@ ds_grid_set(obj_planetary.planetary,214,planetparent,500);}
 instance_destroy();
 //ds_grid_add(obj_planetary.planetary,87,planetparent,1)
 }else{
-if xx2 &lt; lengthdir_x(vitesseship*vargetdsgrid[7],image_angle) {xx2 += accellerationship*vargetdsgrid[7]}else if xx2 &gt; lengthdir_x(vitesseship*vargetdsgrid[7],image_angle){xx2 -= accellerationship*vargetdsgrid[7]}
-if yy2 &lt; lengthdir_y(vitesseship*vargetdsgrid[7],image_angle) {yy2 += accellerationship*vargetdsgrid[7]}else if yy2 &gt; lengthdir_y(vitesseship*vargetdsgrid[7],image_angle){yy2 -= accellerationship*vargetdsgrid[7]}
+lengthdirx = lengthdir_x(vitesseship*vargetdsgrid[7],image_angle)
+lengthdiry = lengthdir_y(vitesseship*vargetdsgrid[7],image_angle)
+if xx2 &lt; lengthdirx {xx2 += accellerationship*vargetdsgrid[7]}else if xx2 &gt; lengthdirx{xx2 -= accellerationship*vargetdsgrid[7]}
+if yy2 &lt; lengthdiry {yy2 += accellerationship*vargetdsgrid[7]}else if yy2 &gt; lengthdiry{yy2 -= accellerationship*vargetdsgrid[7]}
 
 xx += xx2*obj_planetary.optiportabletaille
 yy += yy2*obj_planetary.optiportabletaille
 }
-//xx += lengthdir_x(vitesseship,image_angle)
-//yy += lengthdir_y(vitesseship,image_angle)
 if obj_planetary.planetnowid = planetparent &amp;&amp; obj_planetary.echelle = 0 {
 if type = 6 {image_xscale = 1*obj_planetary.optiportabletaille;image_yscale = image_xscale;image_index = 25;mask_index = spr_masktype3;
 draw_sprite_ext(spr_ship,25,xx,yy,1*obj_planetary.optiportabletaille,1*obj_planetary.optiportabletaille,image_angle,colorshiprgb,1)
@@ -2114,10 +2166,10 @@ image_yscale = 1*obj_planetary.optiportabletaille
 }else if colonisateur = 0 {//N A PLUS RIEN A FAIRE ICI NI ENEMY NI POSSESSEUR
 //if alarm[9] &lt;= 700 {//TROP LONGTEMPS QUE T EN ATAK FAIS RAMER
 suislepatron = 0
-dir = point_direction(room_width/2,room_height/2,xx,yy)
-if point_distance(room_width/2,room_height/2,xx,yy) &lt; 2000*obj_planetary.optiportabletaille {if tracelerp &lt; 50 {tracelerp += 0.01}}else{
+dir = ditint
+if distoutofscreen &lt; 2000*obj_planetary.optiportabletaille {if tracelerp &lt; 50 {tracelerp += 0.01}}else{
 if tracelerp &lt; 50 {tracelerp += 1}}
-if point_distance(room_width/2,room_height/2,xx,yy) &gt; 5000*obj_planetary.optiportabletaille {instance_destroy();}
+if distoutofscreen &gt; 5000*obj_planetary.optiportabletaille {instance_destroy();}
 if tracelerp &gt; 5 &amp;&amp; obj_planetary.planetnowid = planetparent &amp;&amp; obj_planetary.echelle = 0 {
 part_type_shape(obj_planetary.particlec,pt_shape_flare);
 part_type_color3(obj_planetary.particlec,c_white,c_blue,c_white);//33023,255,65535);

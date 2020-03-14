@@ -27,7 +27,11 @@
             <kind>1</kind>
             <string>///JEU PLANETARY NOIR SUR FOND BLEUE 
 
-
+listPlanetOwned[0] = -1;
+dontSave = 0
+global.dateNow = 0
+global.lts = "none"
+global.lfs = "none"
 /*ordre des choses : 
 
 //planete annexes
@@ -115,7 +119,7 @@ nosave = 0
 global.lastprivatemessage = ""
 guildchannel = 1
 
-maitredeslieu = 1
+maitredeslieu = 0
 
 zoom = 1
 zoomlerp = 1
@@ -150,7 +154,7 @@ audio_play_sound(snd_spaceloop,2,true);
 randomize();
 idnumbervar = floor(random_range(6,10000000))
 completeedition = 1
-ini_open( "working_directory+save2.ini" );
+ini_open( working_directory+"save2.ini" );
 optiportabletaille = ini_read_real("game","GameSaves1",1)
 moderatio = ini_read_real("game","GameSaves2",1)
 savedate = ini_read_real("game","GameSaves3",date_current_datetime()*1000)
@@ -168,6 +172,109 @@ rcolor2 = ini_read_real("game","rcolor2",51)
 gcolor2 = ini_read_real("game","gcolor2",26)
 bcolor2 = ini_read_real("game","bcolor2",0)
 dlcpris1 = ini_read_real("game","dlcpris1",0)
+tech1 = ini_read_real("game","tech1",0)
+tech2 = ini_read_real("game","tech2",0)
+tech3 = ini_read_real("game","tech3",0)
+tech4 = ini_read_real("game","tech4",0)
+tech5 = ini_read_real("game","tech5",0)
+tech6 = ini_read_real("game","tech6",0)
+tech7 = ini_read_real("game","tech7",0)
+tech8 = ini_read_real("game","tech8",0)
+tech9 = ini_read_real("game","tech9",0)
+tech10 = ini_read_real("game","tech10",0)
+tech11 = ini_read_real("game","tech11",0)
+tech12 = ini_read_real("game","tech12",0)
+tech13 = ini_read_real("game","tech13",0)
+tech14 = ini_read_real("game","tech14",0)
+tech15 = ini_read_real("game","tech15",0)
+tech16 = ini_read_real("game","tech16",0)
+tech17 = ini_read_real("game","tech17",0)
+tech18 = ini_read_real("game","tech18",0)
+tech19 = ini_read_real("game","tech19",0)
+tech20 = ini_read_real("game","tech20",0)
+tech21 = ini_read_real("game","tech21",0)
+tech22 = ini_read_real("game","tech22",0)
+tech23 = ini_read_real("game","tech23",0)
+tech24 = ini_read_real("game","tech24",0)
+tech25 = ini_read_real("game","tech25",0)
+tech26 = ini_read_real("game","tech26",0)
+tech27 = ini_read_real("game","tech27",0)
+tech28 = ini_read_real("game","tech28",0)
+tech29 = ini_read_real("game","tech29",0)
+tech30 = ini_read_real("game","tech30",0)
+toPMssc1 = ini_read_real("game","topm1",0)
+toPMssc2 = ini_read_real("game","topm2",0)
+toPMssc3 = ini_read_real("game","topm3",0)
+toPMssc4 = ini_read_real("game","topm4",0)
+toPMssc5 = ini_read_real("game","topm5",0)
+toPMssc6 = ini_read_real("game","topm6",0)
+toPMssc7 = ini_read_real("game","topm7",0)
+toPMrttal = ini_read_real("game","topm8",0)
+toPMr1 = ini_read_real("game","topm9",0)
+toPMr2 = ini_read_real("game","topm10",0)
+toPMr3 = ini_read_real("game","topm11",0)
+toPMr4 = ini_read_real("game","topm12",0)
+toPMr5 = ini_read_real("game","topm13",0)
+toPMr6 = ini_read_real("game","topm14",0)
+toPMr7 = ini_read_real("game","topm15",0)
+toPMr8 = ini_read_real("game","topm16",0)
+toPMr9 = ini_read_real("game","topm17",0)
+toPMtime = ini_read_real("game","topm18",0)
+
+techArray[1] = tech1
+techArray[2] = tech2
+techArray[3] = tech3
+techArray[4] = tech4
+techArray[5] = tech5
+techArray[6] = tech6
+techArray[7] = tech7
+techArray[8] = tech8
+techArray[9] = tech9
+techArray[10] = tech10
+techArray[11] = tech11
+techArray[12] = tech12
+techArray[13] = tech13
+techArray[14] = tech14
+techArray[15] = tech15
+techArray[16] = tech16
+techArray[17] = tech17
+techArray[18] = tech18
+techArray[19] = tech19
+techArray[20] = tech20
+techArray[21] = tech21
+techArray[22] = tech22
+techArray[23] = tech23
+techArray[24] = tech24
+techArray[25] = tech25
+techArray[26] = tech26
+techArray[27] = tech27
+techArray[28] = tech28
+techArray[29] = tech29
+techArray[30] = tech30
+
+textSkillName[0] = "Laser technology";
+textSkillName[1] = "Ship hull technology";
+textSkillName[2] = "Missile technology";
+textSkillName[3] = "Shield technology";
+textSkillName[4] = "Alloy technology";
+textSkillName[5] = "Plasma technology";
+textSkillName[6] = "Combustion technology";
+textSkillName[7] = "Hyperdrive technology";
+textSkillName[8] = "Distortion technology";
+textSkillName[9] = "Anti matter";
+
+textSkillDesc[0] = "Improves laser weapon technology, offering considerable power gain";
+textSkillDesc[1] = "Improves the spaceship's storage capacity, and allows to transport more resources";
+textSkillDesc[2] = "Improves rocket armament technology for spaceship categories by disposing";
+textSkillDesc[3] = "Improves the power of spaceship shield generators and planetary defences";
+textSkillDesc[4] = "Improves the alloy's protection of spaceship and planetary defences";
+textSkillDesc[5] = "Improves plasma weapon technology, providing absolute destructive power";
+textSkillDesc[6] = "Improves spaceship combustion engines for more efficient maneuvering of spaceship";
+textSkillDesc[7] = "Improves the Hyperdrive engines of spaceship, allowing faster stellar movement.";
+textSkillDesc[8] = "Improves Space Distortion Engines for near-instantaneous movement of spaceship";
+textSkillDesc[9] = "Improves the anti-matter generator which allows to multiply the efficiency of the resources.";
+
+
 /*ds_grid_add(planetary,30,yygrid,make_colour_rgb(83,41,0))//color1
 ds_grid_add(planetary,31,yygrid,make_colour_rgb(51,26,0))//color2*/
 //show_message(global.idfixe);
@@ -183,6 +290,7 @@ global.ssc4 = "0";
 global.ssc5 = "0";
 global.ssc6 = "0";
 global.ssc7 = "0";
+global.r = "0";
 global.d = "0";
 global.to = "0";
 global.sscu = global.idfixe;
@@ -391,7 +499,7 @@ idplanet[2] = -1
 idplanet[3] = -1
 idplanet[4] = -1
 
-ini_open("working_directory+save.ini");
+ini_open(working_directory+"save.ini");
 ds_grid_read(planetary, ini_read_string("planetary", "grid", 0));
 //ds_grid_read(questgrid, ini_read_string("quest", "grid", ""));
 ini_close();
@@ -816,7 +924,8 @@ part_type_blend(particle2,1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.idfixe {
+            <string>launchTravel = 0
+if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.idfixe) or (global.to != planetnowid and global.idguild = ds_grid_get(planetary,242,planetnowid)) {
     //if real(global.to) != 0 {show_debug_message('test3')
         if real(planetnowid) = 0 {
             ds_grid_add(planetary,43,planetnowid,-global.ssc1)
@@ -826,6 +935,17 @@ part_type_blend(particle2,1);
             ds_grid_add(planetary,47,planetnowid,-global.ssc5)
             ds_grid_add(planetary,48,planetnowid,-global.ssc6)
             ds_grid_add(planetary,49,planetnowid,-global.ssc7)
+            
+            ds_grid_add(planetary,35,buildaffect,-(global.r))
+            ds_grid_add(planetary,90,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,91,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,92,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,93,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,94,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,95,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,96,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,97,buildaffect,-floor(global.r/9))
+            ds_grid_add(planetary,98,buildaffect,-floor(global.r/9))
         }
         with(obj_highscore){
             var hiscore_map, i, str;
@@ -839,41 +959,52 @@ part_type_blend(particle2,1);
             ds_map_set(hiscore_map,'sc6', global.ssc6);
             ds_map_set(hiscore_map,'sc7', global.ssc7);
             ds_map_set(hiscore_map,'to', global.to);
-            ds_map_set(hiscore_map,'d', ds_grid_get(obj_planetary.planetary,50,global.to));//ds_grid_get(obj_planetary.planetary,50,other.planetnowid)
+            ds_map_set(hiscore_map,'d', (ds_grid_get(obj_planetary.planetary,50,global.to)/(1+(obj_planetary.techArray[8]/25)))/(1+(obj_planetary.techArray[9]/25)));//ds_grid_get(obj_planetary.planetary,50,other.planetnowid)
             ds_map_set(hiscore_map,'cu', global.idfixe);
+            ds_map_set(hiscore_map,'r', global.r);
             str = json_encode(hiscore_map);
             ds_map_destroy(hiscore_map); 
-            http_post_string("http://localhost:3000/universe/transferShip" , str);
+            http_post_string(addr+"universe/transferShip" , str);
         }
+        scr_addinfo2(22,ds_grid_get(planetary,8,global.to),planetnowid)
         if global.to = 0 {
-            ds_grid_add(planetary,43,0,global.ssc1)//shiptype1nbr
-            ds_grid_add(planetary,44,0,global.ssc2)//shiptype2nbr
-            ds_grid_add(planetary,45,0,global.ssc3)//shiptype3nbr
-            ds_grid_add(planetary,46,0,global.ssc4)//shiptype4nbr
-            ds_grid_add(planetary,47,0,global.ssc5)//shiptype5nbr
-            ds_grid_add(planetary,48,0,global.ssc6)//shiptype6nbr
-            ds_grid_add(planetary,49,0,global.ssc7)//shiptype7nbr
+            toPMssc1 += global.ssc1
+            toPMssc2 += global.ssc2
+            toPMssc3 += global.ssc3
+            toPMssc4 += global.ssc4
+            toPMssc5 += global.ssc5
+            toPMssc6 += global.ssc6
+            toPMssc7 += global.ssc7
+            toPMrttal += global.r
+            toPMr1 += floor(global.r/9)
+            toPMr2 += floor(global.r/9)
+            toPMr3 += floor(global.r/9)
+            toPMr4 += floor(global.r/9)
+            toPMr5 += floor(global.r/9)
+            toPMr6 += floor(global.r/9)
+            toPMr7 += floor(global.r/9)
+            toPMr8 += floor(global.r/9)
+            toPMr9 += floor(global.r/9)
+            toPMtime += (ds_grid_get(obj_planetary.planetary,50,obj_planetary.planetnowid)*10)
+            
+            
         }
-        global.ssc1 = 0;
-        global.ssc2 = 0;
-        global.ssc3 = 0;
-        global.ssc4 = 0;
-        global.ssc5 = 0;
-        global.ssc6 = 0;
-        global.ssc7 = 0;
-    
+        launchTravel = 1
+    scr_save()
 }else if global.to != planetnowid and ds_grid_get(planetary,32,global.to) != global.idfixe and planetnowid = 0 {
-    if global.ssc1+global.ssc2+global.ssc3+global.ssc4+global.ssc5+global.ssc6+global.ssc7 &gt; 5 {
+    if global.ssc2+global.ssc3+global.ssc4+global.ssc5+global.ssc6+global.ssc7 &gt; 0 {
+        scr_addinfo2(21,ds_grid_get(planetary,8,global.to),planetnowid)
         with(obj_highscore){
            var hiscore_map, i, str;
             hiscore_map = ds_map_create();
             ds_map_set(hiscore_map,'by', global.idfixe);
             
-            if ds_grid_get(obj_planetary.planetary,43,0)-10 &gt; 0 {
+            /*if ds_grid_get(obj_planetary.planetary,43,0)-10 &gt; 0 {
             ds_map_set(hiscore_map,'sc1', global.ssc1);
             }else{
             ds_map_set(hiscore_map,'sc1', 0);
-            }
+            }*/
+            ds_map_set(hiscore_map,'sc1', 0);
             ds_map_set(hiscore_map,'sc2', global.ssc2);
             ds_map_set(hiscore_map,'sc3', global.ssc3);
             ds_map_set(hiscore_map,'sc4', global.ssc4);
@@ -881,7 +1012,7 @@ part_type_blend(particle2,1);
             ds_map_set(hiscore_map,'sc6', global.ssc6);
             ds_map_set(hiscore_map,'sc7', global.ssc7);
             ds_map_set(hiscore_map,'cu', global.idfixe);
-            ds_map_set(hiscore_map,'d', ds_grid_get(obj_planetary.planetary,50,global.to));
+            ds_map_set(hiscore_map,'d', (ds_grid_get(obj_planetary.planetary,50,global.to)/(1+(obj_planetary.techArray[8]/25)))/(1+(obj_planetary.techArray[9]/25)));
             ds_map_set(hiscore_map,'idP', 0);
             ds_map_set(hiscore_map,'id', global.to);
             str = json_encode(hiscore_map);
@@ -892,15 +1023,58 @@ part_type_blend(particle2,1);
             ds_grid_get(obj_planetary.planetary,49,0) &gt; 0 {
             //show_debug_message(ds_grid_get(obj_planetary.planetary,34,obj_planetary.planetnowid));
             if ds_grid_get(obj_planetary.planetary,34,obj_planetary.planetnowid) &lt; 7 {
-                post = http_post_string("http://localhost:3000/universe/launchattack" , str);
-                ds_grid_set(obj_planetary.planetary,43,0,10)
-                ds_grid_set(obj_planetary.planetary,44,0,0)
-                ds_grid_set(obj_planetary.planetary,45,0,0)
-                ds_grid_set(obj_planetary.planetary,46,0,0)
-                ds_grid_set(obj_planetary.planetary,47,0,0)
-                ds_grid_set(obj_planetary.planetary,48,0,0)
-                ds_grid_set(obj_planetary.planetary,49,0,0)
+                post = http_post_string(addr+"universe/launchattack" , str);
+                ds_grid_add(obj_planetary.planetary,44,0,-global.ssc2)
+                ds_grid_add(obj_planetary.planetary,45,0,-global.ssc3)
+                ds_grid_add(obj_planetary.planetary,46,0,-global.ssc4)
+                ds_grid_add(obj_planetary.planetary,47,0,-global.ssc5)
+                ds_grid_add(obj_planetary.planetary,48,0,-global.ssc6)
+                ds_grid_add(obj_planetary.planetary,49,0,-global.ssc7)
             }
+            }
+        }
+        
+        launchTravel = 1
+    }
+}
+    if launchTravel = 1 {
+        maxSendShipTravel = 0
+        for (var il = 0; il &lt; 5; il += 1)
+        {   
+            global.il = il;
+            if il = 0 {shipCatCreate = global.ssc2}
+            if il = 1 {shipCatCreate = global.ssc3}
+            if il = 2 {shipCatCreate = global.ssc4}
+            if il = 3 {shipCatCreate = global.ssc5}
+            if il = 4 {shipCatCreate = global.ssc6}
+            if il = 5 {shipCatCreate = global.ssc7}
+            for (i2 = 0; i2 &lt; shipCatCreate; i2 += 1)
+            {
+                maxSendShipTravel += 1
+                if maxSendShipTravel &lt; 500 {
+                    with(instance_create(x,y,obj_shipcommerce)){
+                        modenew = global.il+2
+                        fuyard = 1
+                        partir = 2
+                        trace = random_range(1,3)
+                        alarm[3] = 4
+                        alarm[7] = 5000
+                        colorshiprgb = ds_grid_get(obj_planetary.planetary,30,planetparent)
+                        colorship = ds_grid_get(other.planetary,32,other.planetnowid);enemy = 0
+                        planetparent = other.planetnowid
+                        vardist = ds_grid_get(other.planetary,39,other.planetnowid)
+                        alarm[0] = (3000/(1+(ds_grid_get(other.planetary,74,other.planetnowid)/100)))*(1+(20/50))
+                        //returnsurbase = 
+                        alarm[1] = alarm[0]+100
+                        rotaaleatdecol = random(360)
+                        xx = room_width/2+lengthdir_x((ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*obj_planetary.optiportabletaille,rotaaleatdecol)
+                        yy = room_height/2+lengthdir_y((ds_grid_get(obj_planetary.planetary,7,other.planetnowid)/25)*obj_planetary.optiportabletaille,rotaaleatdecol)
+                        vargetdsgrid[1] = ds_grid_get(obj_planetary.planetary,51,planetparent)
+                        vargetdsgrid[2] = ds_grid_get(obj_planetary.planetary,34,planetparent)
+                        vargetdsgrid[3] = ((ds_grid_get(obj_planetary.planetary,7,planetparent)/25)*obj_planetary.optiportabletaille)
+                        vargetdsgrid[4] = ds_grid_get(obj_planetary.planetary,32,planetparent)
+                    }
+                }else{break;}
             }
         }
         
@@ -911,8 +1085,9 @@ part_type_blend(particle2,1);
         global.ssc5 = 0;
         global.ssc6 = 0;
         global.ssc7 = 0;
+        global.r = 0;
     }
-}
+    
 </string>
           </argument>
         </arguments>
@@ -2005,7 +2180,13 @@ ds_grid_add(planetary,85,yygrid,0)//vivante
 ds_grid_add(planetary,86,yygrid,0)//color
 ds_grid_add(planetary,87,yygrid,0)//nbr de defense de la lune
 ds_grid_add(planetary,88,yygrid,0)//
-ds_grid_add(planetary,89,yygrid,0)//
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5//shield
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 
 
 //ds_grid_add(planetary,82,yygrid,0)//stationdef10
@@ -2090,6 +2271,7 @@ ds_grid_add(planetary,286,yygrid,0)//planetdef7
 ds_grid_add(planetary,287,yygrid,0)//planetdef8
 ds_grid_add(planetary,288,yygrid,0)//planetdef9
 ds_grid_add(planetary,289,yygrid,0)//planetdef10
+ds_grid_add(planetary,290,yygrid,0)//ressourceaddsendstock
 randomize();
 var i;
 for (i = 0; i &lt; 360; i += 5)
@@ -2184,6 +2366,13 @@ ds_grid_add(planetary,69,yygrid,0)//stationdef9
 ds_grid_add(planetary,70,yygrid,0)//stationdef10
 ds_grid_add(planetary,71,yygrid,1500)//ACTIVITE ASTEORIDE
 ds_grid_add(planetary,81,yygrid,0)//datesave
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 
 
 //ressource
@@ -2295,6 +2484,13 @@ ds_grid_add(planetary,69,yygrid,0)//stationdef9
 ds_grid_add(planetary,70,yygrid,0)//stationdef10
 ds_grid_add(planetary,71,yygrid,150)//ACTIVITE ASTEORIDE
 ds_grid_add(planetary,81,yygrid,0)//datesave
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 ds_grid_add(planetary,200,yygrid,ds_grid_get(planetary,84,yygrid)+random_range(200,600))//distringmin
 ds_grid_add(planetary,201,yygrid,ds_grid_get(planetary,200,yygrid)+random_range(50,700))//distringmax
 
@@ -2417,6 +2613,13 @@ ds_grid_add(planetary,69,yygrid,0)//stationdef9
 ds_grid_add(planetary,70,yygrid,0)//stationdef10
 ds_grid_add(planetary,71,yygrid,500)//ACTIVITE ASTEORIDE
 ds_grid_add(planetary,81,yygrid,0)//datesave
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 
 //ressource
 ds_grid_add(planetary,90,yygrid,0)//iron
@@ -2531,6 +2734,13 @@ ds_grid_add(planetary,69,yygrid,0)//stationdef9
 ds_grid_add(planetary,70,yygrid,0)//stationdef10
 ds_grid_add(planetary,71,yygrid,4500)//ACTIVITE ASTEORIDE
 ds_grid_add(planetary,81,yygrid,0)//datesave
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 
 
 //ressource
@@ -2645,6 +2855,13 @@ ds_grid_add(planetary,69,yygrid,0)//stationdef9
 ds_grid_add(planetary,70,yygrid,0)//stationdef10
 ds_grid_add(planetary,71,yygrid,2200)//ACTIVITE ASTEORIDE
 ds_grid_add(planetary,81,yygrid,0)//datesave
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 ds_grid_add(planetary,83,yygrid,random_range(800,2500))//taille de lune (si 0 exist pas)
 ds_grid_add(planetary,84,yygrid,random_range(200,1000))//distancelune
 ds_grid_add(planetary,200,yygrid,ds_grid_get(planetary,84,yygrid)+random_range(200,600))//distringmin
@@ -2767,6 +2984,13 @@ ds_grid_add(planetary,69,yygrid,0)//stationdef9
 ds_grid_add(planetary,70,yygrid,0)//stationdef10
 ds_grid_add(planetary,71,yygrid,3000)//ACTIVITE ASTEORIDE
 ds_grid_add(planetary,81,yygrid,0)//datesave
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 
 ds_grid_add(planetary,200,yygrid,ds_grid_get(planetary,84,yygrid)+random_range(200,600))//distringmin
 ds_grid_add(planetary,201,yygrid,ds_grid_get(planetary,200,yygrid)+random_range(50,700))//distringmax
@@ -2855,6 +3079,7 @@ ds_grid_add(planetary,45,yygrid,0)//shiptype3nbr
    
 
    ds_grid_add(planetary,0,yygrid,yygrid)//id
+ds_grid_add(planetary,290,yygrid,0)//ressourceaddsendstock
 ds_grid_add(planetary,1,yygrid,4)//Type 1//Asteroid 3//planet morte 4//planet vivante 5//gazeuze 6//etoile
 ds_grid_add(planetary,2,yygrid,random_range(50000000,340000000))//distance soleil ou du parent M de km
 ds_grid_add(planetary,3,yygrid,0)//idparent
@@ -2929,6 +3154,13 @@ ds_grid_add(planetary,69,yygrid,0)//stationdef9
 ds_grid_add(planetary,70,yygrid,0)//stationdef10
 ds_grid_add(planetary,71,yygrid,asteorid)//ACTIVITE ASTEORIDE
 ds_grid_add(planetary,81,yygrid,0)//datesave
+ds_grid_add(planetary,89,yygrid,0)//shield bonus
+ds_grid_add(planetary,101,yygrid,0)//atk t0
+ds_grid_add(planetary,102,yygrid,0)//atk t2
+ds_grid_add(planetary,103,yygrid,0)//atk t3
+ds_grid_add(planetary,104,yygrid,0)//atk t4
+ds_grid_add(planetary,105,yygrid,0)//atk t5
+ds_grid_add(planetary,106,yygrid,0)//atk t6
 if lune &gt; 0 {
 ds_grid_add(planetary,83,yygrid,random_range(600,2500))//taille de lune (si 0 exist pas)
 ds_grid_add(planetary,84,yygrid,random_range(200,1000))//distancelune
@@ -3148,36 +3380,49 @@ ds_grid_add(planetary,237,i,0)//shipatak7
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*colorrect1 = planetarycolor2
-colorrect2 = planetarycolor2
-colorrect3 = planetarycolor2
-colorrect4 = planetarycolor2
-colorrect5 = planetarycolor2
-colorrect6 = planetarycolor2
-colorrect7 = planetarycolor2
-colorrect8 = planetarycolor2//
-colorrect9 = planetarycolor2
-colorrect10 = planetarycolor2
-colorrect11 = planetarycolor2
-colorrect12 = planetarycolor2
-colorrect13 = planetarycolor2
-colorrect14 = c_black
-colorrect15 = c_black
-colorrect16 = c_black
-colorrect17 = c_black
-colorrect18 = c_black
-colorrect19 = c_black
-colorrect20 = planetarycolor2
-colorrect21 = planetarycolor2
-colorrect22 = planetarycolor2
-colorrect23 = planetarycolor2
-colorrect24 = planetarycolor2
-colorrect25 = planetarycolor2
-colorrect26 = planetarycolor2
-colorrect27 = planetarycolor2
-colorrect28 = planetarycolor2
-colorrect29 = planetarycolor2
-colorrect30 = planetarycolor2*/
+            <string>
+if toPMtime &lt;= 0 {
+    ds_grid_add(planetary,43,0,toPMssc1)//shiptype1nbr
+    ds_grid_add(planetary,44,0,toPMssc2)//shiptype2nbr
+    ds_grid_add(planetary,45,0,toPMssc3)//shiptype3nbr
+    ds_grid_add(planetary,46,0,toPMssc4)//shiptype4nbr
+    ds_grid_add(planetary,47,0,toPMssc5)//shiptype5nbr
+    ds_grid_add(planetary,48,0,toPMssc6)//shiptype6nbr
+    ds_grid_add(planetary,49,0,toPMssc7)//shiptype7nbr
+    
+    ds_grid_add(planetary,35,0,toPMrttal)
+    ds_grid_add(planetary,90,0,toPMr1)
+    ds_grid_add(planetary,91,0,toPMr2)
+    ds_grid_add(planetary,92,0,toPMr3)
+    ds_grid_add(planetary,93,0,toPMr4)
+    ds_grid_add(planetary,94,0,toPMr5)
+    ds_grid_add(planetary,95,0,toPMr6)
+    ds_grid_add(planetary,96,0,toPMr7)
+    ds_grid_add(planetary,97,0,toPMr8)
+    ds_grid_add(planetary,98,0,toPMr9)
+    
+    toPMssc1 = 0
+    toPMssc2 = 0
+    toPMssc3 = 0
+    toPMssc4 = 0
+    toPMssc5 = 0
+    toPMssc6 = 0
+    toPMssc7 = 0
+    toPMrttal = 0
+    toPMr1 = 0
+    toPMr2 = 0
+    toPMr3 = 0
+    toPMr4 = 0
+    toPMr5 = 0
+    toPMr6 = 0
+    toPMr7 = 0
+    toPMr8 = 0
+    toPMr9 = 0
+    toPMtime = 0
+    
+}else{
+    toPMtime -= 1
+}
 
 if statschoosemenu = 5 {
 if global.clickss = 1 {global.ssc1 = real(keyboard_string);}
@@ -3188,6 +3433,7 @@ if global.clickss = 5 {global.ssc5 = real(keyboard_string);}
 if global.clickss = 6 {global.ssc6 = real(keyboard_string);}
 if global.clickss = 7 {global.ssc7 = real(keyboard_string);}
 if global.clickss = 8 {global.to = real(keyboard_string);}
+if global.clickss = 9 {global.r = real(keyboard_string);}
 }else{
 global.ssc1 = 0;
 global.ssc2 = 0;
@@ -3197,6 +3443,7 @@ global.ssc5 = 0;
 global.ssc6 = 0;
 global.ssc7 = 0;
 global.to = 0;
+global.r = 0;
 }
 
 
@@ -3376,6 +3623,9 @@ if audio_is_playing(snd_lasera){}else{audio_stop_sound(snd_lasera);}}
           <argument>
             <kind>1</kind>
             <string>if menuplanet = 1 or menuplanet = 3{
+if menuplanet = 3 {
+if roll &lt; 450 {roll += 20}
+}else
 if roll &lt; 600 {roll += 20}
 }else if menuhelp = 0{
 alarm[5] = 30
@@ -3502,23 +3752,74 @@ if type == "INPUTTEXT"
    //which is stored inside the variable called "data"
    var StringWrittenByUser = data
    keyboard_string = StringWrittenByUser
+   //if keyboardcheck2 = 0 {
    if keyboardcheck = 0 {
-global.name = keyboard_string;keyboardcheck = 1
+        global.name = keyboard_string;
+        keyboardcheck = 1;
+        keyboard_string = "";
+    }
+   if keyboardcheck2 = 0 {
+    keyboardcheck2 = 1
+   //keyboardcheck2 = 1
+    with(obj_highscore){
+        var hiscore_map, i, str;
+        hiscore_map = ds_map_create();
+        //ds_map_set(hiscore_map,'id', global.travel);
+        ds_map_set(hiscore_map,'cu', global.idfixe);
+        ds_map_set(hiscore_map,'cun', global.name);
+        ds_map_set(hiscore_map,'cur', obj_planetary.scoreressvalid);
+        ds_map_set(hiscore_map,'cus', obj_planetary.scoreshipsvalid);
+        ds_map_set(hiscore_map,'cut', obj_planetary.scoresciencevalid);
+        ds_map_set(hiscore_map,'cud', obj_planetary.scoredefvalid);
+        ds_map_set(hiscore_map,'n', keyboard_string);
+        str = json_encode(hiscore_map);
+        ds_map_destroy(hiscore_map); 
+        postGuild = http_post_string(addr+"universe/addguild" , str);
+    }
+    scr_addinfo2(19,"",planetnowid)
 keyboard_string = "";
 }
-if keyboardcheck2 = 0 {
+/*if keyboardcheck2 = 0 {
 global.idguildname = keyboard_string;keyboardcheck2 = 1
 keyboard_string = "";
-}
+}*/
 
 if menuplanet = 3 {
 if menuplanet3 &gt; 0 {
 //show_message(menuplanet3)
 if keyboard_string = "" or keyboard_string = " " {}else{
 if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
-if menuplanet3 = 2 {send_message(keyboard_string,global.lastprivatemessage,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-else if menuplanet3 = 3 {send_message(keyboard_string,global.idguild,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-else {send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
+if menuplanet3 = 3 {get_chat(global.idguild,menuplanet3);}
+if menuplanet3 &gt; 0 {
+roll = 450
+
+with(obj_highscore){
+    var hiscore_map, i, str;
+    hiscore_map = ds_map_create();
+    ds_map_set(hiscore_map,'id', other.buildaffect);
+    ds_map_set(hiscore_map,'by', global.idfixe);
+    ds_map_set(hiscore_map,'byn', global.name);
+    if obj_planetary.menuplanet3 = 2 {
+        ds_map_set(hiscore_map,'to', global.lastprivatemessage);
+    }
+    
+    if obj_planetary.menuplanet3 = 3 {
+        ds_map_set(hiscore_map,'g', global.idguild);
+    }else{
+        ds_map_set(hiscore_map,'g', "");
+    }
+    ds_map_set(hiscore_map,'m', keyboard_string);
+    ds_map_set(hiscore_map,'t', 1);
+    str = json_encode(hiscore_map);
+    ds_map_destroy(hiscore_map); 
+    post2 = http_post_string(addr+"universe/addMessage" , str);
+}
+ 
+
+
+get_chat(0,menuplanet3);}else{
+get_chat(global.idfixe,menuplanet3);}
+
 }}
 keyboard_string = "";
 if menuplanet3 = 3 {get_chat(global.idguild,menuplanet3);}else
@@ -3527,31 +3828,66 @@ get_chat(global.idfixe,menuplanet3);}
 //showInputText("Title Text", "OK", "Cancel")
 }
 with(obj_planetary){if scoreshipsvalid &gt; 0 {if global.name = "" or global.name = " " {}else{
-update_score(global.name,scoretotal,global.idfixe,scoreressvalid,scoreshipsvalid,scoresciencevalid,scoredefvalid,global.idguildname,global.idguild,global.grade);
+//update_score(global.name,scoretotal,global.idfixe,scoreressvalid,scoreshipsvalid,scoresciencevalid,scoredefvalid,global.idguildname,global.idguild,global.grade);
 }}}
-if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
+//if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
 }
-/*if menuplanet = 5 {
+
+if statschoosemenu = 5 {
 if keyboard_string = "" or keyboard_string = " " {}else{
 if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
-if menuplanet3 = 2 {send_message(keyboard_string,global.lastprivatemessage,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-else if menuplanet3 = 3 {send_message(keyboard_string,global.idguild,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-else {send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-}}
+if global.clickss = 1 {global.ssc1 = real(keyboard_string);}
+if global.clickss = 2 {global.ssc2 = real(keyboard_string);}
+if global.clickss = 3 {global.ssc3 = real(keyboard_string);}
+if global.clickss = 4 {global.ssc4 = real(keyboard_string);}
+if global.clickss = 5 {global.ssc5 = real(keyboard_string);}
+if global.clickss = 6 {global.ssc6 = real(keyboard_string);}
+if global.clickss = 7 {global.ssc7 = real(keyboard_string);}
+if global.clickss = 8 {global.to = real(keyboard_string);}
+if global.clickss = 9 {global.r = real(keyboard_string);}
+global.clickss = 0
+if global.to &gt; 500 {global.to = 500}else if global.to &lt; 0 {global.to = 0}
+if global.to != 0 &amp;&amp; global.to != planetnowid {
+    with(obj_highscore){
+        var hiscore_map, i, str;
+        hiscore_map = ds_map_create();
+        ds_map_set(hiscore_map,'id', global.to);
+        ds_map_set(hiscore_map,'sr', ds_grid_get(obj_planetary.planetary,39,global.to));
+        ds_map_set(hiscore_map,'ss', ds_grid_get(obj_planetary.planetary,40,global.to));
+        ds_map_set(hiscore_map,'st', ds_grid_get(obj_planetary.planetary,41,global.to));
+        ds_map_set(hiscore_map,'sd', ds_grid_get(obj_planetary.planetary,42,global.to));
+        ds_map_set(hiscore_map,'cu', global.idfixe);
+        str = json_encode(hiscore_map);
+        ds_map_destroy(hiscore_map); 
+        post = http_post_string(addr+"universe/loadbyid" , str);
+    }
+}
+if real(global.ssc1) &gt; ds_grid_get(planetary,43,planetnowid)-10{global.ssc1 = ds_grid_get(planetary,43,planetnowid)-10
+}else if real(global.ssc1) &lt; 0 {global.ssc1 = 0}
+if real(global.ssc2) &gt; ds_grid_get(planetary,44,planetnowid){global.ssc2 = ds_grid_get(planetary,44,planetnowid)
+}else if real(global.ssc2) &lt; 0 {global.ssc2 = 0}
+if real(global.ssc3) &gt; ds_grid_get(planetary,45,planetnowid){global.ssc3 = ds_grid_get(planetary,45,planetnowid)
+}else if real(global.ssc3) &lt; 0 {global.ssc3 = 0}
+if real(global.ssc4) &gt; ds_grid_get(planetary,46,planetnowid){global.ssc4 = ds_grid_get(planetary,46,planetnowid)
+}else if real(global.ssc4) &lt; 0 {global.ssc4 = 0}
+if real(global.ssc5) &gt; ds_grid_get(planetary,47,planetnowid){global.ssc5 = ds_grid_get(planetary,47,planetnowid)
+}else if real(global.ssc5) &lt; 0 {global.ssc5 = 0}
+if real(global.ssc6) &gt; ds_grid_get(planetary,48,planetnowid){global.ssc6 = ds_grid_get(planetary,48,planetnowid)
+}else if real(global.ssc6) &lt; 0 {global.ssc6 = 0}
+if real(global.ssc7) &gt; ds_grid_get(planetary,49,planetnowid){global.ssc7 = ds_grid_get(planetary,49,planetnowid)
+}else if real(global.ssc7) &lt; 0 {global.ssc7 = 0}
+if real(global.r) &gt; maxRessourceSended{global.r = maxRessourceSended
+}else if real(global.r) &lt; 0 {global.r = 0}
+}
+}
 keyboard_string = "";
-}*/
-/*if menuplanet = 3 {
-if menuplanet3 &gt; 0 {
-send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)
-keyboard_string = "";
-get_chat(global.idfixe,menuplanet3);}}*/
-
-
+}
 
 
 keyboard_string = "";
 
 
+global.clickss = 0
    //now use it as you please
 }
 </string>
@@ -3576,37 +3912,10 @@ keyboard_string = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if nosave = 0 {
-ini_open("working_directory+save.ini");
-//ds_grid_write(planetary, ini_read_string("planetary", "grid", 0));
-ini_write_string("planetary", "grid", ds_grid_write(planetary));
-//ds_grid_read(questgrid, ini_read_string("quest", "grid", ""));
-ini_close();
-
-ini_open( "working_directory+save2.ini" );
-ini_write_real("game","GameSaves1",optiportabletaille);
-ini_write_real("game","GameSaves2",moderatio);
-ini_write_real("game","GameSaves3",savedate);
-ini_write_real("game","GameSaves4",global.idfixe);
-ini_write_string("game","GameSaves5",global.name);
-ini_write_real("game","GameSaves6",global.idguild);
-ini_write_string("game","GameSaves7",global.idguildname);
-ini_write_real("game","GameSaves8",global.idguildinvit);
-ini_write_string("game","GameSaves9",global.idguildinvitname);
-ini_write_real("game","GameSaves10",global.grade);
-ini_write_real("game","rcolor",rcolor);
-ini_write_real("game","gcolor",gcolor);
-ini_write_real("game","bcolor",bcolor);
-ini_write_real("game","rcolor2",rcolor2);
-ini_write_real("game","gcolor2",gcolor2);
-ini_write_real("game","bcolor2",bcolor2);
-ini_write_real("game","dlcpris1",dlcpris1);
-
-ini_close();
-}
-/*ini_open("Save.ini");
- ini_write_string("Save", "0", ds_grid_write(mygrid));
- ini_close();*/
+            <string>//scr_save();
+if dontSave = 0 {
+scr_save();
+ }
  
    part_type_destroy(particle1);
   part_type_destroy(particle2);
@@ -3662,7 +3971,7 @@ surface_free(surf2);
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>other</whoName>
+        <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -3673,23 +3982,9 @@ surface_free(surf2);
 if global.phpload = 0 {
 if alarm[9] &lt; 0 {alarm[9] = 20}
 draw_sprite_ext(spr_loading,0,room_width-150,room_height-150,0.4,0.4,rotaload,c_white,1)}
-/*
-draw_sprite_ext(spr_loop,0,(view_xview+room_width/zoomlerp)-(250/zoomlerp),(view_yview)+(40/zoomlerp),0.8/zoomlerp,0.8/zoomlerp,0,c_white,1)
-if device_mouse_check_button_released(0, mb_left) &amp;&amp; menuplanet = 0 &amp;&amp; menuhelp = 0 &amp;&amp; echelle = 0 {
-if point_distance(xxmouse,yymouse,(view_xview+room_width/zoomlerp)-(250/zoomlerp),(view_yview)+(40/zoomlerp)) &lt; 40 {
-if zoomlerp &lt;= 2 {zoomlerp += 0.5
-view_wview = room_width/zoom
-view_hview = room_height/zoom
-viewxlerp = (room_width/2)-((room_width/zoomlerp)/2)
-viewylerp = (room_height/2)-((room_height/zoomlerp)/2)
-}else{zoomlerp = 1
-zoom = 1
-view_wview = room_width/zoomlerp
-view_hview = room_height/zoomlerp
-view_yview = 0
-view_xview = 0
-}
-}}*/
+
+
+
 
 //enlever zoom si menu
 if menuplanet = 0 &amp;&amp; menuhelp = 0{}else{zoom = 1
@@ -3701,23 +3996,6 @@ view_wview = room_width/zoom
 view_hview = room_height/zoom
 zoom = lerp(zoom,zoomlerp,0.1)
 
-
-if zoom &gt; 1 &amp;&amp; global.modesolo = 0 {
-draw_sprite_ext(spr_arrow,0,(view_xview+room_width/zoom)-50,(view_yview+(room_height/2)/zoom),0.5/zoom,0.5/zoom,0,c_white,1)
-if device_mouse_check_button(0, mb_left) {
-if point_distance(xxmouse,yymouse,(view_xview+room_width/zoom)-50,(view_yview+(room_height/2)/zoom)) &lt; 60/zoom {if view_xview+room_width/zoom &lt; room_width {viewxlerp += 5}}}
-draw_sprite_ext(spr_arrow,0,(view_xview+(room_width/2)/zoom),(view_yview+room_height/zoom)-50,0.5/zoom,0.5/zoom,-90,c_white,1)
-if device_mouse_check_button(0, mb_left) {
-if point_distance(xxmouse,yymouse,(view_xview+(room_width/2)/zoom),(view_yview+room_height/zoom)-50) &lt; 60/zoom {if view_yview+room_height/zoom &lt; room_height {viewylerp += 5}}}
-draw_sprite_ext(spr_arrow,0,(view_xview)+50,(view_yview+(room_height/2)/zoom),0.5/zoom,0.5/zoom,-180,c_white,1)
-if device_mouse_check_button(0, mb_left) {
-if point_distance(xxmouse,yymouse,(view_xview)+50,(view_yview+(room_height/2)/zoom)) &lt; 60/zoom {if view_xview &gt; 0 {viewxlerp -= 5}}}
-draw_sprite_ext(spr_arrow,0,(view_xview+(room_width/2)/zoom),(view_yview)+50,0.5/zoom,0.5/zoom,-270,c_white,1)
-if device_mouse_check_button(0, mb_left) {
-if point_distance(xxmouse,yymouse,(view_xview+(room_width/2)/zoom),(view_yview)+50) &lt; 60/zoom {if view_yview &gt; 0 {viewylerp -= 5}}}
-
-
-}
 
 view_xview = lerp(view_xview,viewxlerp,0.1)
 view_yview = lerp(view_yview,viewylerp,0.1)
@@ -4398,14 +4676,14 @@ ds_grid_set(other.planetary,222,other.planetnowid,1)
 }}}}
 }}
 
-if instance_exists(obj_shipcommand){with(obj_shipcommand){
+/*if instance_exists(obj_shipcommand){with(obj_shipcommand){
 if planetparent = other.planetnowid {
 if point_distance(xx,yy,other.xxevent,other.yyevent) &lt; 300*other.optiportabletaille {
 if ds_grid_get(other.planetary,222,other.planetnowid) = 0 {
 if ds_grid_get(other.planetary,32,planetparent) = enemy {
 ds_grid_set(other.planetary,222,other.planetnowid,1) 
 }}}}
-}}
+}}*/
 
 //EVENT TYPE 1 ENEMY
 if ds_grid_get(planetary,219,planetnowid) = 1 {
@@ -4464,12 +4742,29 @@ if ds_grid_get(planetary,221,planetnowid) &gt; 10 {ds_grid_set(planetary,221,pla
 if ds_grid_get(planetary,219,planetnowid) = 3 {
 if ds_grid_get(planetary,222,planetnowid) = 1 {
 ds_grid_set(planetary,222,planetnowid,2) 
+mode = choose(1,2,3,4,5)//other.modeship
+if planetnowid != 0 {
+    with(obj_highscore){
+        var hiscore_map, i, str;
+        hiscore_map = ds_map_create();
+        ds_map_set(hiscore_map,'id', other.planetnowid);
+        ds_map_set(hiscore_map,'cat', other.mode);
+        ds_map_set(hiscore_map,'nbr', ds_grid_get(obj_planetary.planetary,220,other.planetnowid));
+        ds_map_set(hiscore_map,'cu', global.idfixe);
+        str = json_encode(hiscore_map);
+        ds_map_destroy(hiscore_map); 
+        post = http_post_string(addr+"universe/addshipmultipleship" , str);
+    }
+}
+    
 repeat(ds_grid_get(planetary,220,planetnowid)){
 with(instance_create(x,y,obj_ship)){
-mode = choose(1,2,3,4,5)//other.modeship
-ds_grid_add(other.planetary,42+mode,other.planetnowid,1)
-ds_grid_add(other.planetary,53+mode,other.planetnowid,1)
+if other.planetnowid = 0 {
+ds_grid_add(other.planetary,42+other.mode,other.planetnowid,1)
+}
+ds_grid_add(other.planetary,53+other.mode,other.planetnowid,1)
 ds_grid_add(other.planetary,53,other.planetnowid,1)
+
 
 colorship = ds_grid_get(other.planetary,32,other.planetnowid)
 enemy = ds_grid_get(obj_planetary.planetary,32,other.planetnowid);
@@ -4639,6 +4934,14 @@ if part_type_exists(particleg)
    }
    
   }
+  
+  
+  /*if modesun = 1 &amp;&amp; !instance_exists(obj_deathstar)
+  {
+      with(instance_create(room_width/2,room_height/2,obj_deathstar)){
+        test = 1;
+      }
+  }*/
 
 </string>
           </argument>
@@ -4874,7 +5177,6 @@ systemstellairenow = 1
 }
 }
 
-
 </string>
           </argument>
         </arguments>
@@ -4898,11 +5200,28 @@ systemstellairenow = 1
           <argument>
             <kind>1</kind>
             <string>if keyboardcheck = 0 {
-global.name = keyboard_string;keyboardcheck = 1
+global.name = keyboard_string;
+keyboardcheck = 1;
 keyboard_string = "";
 }
 if keyboardcheck2 = 0 {
-global.idguildname = keyboard_string;keyboardcheck2 = 1
+keyboardcheck2 = 1;
+with(obj_highscore){
+    var hiscore_map, i, str;
+    hiscore_map = ds_map_create();
+    //ds_map_set(hiscore_map,'id', global.travel);
+    ds_map_set(hiscore_map,'cu', global.idfixe);
+    ds_map_set(hiscore_map,'cun', global.name);
+    ds_map_set(hiscore_map,'cur', obj_planetary.scoreressvalid);
+    ds_map_set(hiscore_map,'cus', obj_planetary.scoreshipsvalid);
+    ds_map_set(hiscore_map,'cut', obj_planetary.scoresciencevalid);
+    ds_map_set(hiscore_map,'cud', obj_planetary.scoredefvalid);
+    ds_map_set(hiscore_map,'n', keyboard_string);
+    str = json_encode(hiscore_map);
+    ds_map_destroy(hiscore_map); 
+    postGuild = http_post_string(addr+"universe/addguild" , str);
+}
+scr_addinfo2(19,"",planetnowid)
 keyboard_string = "";
 }
 
@@ -4910,35 +5229,69 @@ if menuplanet = 3 {
 if menuplanet3 &gt; 0 {
 //show_message(menuplanet3)
 if keyboard_string = "" or keyboard_string = " " {}else{
-if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
+/*if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
 if menuplanet3 = 2 {send_message(keyboard_string,global.lastprivatemessage,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
 else if menuplanet3 = 3 {send_message(keyboard_string,global.idguild,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
 else {send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-}}
-keyboard_string = "";
-if menuplanet3 = 3 {get_chat(global.idguild,menuplanet3);}else
-if menuplanet3 = 1 {get_chat(0,menuplanet3);}else{
+}*/}
+//keyboard_string = "";
+if menuplanet3 = 3 {get_chat(global.idguild,menuplanet3);}
+if menuplanet3 &gt; 0 {
+roll = 450
+
+with(obj_highscore){
+    var hiscore_map, i, str;
+    hiscore_map = ds_map_create();
+    ds_map_set(hiscore_map,'id', other.buildaffect);
+    ds_map_set(hiscore_map,'by', global.idfixe);
+    ds_map_set(hiscore_map,'byn', global.name);
+    if obj_planetary.menuplanet3 = 2 {
+        ds_map_set(hiscore_map,'to', global.lastprivatemessage);
+    }
+    
+    if obj_planetary.menuplanet3 = 3 {
+        ds_map_set(hiscore_map,'g', global.idguild);
+    }else{
+        ds_map_set(hiscore_map,'g', "");
+    }
+    ds_map_set(hiscore_map,'m', keyboard_string);
+    ds_map_set(hiscore_map,'t', 1);
+    str = json_encode(hiscore_map);
+    ds_map_destroy(hiscore_map); 
+    post2 = http_post_string(addr+"universe/addMessage" , str);
+}
+ 
+
+   get_chat(0,menuplanet3);}else{
 get_chat(global.idfixe,menuplanet3);}
 //showInputText("Title Text", "OK", "Cancel")
 }
 with(obj_planetary){if scoreshipsvalid &gt; 0 {if global.name = "" or global.name = " " {}else{
-update_score(global.name,scoretotal,global.idfixe,scoreressvalid,scoreshipsvalid,scoresciencevalid,scoredefvalid,global.idguildname,global.idguild,global.grade);
+//update_score(global.name,scoretotal,global.idfixe,scoreressvalid,scoreshipsvalid,scoresciencevalid,scoredefvalid,global.idguildname,global.idguild,global.grade);
 }}}
-if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
-}
+//if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
+}else
 if statschoosemenu = 5 {
 if keyboard_string = "" or keyboard_string = " " {}else{
 if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
-/*if global.clickss = 1 {global.ssc1 = real(keyboard_string);}
-if global.clickss = 2 {global.ssc2 = real(keyboard_string);}
-if global.clickss = 3 {global.ssc3 = real(keyboard_string);}
-if global.clickss = 4 {global.ssc4 = real(keyboard_string);}
-if global.clickss = 5 {global.ssc5 = real(keyboard_string);}
-if global.clickss = 6 {global.ssc6 = real(keyboard_string);}
-if global.clickss = 7 {global.ssc7 = real(keyboard_string);}
-if global.clickss = 8 {global.to = real(keyboard_string);}*/
+
 global.clickss = 0
 if global.to &gt; 500 {global.to = 500}else if global.to &lt; 0 {global.to = 0}
+if global.to != 0 &amp;&amp; global.to != planetnowid {
+    with(obj_highscore){
+        var hiscore_map, i, str;
+        hiscore_map = ds_map_create();
+        ds_map_set(hiscore_map,'id', global.to);
+        ds_map_set(hiscore_map,'sr', ds_grid_get(obj_planetary.planetary,39,global.to));
+        ds_map_set(hiscore_map,'ss', ds_grid_get(obj_planetary.planetary,40,global.to));
+        ds_map_set(hiscore_map,'st', ds_grid_get(obj_planetary.planetary,41,global.to));
+        ds_map_set(hiscore_map,'sd', ds_grid_get(obj_planetary.planetary,42,global.to));
+        ds_map_set(hiscore_map,'cu', global.idfixe);
+        str = json_encode(hiscore_map);
+        ds_map_destroy(hiscore_map); 
+        post = http_post_string(addr+"universe/loadbyid" , str);
+    }
+}
 if real(global.ssc1) &gt; ds_grid_get(planetary,43,planetnowid)-10{global.ssc1 = ds_grid_get(planetary,43,planetnowid)-10
 }else if real(global.ssc1) &lt; 0 {global.ssc1 = 0}
 if real(global.ssc2) &gt; ds_grid_get(planetary,44,planetnowid){global.ssc2 = ds_grid_get(planetary,44,planetnowid)
@@ -4953,6 +5306,8 @@ if real(global.ssc6) &gt; ds_grid_get(planetary,48,planetnowid){global.ssc6 = ds
 }else if real(global.ssc6) &lt; 0 {global.ssc6 = 0}
 if real(global.ssc7) &gt; ds_grid_get(planetary,49,planetnowid){global.ssc7 = ds_grid_get(planetary,49,planetnowid)
 }else if real(global.ssc7) &lt; 0 {global.ssc7 = 0}
+if real(global.r) &gt; maxRessourceSended{global.r = maxRessourceSended
+}else if real(global.r) &lt; 0 {global.r = 0}
 }
 }
 keyboard_string = "";

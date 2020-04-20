@@ -29,14 +29,35 @@
 post = '';
 post2 = '';
 postGuild = '';
+postBio = '';
+postQuest = '';
 //alarm[0] = 10;
 
-addr = "http://localhost:31095/"
-//addr = "http://fosthome.synology.me:31095/"
+//addr = "http://localhost:31095/"
+addr = "http://fosthome.synology.me:31095/"
+//addr = "90.22.181.183:31095"
 player_name = global.idfixe;
+global.bioT = "";
+global.bioD = "";
+global.bioD1 = "";
+global.bioPage = 1;
+global.bioPageMax = 1;
+global.listBio = ds_list_create(); 
+ds_list_set(global.listBio, 0, '');
+ds_list_set(global.listBio, 1, '');
+ds_list_set(global.listBio, 2, '');
+ds_list_set(global.listBio, 3, '');
+ds_list_set(global.listBio, 4, '');
+ds_list_set(global.listBio, 5, '');
+ds_list_set(global.listBio, 6, '');
+ds_list_set(global.listBio, 7, '');
+ds_list_set(global.listBio, 8, '');
+ds_list_set(global.listBio, 9, '');
+global.idguildressource = "";
 //alarm[5] = 70
 get_highscores = ""
 array_sample = 0
+enterKey = 0;
 //alarm[6] = 4000
 //get_planet(obj_planetary.buildaffect2);
     //get_scores(player_name,3);
@@ -127,29 +148,50 @@ get_planet(obj_planetary.buildaffect2);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if obj_planetary.menuplanet = 3 &amp;&amp; obj_planetary.menuplanet3 &gt; 0  {
-if obj_planetary.guildchannel = 0 &amp;&amp; obj_planetary.menuplanet3 = 3{
-    var hiscore_map, i, str;
-    hiscore_map = ds_map_create();
-    ds_map_set(hiscore_map,'id', obj_planetary.buildaffect);
-    ds_map_set(hiscore_map,'gn', global.idguildname);
-    str = json_encode(hiscore_map);
-    ds_map_destroy(hiscore_map); 
-    post2 = http_post_string(addr+"universe/loadusersguild" , str);
-}else{
-    var hiscore_map, i, str;
-    hiscore_map = ds_map_create();
-    ds_map_set(hiscore_map,'id', obj_planetary.buildaffect);
-    if obj_planetary.menuplanet3 = 1 {
-    ds_map_set(hiscore_map,'g', "");
+            <string>if obj_planetary.menuplanet = 3 &amp;&amp; obj_planetary.menuplanet3 &gt;= 0  {
+    if obj_planetary.guildchannel = 0 &amp;&amp; obj_planetary.menuplanet3 = 3{
+        var hiscore_map, i, str;
+        hiscore_map = ds_map_create();
+        ds_map_set(hiscore_map,'id', obj_planetary.buildaffect);
+        ds_map_set(hiscore_map,'gn', global.idguildname);
+        str = json_encode(hiscore_map);
+        ds_map_destroy(hiscore_map); 
+        post2 = http_post_string(addr+"universe/loadusersguild" , str);
     }else{
-    ds_map_set(hiscore_map,'g', global.idguild);
+        if obj_planetary.menuplanet = 3 &amp;&amp; obj_planetary.menuplanet3 = 0{
+            if obj_planetary.planetnowid = 0 {
+                    idSend = 1
+                }else{
+                    idSend = obj_planetary.planetnowid
+                }
+            var hiscore_map, i, str;
+            hiscore_map = ds_map_create();
+            ds_map_set(hiscore_map,'r', obj_planetary.scoreressvalid);
+            ds_map_set(hiscore_map,'s', obj_planetary.scoreshipsvalid);
+            ds_map_set(hiscore_map,'t', obj_planetary.scoresciencevalid);
+            ds_map_set(hiscore_map,'d', obj_planetary.scoredefvalid);
+            ds_map_set(hiscore_map,'id', idSend);
+            ds_map_set(hiscore_map,'cu', global.idfixe);
+            ds_map_set(hiscore_map,'n', global.name);
+            //ds_map_set(hiscore_map,'cu', global.idfixe);
+            str = json_encode(hiscore_map);
+            ds_map_destroy(hiscore_map); 
+            post = http_post_string(addr+"universe/loadusersscore" , str);
+        }else{
+            var hiscore_map, i, str;
+            hiscore_map = ds_map_create();
+            ds_map_set(hiscore_map,'id', obj_planetary.buildaffect);
+            if obj_planetary.menuplanet3 = 1 {
+            ds_map_set(hiscore_map,'g', "");
+            }else{
+            ds_map_set(hiscore_map,'g', global.idguild);
+            }
+            ds_map_set(hiscore_map,'t', obj_planetary.menuplanet3);
+            str = json_encode(hiscore_map);
+            ds_map_destroy(hiscore_map); 
+            post2 = http_post_string(addr+"universe/loadlasttenmessage" , str);
+        }
     }
-    ds_map_set(hiscore_map,'t', obj_planetary.menuplanet3);
-    str = json_encode(hiscore_map);
-    ds_map_destroy(hiscore_map); 
-    post2 = http_post_string(addr+"universe/loadlasttenmessage" , str);
-}
 }
 
 if obj_planetary.menuplanet = 3 &amp;&amp; obj_planetary.menuplanet3 = 3{
@@ -161,8 +203,10 @@ if obj_planetary.menuplanet = 3 &amp;&amp; obj_planetary.menuplanet3 = 3{
     ds_map_destroy(hiscore_map); 
     postGuild = http_post_string(addr+"universe/loadGuild" , str);
 }
+
+
     
-    alarm[8] = 25;
+    alarm[8] = 100;
     
     
 </string>
@@ -403,6 +447,23 @@ alarm[0] = 20
 //show_debug_message(post)
 
 var r_str = "null";
+if ds_map_find_value(async_load, "id") == postQuest
+   {
+   if ds_map_find_value(async_load, "status") == 0
+      {
+        r_str = ds_map_find_value(async_load, "result");
+        resultMap = json_decode(r_str)
+        obj_planetary.questR = resultMap[? "r"];
+        obj_planetary.questS = resultMap[? "s"];
+        obj_planetary.questRmax = resultMap[? "rmax"];
+        obj_planetary.questSmax = resultMap[? "smax"];
+        obj_planetary.questId = resultMap[? "id"];
+        obj_planetary.questP = resultMap[? "p"];
+        
+        }
+   }
+
+var r_str = "null";
 if ds_map_find_value(async_load, "id") == postGuild
    {
    if ds_map_find_value(async_load, "status") == 0
@@ -412,14 +473,35 @@ if ds_map_find_value(async_load, "id") == postGuild
         if !is_undefined(resultMap[? "cg"]){//createguild
             if resultMap[? "cg"] = 1 {
                 global.idguildname = string(resultMap[? "n"]);
-                global.idguild = resultMap[? "idg"]
+                global.idguild = resultMap[? "idg"];
+                with(obj_planetary){scr_save();}
             }
         }
-        
-        
+    
+    
         if !is_undefined(resultMap[? "n"]) {
             global.idguildname = resultMap[? "n"]
             global.idguild = resultMap[? "idg"]
+        }
+        
+        if !is_undefined(resultMap[? "r"]) {
+            global.idguildressource = resultMap[? "r"]
+        }
+        
+        if !is_undefined(resultMap[? "rgain"]) {
+            if resultMap[? "rgain"] = 1{
+                ds_grid_add(obj_planetary.planetary,35,0,1000000) 
+                ds_grid_add(obj_planetary.planetary,90,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,91,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,92,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,93,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,94,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,95,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,96,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,97,0,1000000/9)
+                ds_grid_add(obj_planetary.planetary,98,0,1000000/9)
+                with(obj_planetary){scr_save();}
+            }
         }
        
         if !is_undefined(resultMap[? "icu"]){
@@ -435,13 +517,34 @@ if ds_map_find_value(async_load, "id") == post2
    {
    if ds_map_find_value(async_load, "status") == 0
       {
-      r_str = ds_map_find_value(async_load, "result");
-    resultMap = json_decode(r_str)
-    if resultMap[? "chat"] != ""
-        obj_highscore.textChat = resultMap[? "chat"];
-                    
+        r_str = ds_map_find_value(async_load, "result");
+        resultMap = json_decode(r_str);
+        if resultMap[? "chat"] != "" &amp;&amp; !is_undefined(resultMap[? "chat"])
+            obj_highscore.textChat = resultMap[? "chat"];     
       }
       
+   }
+   
+   var r_str = "null";
+if ds_map_find_value(async_load, "id") == postBio
+   {
+   if ds_map_find_value(async_load, "status") == 0
+      {
+        r_str = ds_map_find_value(async_load, "result");
+        resultMap = json_decode(r_str);
+        if resultMap[? "listbio"] != "" &amp;&amp; !is_undefined(resultMap[? "listbio"]){
+        scr_bioClearList();
+            string_split_ds_list("|",resultMap[? "listbio"],true,global.listBio);
+            global.bioPageMax = resultMap[? "nbrpage"];
+        }
+        if resultMap[? "t"] != "" &amp;&amp; !is_undefined(resultMap[? "t"]){
+            //show_debug_message(resultMap[? "t"]);
+            global.bioT = resultMap[? "t"];
+            global.bioD = resultMap[? "d"];
+            global.bioD1 = resultMap[? "d1"];
+        }
+            //show_debug_message(resultMap[? "listbio"]);
+      }
    }
 if ds_map_find_value(async_load, "id") == post
    {
@@ -480,6 +583,8 @@ if ds_map_find_value(async_load, "id") == post
                                             ds_grid_set(obj_planetary.planetary,105,resultMap[? "id"],real(resultMap[? "at5"]))//atk t5
                                             ds_grid_set(obj_planetary.planetary,106,resultMap[? "id"],real(resultMap[? "at6"]))//atk t6
                                             ds_grid_set(obj_planetary.planetary,242,resultMap[? "id"],real(resultMap[? "g"]))//guild
+                                            ds_grid_set(obj_planetary.planetary,291,resultMap[? "id"],real(resultMap[? "p"]))//guild
+                                            //show_debug_message(ds_grid_get(obj_planetary.planetary,242,resultMap[? "id"]));
                     /*if resultMap[? "dn"]*/ global.dateNow = resultMap[? "dn"]
                     if !is_undefined(resultMap[? "t0"]) ds_grid_set(obj_planetary.planetary,72,resultMap[? "id"],real(resultMap[? "t0"]))
                     //if !is_undefined(resultMap[? "t2"]) 
@@ -488,6 +593,21 @@ if ds_map_find_value(async_load, "id") == post
                     //if !is_undefined(resultMap[? "t5"]) 
                     if !is_undefined(resultMap[? "t6"]) ds_grid_set(obj_planetary.planetary,74,resultMap[? "id"],real(resultMap[? "t6"]))
                     global.resultMapId = real(resultMap[? "id"])
+                    if !is_undefined(resultMap[? "gift"]){
+                        gift = real(resultMap[? "gift"])*1000000
+                        //show_debug_message(gift);
+                        ds_grid_add(obj_planetary.planetary,35,0,gift) 
+                        ds_grid_add(obj_planetary.planetary,90,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,91,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,92,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,93,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,94,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,95,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,96,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,97,0,gift/9)
+                        ds_grid_add(obj_planetary.planetary,98,0,gift/9)
+                        with(obj_planetary){scr_save();}
+                    }
                     if is_undefined(resultMap[? "aopsc2"]){}else{
                             maxSendShipTravel = 0
                         for (var i = 0; i &lt; 5; i += 1)
@@ -930,6 +1050,7 @@ else
 }
 //}
 }
+
 
 </string>
           </argument>

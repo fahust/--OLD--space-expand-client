@@ -58,6 +58,11 @@
     <sprite>sprites\spr_loop</sprite>
     <sprite>sprites\spr_deathstar</sprite>
     <sprite>sprites\spr_tech</sprite>
+    <sprite>sprites\spr_tuto</sprite>
+    <sprite>sprites\spr_bounty</sprite>
+    <sprite>sprites\spr_bio</sprite>
+    <sprite>sprites\spr_quest</sprite>
+    <sprite>sprites\spr_galaxy</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -103,12 +108,14 @@
     <script>scripts\scr_stepTest.gml</script>
     <script>scripts\scr_quest.gml</script>
     <script>scripts\scr_save.gml</script>
+    <script>scripts\scr_bioClearList.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\sdh_radiant.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_poly</font>
+    <font>fonts\fnt_realylittle</font>
     <font>fonts\fntpolylitlle</font>
   </fonts>
   <objects name="objects">
@@ -131,6 +138,7 @@
     <object>objects\obj_send_in</object>
     <object>objects\obj_debris</object>
     <object>objects\obj_googleservices</object>
+    <object>objects\obj_areyousure</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

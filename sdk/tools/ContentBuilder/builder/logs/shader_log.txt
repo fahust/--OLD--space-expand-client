@@ -1,0 +1,36 @@
+
+
+[2020-04-08 14:23:41] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:23:41] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:23:41] Unknown shader cache type, ignoring.
+[2020-04-08 14:23:42] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:23:42] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:23:42] Unknown shader cache type, ignoring.
+[2020-04-08 14:23:42] Found 0 current buckets:
+
+
+[2020-04-08 14:28:38] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:28:38] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:28:38] Unknown shader cache type, ignoring.
+[2020-04-08 14:28:39] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:28:39] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:28:39] Unknown shader cache type, ignoring.
+[2020-04-08 14:28:39] Found 0 current buckets:
+
+
+[2020-04-08 14:28:43] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:28:43] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:28:43] Unknown shader cache type, ignoring.
+[2020-04-08 14:28:44] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:28:44] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:28:44] Unknown shader cache type, ignoring.
+[2020-04-08 14:28:44] Found 0 current buckets:
+
+
+[2020-04-08 14:29:12] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:29:13] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_64
+[2020-04-08 14:29:13] Unknown shader cache type, ignoring.
+[2020-04-08 14:29:13] Attempting to find current bucket; temporary dir: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:29:13] Creating shader cache directory: C:\Users\Fahust\Desktop\space expand 2.0\client\spaceExpandClient-master\sdk\tools\ContentBuilder\builder\shader_cache_temp_dir_gl_32
+[2020-04-08 14:29:13] Unknown shader cache type, ignoring.
+[2020-04-08 14:29:14] Found 0 current buckets:

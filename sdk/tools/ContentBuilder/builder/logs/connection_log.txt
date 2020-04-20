@@ -1,0 +1,88 @@
+
+
+[2020-04-08 14:23:41] Log session started
+[2020-04-08 14:23:41] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:23:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:23:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:23:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:23:41] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:23:41] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:23:41] IPv6 HTTP connectivity test (ipv6check-http.steamcontent.com / [2a01:bc80:a:100::b919:b602]:80 ([2a01:bc80:a:100::b919:b602]:80)) - SUCCESS
+[2020-04-08 14:23:41] IPv6 UDP connectivity test (ipv6check-udp.steamcontent.com / [2a01:bc80:7:100::9b85:f80b]:27019) - SUCCESS
+[2020-04-08 14:23:41] [0,0] Server says 0% of connections should be websockets, we rolled 10 - using UDP as default.
+[2020-04-08 14:23:41] CCMInterface::YieldingConnect -- no CMs cached locally, calling ISteamDirectory/GetCMList web api for launcher type 'steamcmd'. . .
+[2020-04-08 14:23:42] CCMInterface::YieldingConnect -- got 100 CMs and 100 WebSocket CMS from ISteamDirectory/GetCMList.
+[2020-04-08 14:23:42] [1,2] Connect() starting connection (eNetQOSLevelHigh, 185.25.182.77:27017, UDP)
+[2020-04-08 14:23:43] [1,2] ConnectionCompleted() (155.133.246.69:27019, UDP)
+[2020-04-08 14:23:43] [1,2] RecvMsgClientLogOnResponse() : [I:0:0] 'Invalid Password'
+[2020-04-08 14:23:43] [1,2] AsyncDisconnect()
+[2020-04-08 14:23:43] [0,0] ConnectionDisconnected('Disconnected By Remote Host') : 'Invalid Password' (155.133.246.69:27019, UDP)
+[2020-04-08 14:23:43] [0,0] ConnectionDisconnected() not auto reconnecting due to eResultLogonSession specifies no reconnect
+[2020-04-08 14:23:43] [0,0] ResetVoiceRecording() (was recording: 0) (last get voice time: 1586348623 seconds ago)
+[2020-04-08 14:23:43] [0,0] Log session ended
+
+
+[2020-04-08 14:28:38] Log session started
+[2020-04-08 14:28:38] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:28:38] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:28:38] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:28:38] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:28:38] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:28:38] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:28:38] IPv6 HTTP connectivity test (ipv6check-http.steamcontent.com / [2a01:bc80:4:100::a2fe:c40b]:80 ([2a01:bc80:4:100::a2fe:c40b]:80)) - SUCCESS
+[2020-04-08 14:28:38] IPv6 UDP connectivity test (ipv6check-udp.steamcontent.com / [2a01:bc80:7:100::9b85:f80b]:27019) - SUCCESS
+[2020-04-08 14:28:38] [0,0] Server says 0% of connections should be websockets, we rolled 52 - using UDP as default.
+[2020-04-08 14:28:38] CCMInterface::YieldingConnect -- no CMs cached locally, calling ISteamDirectory/GetCMList web api for launcher type 'steamcmd'. . .
+[2020-04-08 14:28:39] CCMInterface::YieldingConnect -- got 100 CMs and 100 WebSocket CMS from ISteamDirectory/GetCMList.
+[2020-04-08 14:28:39] [1,2] Connect() starting connection (eNetQOSLevelHigh, 185.25.182.77:27017, UDP)
+[2020-04-08 14:28:40] [1,2] ConnectionCompleted() (155.133.246.69:27018, UDP)
+[2020-04-08 14:28:40] [1,2] RecvMsgClientLogOnResponse() : [I:0:0] 'Invalid Password'
+[2020-04-08 14:28:40] [1,2] AsyncDisconnect()
+[2020-04-08 14:28:40] [0,0] ConnectionDisconnected('Disconnected By Remote Host') : 'Invalid Password' (155.133.246.69:27018, UDP)
+[2020-04-08 14:28:40] [0,0] ConnectionDisconnected() not auto reconnecting due to eResultLogonSession specifies no reconnect
+[2020-04-08 14:28:40] [0,0] ResetVoiceRecording() (was recording: 0) (last get voice time: 1586348920 seconds ago)
+[2020-04-08 14:28:40] [0,0] Log session ended
+
+
+[2020-04-08 14:28:43] Log session started
+[2020-04-08 14:28:43] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:28:43] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:28:43] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:28:43] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:28:43] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:28:43] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:28:43] IPv6 HTTP connectivity test (ipv6check-http.steamcontent.com / [2a01:bc80:4:100::a2fe:c40b]:80 ([2a01:bc80:4:100::a2fe:c40b]:80)) - SUCCESS
+[2020-04-08 14:28:43] IPv6 UDP connectivity test (ipv6check-udp.steamcontent.com / [2a01:bc80:7:100::9b85:f80b]:27019) - SUCCESS
+[2020-04-08 14:28:43] [0,0] Server says 0% of connections should be websockets, we rolled 23 - using UDP as default.
+[2020-04-08 14:28:43] CCMInterface::YieldingConnect -- no CMs cached locally, calling ISteamDirectory/GetCMList web api for launcher type 'steamcmd'. . .
+[2020-04-08 14:28:44] CCMInterface::YieldingConnect -- got 100 CMs and 100 WebSocket CMS from ISteamDirectory/GetCMList.
+[2020-04-08 14:28:44] [1,2] Connect() starting connection (eNetQOSLevelHigh, 185.25.182.76:27018, UDP)
+[2020-04-08 14:28:45] [1,2] ConnectionCompleted() (155.133.246.69:27018, UDP)
+[2020-04-08 14:28:45] [1,2] RecvMsgClientLogOnResponse() : [I:0:0] 'Invalid Password'
+[2020-04-08 14:28:45] [1,2] AsyncDisconnect()
+[2020-04-08 14:28:45] [0,0] ConnectionDisconnected('Disconnected By Remote Host') : 'Invalid Password' (155.133.246.69:27018, UDP)
+[2020-04-08 14:28:45] [0,0] ConnectionDisconnected() not auto reconnecting due to eResultLogonSession specifies no reconnect
+[2020-04-08 14:28:45] [0,0] ResetVoiceRecording() (was recording: 0) (last get voice time: 1586348925 seconds ago)
+[2020-04-08 14:28:45] [0,0] Log session ended
+
+
+[2020-04-08 14:29:12] Log session started
+[2020-04-08 14:29:12] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:29:13] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:29:13] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:29:13] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2020-04-08 14:29:13] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:29:13] [0,0] SetSteamID( [U:1:0] )
+[2020-04-08 14:29:13] IPv6 HTTP connectivity test (ipv6check-http.steamcontent.com / [2a01:bc80:5:106::9b85:fa6c]:80 ([2a01:bc80:5:106::9b85:fa6c]:80)) - SUCCESS
+[2020-04-08 14:29:13] IPv6 UDP connectivity test (ipv6check-udp.steamcontent.com / [2a01:bc80:7:100::9b85:f80b]:27019) - SUCCESS
+[2020-04-08 14:29:13] [0,0] Server says 0% of connections should be websockets, we rolled 96 - using UDP as default.
+[2020-04-08 14:29:13] CCMInterface::YieldingConnect -- no CMs cached locally, calling ISteamDirectory/GetCMList web api for launcher type 'steamcmd'. . .
+[2020-04-08 14:29:14] CCMInterface::YieldingConnect -- got 100 CMs and 100 WebSocket CMS from ISteamDirectory/GetCMList.
+[2020-04-08 14:29:14] [1,2] Connect() starting connection (eNetQOSLevelHigh, 185.25.182.77:27017, UDP)
+[2020-04-08 14:29:15] [1,2] ConnectionCompleted() (155.133.246.69:27018, UDP)
+[2020-04-08 14:29:15] [1,2] RecvMsgClientLogOnResponse() : [I:0:0] 'Invalid Password'
+[2020-04-08 14:29:15] [1,2] AsyncDisconnect()
+[2020-04-08 14:29:15] [0,0] ConnectionDisconnected('Disconnected By Remote Host') : 'Invalid Password' (155.133.246.69:27018, UDP)
+[2020-04-08 14:29:15] [0,0] ConnectionDisconnected() not auto reconnecting due to eResultLogonSession specifies no reconnect
+[2020-04-08 14:29:15] [0,0] ResetVoiceRecording() (was recording: 0) (last get voice time: 1586348955 seconds ago)
+[2020-04-08 14:29:15] [0,0] Log session ended

@@ -32,6 +32,10 @@ dontSave = 0
 global.dateNow = 0
 global.lts = "none"
 global.lfs = "none"
+tutohelp = 0
+yPointReclangle = 0
+yPointReclangle2 = 0
+rollYPlus = 0
 /*ordre des choses : 
 
 //planete annexes
@@ -160,7 +164,7 @@ moderatio = ini_read_real("game","GameSaves2",1)
 savedate = ini_read_real("game","GameSaves3",date_current_datetime()*1000)
 global.idfixe = ini_read_real("game","GameSaves4",idnumbervar)
 global.name = ini_read_string("game","GameSaves5","Guest:"+string(idnumbervar))
-global.idguild = ini_read_real("game","GameSaves6",global.idfixe)
+global.idguild = ini_read_real("game","GameSaves6",-1)
 global.idguildname = ini_read_string("game","GameSaves7","")
 global.idguildinvit = ini_read_real("game","GameSaves8",0)
 global.idguildinvitname = ini_read_string("game","GameSaves9","")
@@ -483,6 +487,8 @@ luneangle1 = 0
 
 planetary = ds_grid_create(300,500);
 ds_grid_clear(planetary,0);
+questgrid = ds_grid_create(5,100);
+ds_grid_clear(planetary,0);
 //Y = systeme stellaire
 buildaffect = 0
 lastbuildaffect = 500
@@ -501,10 +507,84 @@ idplanet[4] = -1
 
 ini_open(working_directory+"save.ini");
 ds_grid_read(planetary, ini_read_string("planetary", "grid", 0));
-//ds_grid_read(questgrid, ini_read_string("quest", "grid", ""));
+ds_grid_read(questgrid, ini_read_string("quest", "grid", ""));
 ini_close();
 if ds_grid_get(planetary,7,0) &gt; 0 {}else{
 alarm[0] = 2;}
+
+ds_grid_set(questgrid,0,1,"Political Piracy")//Pirate politique
+ds_grid_set(questgrid,1,1,"Xahor commandeers programmers from major factions to hack into the Cehenyth mainframe and block their election.")//Les Xahor réquisitione des programmeurs des grandes factions pour pirater les ordinateur centrale des Cehenyth et bloqué leur election
+ds_grid_set(questgrid,2,1,"")//quest faction
+ds_grid_set(questgrid,3,1,"")//quest quest
+ds_grid_set(questgrid,4,1,"")//quest quest
+ds_grid_set(questgrid,5,1,"")//quest quest
+
+ds_grid_set(questgrid,0,2,"Global Sterilization")//Stérilisation mondial
+ds_grid_set(questgrid,1,2,"The Dominion has a problem of overpopulation, it asks a third faction to discreetly infiltrate a virus into world waters to prevent the replication of the faction.")//Le Dominion à un problème de surpopulation, il demande a une faction tier d'infiltrer discretement un virus dans les eaux mondial pour empêcher la reproduction de la faction
+ds_grid_set(questgrid,2,2,"")//quest faction
+ds_grid_set(questgrid,3,2,"")//quest quest
+ds_grid_set(questgrid,4,2,"")//quest quest
+ds_grid_set(questgrid,5,2,"")//quest quest
+
+ds_grid_set(questgrid,0,3,"Scientist at Risk")//Scientifique en péril
+ds_grid_set(questgrid,1,3,"A supernova explosion threatens scientific facilities, you can help them by sending ships to transport their occupants.")//Une explosion de supernova menace des installations scientifiques, vous pouvez leur venir en aide en envoyez des vaisseau pour transporter leur occupants
+ds_grid_set(questgrid,2,3,"")//quest faction
+ds_grid_set(questgrid,3,3,"")//quest quest
+ds_grid_set(questgrid,4,3,"")//quest quest
+ds_grid_set(questgrid,5,3,"")//quest quest
+
+ds_grid_set(questgrid,0,4,"Industrial collapse")//Effondrement industriel
+ds_grid_set(questgrid,1,4,"A mine on an asteroid Cehenyth collapsed, sent helpers to come to their aid.")//Une mine sur un astéroide Cehenyth c'est effondré, envoyé des secours pour leur venir en aide
+ds_grid_set(questgrid,2,4,"")//quest faction
+ds_grid_set(questgrid,3,4,"")//quest quest
+ds_grid_set(questgrid,4,4,"")//quest quest
+ds_grid_set(questgrid,5,4,"")//quest quest
+
+ds_grid_set(questgrid,0,5,"Checking out the revolt")//Matter la révolte
+ds_grid_set(questgrid,1,5,"As a result of an unprecedented economic crisis the people of the Dominion are in the midst of a revolution, they are asking for support from resources and military vessels.")//Suite a une crise économique sans précédent le peuple du Dominion est en pleine révolution, il demande un soutien de ressource et de vaisseau militaire
+ds_grid_set(questgrid,2,5,"")//quest faction
+ds_grid_set(questgrid,3,5,"")//quest quest
+ds_grid_set(questgrid,4,5,"")//quest quest
+ds_grid_set(questgrid,5,5,"")//quest quest
+
+ds_grid_set(questgrid,0,6,"Eco-terrorist")//éco-terroriste
+ds_grid_set(questgrid,1,6,"Eco-terrorists attacked military installations in the dominion to send a message. They're looking for experienced trackers to hunt them down and eliminate them.")//Des éco terroriste ont attaqué les installations millitaire du dominion pour faire passé un message, ils cherchent des traqueurs experimenté pour les pourchassé et les éliminer
+ds_grid_set(questgrid,2,6,"")//quest faction
+ds_grid_set(questgrid,3,6,"")//quest quest
+ds_grid_set(questgrid,4,6,"")//quest quest
+ds_grid_set(questgrid,5,6,"")//quest quest
+
+ds_grid_set(questgrid,0,7,"Slave transport")//Transport d'esclave
+ds_grid_set(questgrid,1,7,"A Xahor slave transport has not arrived at its destination, a reward will be given for any help in finding them.")//Un transport d'esclave Xahor n'est pas arrivé a destination, une récompense sera donné toute aide pour les retrouver.
+ds_grid_set(questgrid,2,7,"")//quest faction
+ds_grid_set(questgrid,3,7,"")//quest quest
+ds_grid_set(questgrid,4,7,"")//quest quest
+ds_grid_set(questgrid,5,7,"")//quest quest
+
+
+ds_grid_set(questgrid,0,8,"Interrupting trade")//Interompre le commerce
+ds_grid_set(questgrid,1,8,"The Xahor trade has lost its splendor, to regain its former splendor he is looking for mercenaries to block a Cehenyth trade line.")//Le commerce Xahor à perdu de sa superbe, pour retrouver sa spleudeur d'antan il cherche des mercenaires pour bloquer une ligne commercial Cehenyth
+ds_grid_set(questgrid,2,8,"")//quest faction
+ds_grid_set(questgrid,3,8,"")//quest quest
+ds_grid_set(questgrid,4,8,"")//quest quest
+ds_grid_set(questgrid,5,8,"")//quest quest
+
+ds_grid_set(questgrid,0,9,"Political refugee")//Réfugié politique
+ds_grid_set(questgrid,1,9,"The Cehenyth are fleeing one of their Xahor-dominated planets, escorting their political refugee to their homeworld.")//Les cehenyth fuis une de leur planète sous domination Xahor, escorter leur réfugié politique jusqu'a leur planète mère
+ds_grid_set(questgrid,2,9,"")//quest faction
+ds_grid_set(questgrid,3,9,"")//quest quest
+ds_grid_set(questgrid,4,9,"")//quest quest
+ds_grid_set(questgrid,5,9,"")//quest quest
+
+ds_grid_set(questgrid,0,10,"Under the bars")//quest title
+ds_grid_set(questgrid,1,10,"Enemies of the Xahor Nation are currently broadcasting radio causing damaging to them, tracing the radio waves and eliminating them.")//Des énemies de la nation Xahor diffuse actuellement des émissions radio portant préjudice a ces derniers, retracer les ondes radio et éliminer les.
+ds_grid_set(questgrid,2,10,"")//quest faction
+ds_grid_set(questgrid,3,10,"")//quest quest
+ds_grid_set(questgrid,4,10,"")//quest quest
+ds_grid_set(questgrid,5,10,"")//quest quest
+
+
+
 
 //show_message(ds_grid_height(planetary)-1)
 ///A ENLEVER !!!!!!! POUR FAIRE DEUX BATAILLE INSTANT DANS SYST SOL
@@ -612,6 +692,108 @@ xxorbitdist9 = -2
 yyorbitdist9 = -2
 
 portrait = 0
+lengthconstellation[0] = 135;
+angleconstellation[0] = 6;
+lengthconstellation[1] = 135;
+angleconstellation[1] = 6;
+lengthconstellation[2] = 305;
+angleconstellation[2] = 14;
+lengthconstellation[3] = 534;
+angleconstellation[3] = 35;
+lengthconstellation[4] = 405;
+angleconstellation[4] = 52;
+lengthconstellation[5] = 515;
+angleconstellation[5] = 67;
+lengthconstellation[6] = 455;
+angleconstellation[6] = 72;
+lengthconstellation[7] = 255;
+angleconstellation[7] = 91;
+lengthconstellation[8] = 175;
+angleconstellation[8] = 112;
+lengthconstellation[9] = 225;
+angleconstellation[9] = 125;
+lengthconstellation[10] = 375;
+angleconstellation[10] = 144;
+lengthconstellation[11] = 425;
+angleconstellation[11] = 167;
+lengthconstellation[12] = 175;
+angleconstellation[12] = 181;
+lengthconstellation[13] = 235;
+angleconstellation[13] = 195;
+lengthconstellation[14] = 545;
+angleconstellation[14] = 221;
+lengthconstellation[15] = 345;
+angleconstellation[15] = 254;
+lengthconstellation[16] = 530;
+angleconstellation[16] = 275;
+lengthconstellation[17] = 420;
+angleconstellation[17] = 288;
+lengthconstellation[18] = 320;
+angleconstellation[18] = 299;
+lengthconstellation[19] = 180;
+angleconstellation[19] = 312;
+lengthconstellation[20] = 460;
+angleconstellation[20] = 335;
+lengthconstellation[21] = 350;
+angleconstellation[21] = 345;
+lengthconstellation[22] = 420;
+angleconstellation[22] = 352;
+lengthconstellation[23] = 496;
+angleconstellation[23] = 2;
+lengthconstellation[24] = 410;
+angleconstellation[24] = 12;
+lengthconstellation[25] = 180;
+angleconstellation[25] = 25;
+lengthconstellation[26] = 240;
+angleconstellation[26] = 34;
+lengthconstellation[27] = 290;
+angleconstellation[27] = 57;
+lengthconstellation[28] = 360;
+angleconstellation[28] = 68;
+lengthconstellation[29] = 140;
+angleconstellation[29] = 72;
+lengthconstellation[30] = 420;
+angleconstellation[30] = 88;
+lengthconstellation[31] = 330;
+angleconstellation[31] = 94;
+lengthconstellation[32] = 397;
+angleconstellation[32] = 112;
+lengthconstellation[33] = 542;
+angleconstellation[33] = 135;
+lengthconstellation[34] = 195;
+angleconstellation[34] = 148;
+lengthconstellation[35] = 278;
+angleconstellation[35] = 152;
+lengthconstellation[36] = 538;
+angleconstellation[36] = 168;
+lengthconstellation[37] = 430;
+angleconstellation[37] = 179;
+lengthconstellation[38] = 328;
+angleconstellation[38] = 194;
+lengthconstellation[39] = 475;
+angleconstellation[39] = 211;
+lengthconstellation[40] = 315;
+angleconstellation[40] = 232;
+lengthconstellation[41] = 514;
+angleconstellation[41] = 254;
+lengthconstellation[42] = 294;
+angleconstellation[42] = 267;
+lengthconstellation[43] = 176;
+angleconstellation[43] = 282;
+lengthconstellation[44] = 346;
+angleconstellation[44] = 289;
+lengthconstellation[45] = 446;
+angleconstellation[45] = 299;
+lengthconstellation[46] = 515;
+angleconstellation[46] = 312;
+lengthconstellation[47] = 198;
+angleconstellation[47] = 331;
+lengthconstellation[48] = 275;
+angleconstellation[48] = 345;
+lengthconstellation[49] = 195;
+angleconstellation[49] = 350;
+lengthconstellation[50] = 347;
+angleconstellation[50] = 360;
 xxconstellation[1] = 1516
 yyconstellation[1] = 264
 xxconstellation[2] = 1704
@@ -726,6 +908,13 @@ xxconstellation[49] = 796
 yyconstellation[49] = 513
 xxconstellation[50] = 530
 yyconstellation[50] = 480
+
+questR = "";
+questS = "";
+questRmax = "";
+questSmax = "";
+questId = "";
+questP = "";
 
 //CHAINE D ASTEORIDE
 for (i = 0; i &lt; 5000; i += 1)
@@ -925,7 +1114,7 @@ part_type_blend(particle2,1);
           <argument>
             <kind>1</kind>
             <string>launchTravel = 0
-if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.idfixe) or (global.to != planetnowid and global.idguild = ds_grid_get(planetary,242,planetnowid)) {
+if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.idfixe) or (global.to != planetnowid and global.idguild = ds_grid_get(planetary,242,global.to)) {
     //if real(global.to) != 0 {show_debug_message('test3')
         if real(planetnowid) = 0 {
             ds_grid_add(planetary,43,planetnowid,-global.ssc1)
@@ -948,6 +1137,9 @@ if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.i
             ds_grid_add(planetary,98,buildaffect,-floor(global.r/9))
         }
         with(obj_highscore){
+            distance = (ds_grid_get(obj_planetary.planetary,50,global.to)/(1+(obj_planetary.techArray[8]/25)))/(1+(obj_planetary.techArray[9]/25));
+            //if distance &lt; ds_grid_get(obj_planetary.planetary,50,global.to)/20 
+            //    distance = ds_grid_get(obj_planetary.planetary,50,global.to)
             var hiscore_map, i, str;
             hiscore_map = ds_map_create();
             ds_map_set(hiscore_map,'id', other.planetnowid);
@@ -959,7 +1151,8 @@ if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.i
             ds_map_set(hiscore_map,'sc6', global.ssc6);
             ds_map_set(hiscore_map,'sc7', global.ssc7);
             ds_map_set(hiscore_map,'to', global.to);
-            ds_map_set(hiscore_map,'d', (ds_grid_get(obj_planetary.planetary,50,global.to)/(1+(obj_planetary.techArray[8]/25)))/(1+(obj_planetary.techArray[9]/25)));//ds_grid_get(obj_planetary.planetary,50,other.planetnowid)
+            ds_map_set(hiscore_map,'n', global.name);
+            ds_map_set(hiscore_map,'d', distance);//ds_grid_get(obj_planetary.planetary,50,other.planetnowid)
             ds_map_set(hiscore_map,'cu', global.idfixe);
             ds_map_set(hiscore_map,'r', global.r);
             str = json_encode(hiscore_map);
@@ -990,8 +1183,8 @@ if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.i
             
         }
         launchTravel = 1
-    scr_save()
-}else if global.to != planetnowid and ds_grid_get(planetary,32,global.to) != global.idfixe and planetnowid = 0 {
+    
+}else if global.to != planetnowid and ds_grid_get(planetary,32,global.to) != global.idfixe /*and planetnowid = 0*/ {
     if global.ssc2+global.ssc3+global.ssc4+global.ssc5+global.ssc6+global.ssc7 &gt; 0 {
         scr_addinfo2(21,ds_grid_get(planetary,8,global.to),planetnowid)
         with(obj_highscore){
@@ -1004,6 +1197,9 @@ if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.i
             }else{
             ds_map_set(hiscore_map,'sc1', 0);
             }*/
+            distance = (ds_grid_get(obj_planetary.planetary,50,global.to)/(1+(obj_planetary.techArray[8]/25)))/(1+(obj_planetary.techArray[9]/25));
+            //if distance &lt; ds_grid_get(obj_planetary.planetary,50,global.to)/20 
+            //    distance = ds_grid_get(obj_planetary.planetary,50,global.to)
             ds_map_set(hiscore_map,'sc1', 0);
             ds_map_set(hiscore_map,'sc2', global.ssc2);
             ds_map_set(hiscore_map,'sc3', global.ssc3);
@@ -1012,9 +1208,10 @@ if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.i
             ds_map_set(hiscore_map,'sc6', global.ssc6);
             ds_map_set(hiscore_map,'sc7', global.ssc7);
             ds_map_set(hiscore_map,'cu', global.idfixe);
-            ds_map_set(hiscore_map,'d', (ds_grid_get(obj_planetary.planetary,50,global.to)/(1+(obj_planetary.techArray[8]/25)))/(1+(obj_planetary.techArray[9]/25)));
+            ds_map_set(hiscore_map,'d', distance);
             ds_map_set(hiscore_map,'idP', 0);
             ds_map_set(hiscore_map,'id', global.to);
+            ds_map_set(hiscore_map,'n', global.name);
             str = json_encode(hiscore_map);
             ds_map_destroy(hiscore_map); 
             if (ds_grid_get(obj_planetary.planetary,43,0)-10)+ds_grid_get(obj_planetary.planetary,44,0)+
@@ -1087,7 +1284,7 @@ if (global.to != planetnowid and ds_grid_get(planetary,32,global.to) == global.i
         global.ssc7 = 0;
         global.r = 0;
     }
-    
+    scr_save()
 </string>
           </argument>
         </arguments>
@@ -2272,6 +2469,7 @@ ds_grid_add(planetary,287,yygrid,0)//planetdef8
 ds_grid_add(planetary,288,yygrid,0)//planetdef9
 ds_grid_add(planetary,289,yygrid,0)//planetdef10
 ds_grid_add(planetary,290,yygrid,0)//ressourceaddsendstock
+ds_grid_add(planetary,291,yygrid,0)//prime
 randomize();
 var i;
 for (i = 0; i &lt; 360; i += 5)
@@ -2905,7 +3103,7 @@ for (i = 0; i &lt; 360; i += 5)
    ds_grid_add(planetary,100+(i/5),yygrid,choose(chooseobj[1],chooseobj[2],chooseobj[3],chooseobj[4],chooseobj[5],chooseobj[6],chooseobj[7],chooseobj[8],chooseobj[9],chooseobj[10]))
    }
    
-   ///6EME PLANET alien pacifique !!
+   ///7EME PLANET alien pacifique !!
    
    
    yygrid = 6
@@ -3040,7 +3238,7 @@ for (i = 0; i &lt; 360; i += 5)
    
     
    //RESTE DES PLANETE ALEATOIRE
-   for (i = 10; i &lt; ds_grid_height(planetary)-1; i += 1)
+   for (i = 7; i &lt; ds_grid_height(planetary)-1; i += 1)
    {  
    randomize();
    yygrid = i
@@ -3080,6 +3278,7 @@ ds_grid_add(planetary,45,yygrid,0)//shiptype3nbr
 
    ds_grid_add(planetary,0,yygrid,yygrid)//id
 ds_grid_add(planetary,290,yygrid,0)//ressourceaddsendstock
+ds_grid_add(planetary,291,yygrid,0)//prime
 ds_grid_add(planetary,1,yygrid,4)//Type 1//Asteroid 3//planet morte 4//planet vivante 5//gazeuze 6//etoile
 ds_grid_add(planetary,2,yygrid,random_range(50000000,340000000))//distance soleil ou du parent M de km
 ds_grid_add(planetary,3,yygrid,0)//idparent
@@ -3380,7 +3579,9 @@ ds_grid_add(planetary,237,i,0)//shipatak7
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>if global.to &gt; 499
+    global.to = 499
+
 if toPMtime &lt;= 0 {
     ds_grid_add(planetary,43,0,toPMssc1)//shiptype1nbr
     ds_grid_add(planetary,44,0,toPMssc2)//shiptype2nbr
@@ -3424,7 +3625,7 @@ if toPMtime &lt;= 0 {
     toPMtime -= 1
 }
 
-if statschoosemenu = 5 {
+if statschoosemenu = 5 or statschoosemenu = 6 {
 if global.clickss = 1 {global.ssc1 = real(keyboard_string);}
 if global.clickss = 2 {global.ssc2 = real(keyboard_string);}
 if global.clickss = 3 {global.ssc3 = real(keyboard_string);}
@@ -3635,6 +3836,8 @@ if optiportabletaillelerp &gt; 0.2 {optiportabletaillelerp -= 0.1}
 if menuhelp = 1 {
 if roll2 &lt; 3000 {roll2 += 20}
 }
+yPointReclangle = mouse_y;
+rollYPlus = 0;
 </string>
           </argument>
         </arguments>
@@ -3659,6 +3862,7 @@ if roll2 &lt; 3000 {roll2 += 20}
             <kind>1</kind>
             <string>if menuplanet = 1 or menuplanet = 3{
 if roll &gt; 0 {roll -= 20}
+if roll &lt; 0 {roll = 0}
 }else if menuhelp = 0 {
 alarm[5] = 30
 if optiportabletaillelerp &lt; 1 {optiportabletaillelerp += 0.1}
@@ -3666,6 +3870,8 @@ if optiportabletaillelerp &lt; 1 {optiportabletaillelerp += 0.1}
 if menuhelp = 1 {
 if roll2 &gt; 0 {roll2 -= 20}
 }
+yPointReclangle = mouse_y;
+rollYPlus = 0;
 </string>
           </argument>
         </arguments>
@@ -3759,12 +3965,14 @@ if type == "INPUTTEXT"
         keyboard_string = "";
     }
    if keyboardcheck2 = 0 {
+    /*obj_planetary.keyboardcheck2 = 1;
+    with(instance_create(x,y,obj_areyousure)){
+        mode = 6
+    }*/
     keyboardcheck2 = 1
-   //keyboardcheck2 = 1
     with(obj_highscore){
         var hiscore_map, i, str;
         hiscore_map = ds_map_create();
-        //ds_map_set(hiscore_map,'id', global.travel);
         ds_map_set(hiscore_map,'cu', global.idfixe);
         ds_map_set(hiscore_map,'cun', global.name);
         ds_map_set(hiscore_map,'cur', obj_planetary.scoreressvalid);
@@ -3777,23 +3985,20 @@ if type == "INPUTTEXT"
         postGuild = http_post_string(addr+"universe/addguild" , str);
     }
     scr_addinfo2(19,"",planetnowid)
-keyboard_string = "";
-}
-/*if keyboardcheck2 = 0 {
-global.idguildname = keyboard_string;keyboardcheck2 = 1
-keyboard_string = "";
-}*/
+    keyboard_string = "";
+    }
 
-if menuplanet = 3 {
+if menuplanet = 3 &amp;&amp; !instance_exists(obj_areyousure){
 if menuplanet3 &gt; 0 {
 //show_message(menuplanet3)
 if keyboard_string = "" or keyboard_string = " " {}else{
 if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
 if menuplanet3 = 3 {get_chat(global.idguild,menuplanet3);}
 if menuplanet3 &gt; 0 {
-roll = 450
+//roll = 450
 
 with(obj_highscore){
+    enterKey = 1
     var hiscore_map, i, str;
     hiscore_map = ds_map_create();
     ds_map_set(hiscore_map,'id', other.buildaffect);
@@ -3820,6 +4025,7 @@ with(obj_highscore){
 get_chat(0,menuplanet3);}else{
 get_chat(global.idfixe,menuplanet3);}
 
+keyboard_string = "";
 }}
 keyboard_string = "";
 if menuplanet3 = 3 {get_chat(global.idguild,menuplanet3);}else
@@ -3833,7 +4039,7 @@ with(obj_planetary){if scoreshipsvalid &gt; 0 {if global.name = "" or global.nam
 //if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
 }
 
-if statschoosemenu = 5 {
+if statschoosemenu = 5 or statschoosemenu = 6{
 if keyboard_string = "" or keyboard_string = " " {}else{
 if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
 if global.clickss = 1 {global.ssc1 = real(keyboard_string);}
@@ -3884,12 +4090,13 @@ keyboard_string = "";
 }
 
 
-keyboard_string = "";
+//keyboard_string = "";
 
 
 global.clickss = 0
    //now use it as you please
 }
+scr_save();
 </string>
           </argument>
         </arguments>
@@ -3978,7 +4185,7 @@ surface_free(surf2);
           <argument>
             <kind>1</kind>
             <string>//optiportabletaille = 1
-
+if !instance_exists(obj_areyousure){
 if global.phpload = 0 {
 if alarm[9] &lt; 0 {alarm[9] = 20}
 draw_sprite_ext(spr_loading,0,room_width-150,room_height-150,0.4,0.4,rotaload,c_white,1)}
@@ -4015,10 +4222,10 @@ if display_get_orientation() = display_portrait
     if moderatio = 8 {room_width = 900.2;room_height = 1200;}else
     if moderatio = 9 {room_width = 1152.2;room_height = 1536;}else
     if moderatio = 10 {room_width = 525.41;room_height = 1080;}
-    if xxconstellation[1] = 1516 {
+    /*if xxconstellation[1] = 1516 {
    scr_constellationadapt1();
    if surface_exists(surf)
-   {surface_free(surf);}}
+   {surface_free(surf);}}*/
     portrait = 1
     }else{
     distanceadaptsyst = 1
@@ -4036,11 +4243,11 @@ if display_get_orientation() = display_portrait
    
    //optiportabletaille = 1
    portrait = 0
-   if xxconstellation[1] = 1516 {}else{
+   /*if xxconstellation[1] = 1516 {}else{
    scr_constellationadapt2();
    if surface_exists(surf)
    {surface_free(surf);}
-   }
+   }*/
    }
    if surface_exists(surf)
    {
@@ -4065,7 +4272,8 @@ if display_get_orientation() = display_portrait
     yybasedir = room_height/2+lengthdir_y(1500,dircolo2)
     draw_set_color(c_red);
     if idplanet[1] = planetnowid or idplanet[2] = planetnowid or idplanet[3] = planetnowid 
-    or idplanet[4] = planetnowid {}else{draw_line(xxmouse,yymouse,xxbasedir,yybasedir)}
+    or idplanet[4] = planetnowid {}else{//draw_line(xxmouse,yymouse,xxbasedir,yybasedir)
+    }
     shipencible = 1}
     draw_set_color(planetarycolor);
     draw_rectangle(xxmousebase,yymousebase,xxmousefin,yymousefin,true);
@@ -4083,7 +4291,7 @@ if alarm[0] &lt; 0 {
 if echelle = 2 {
 if surface_exists(surf){draw_surface(surf, 0, 0);}
 
-for (ic = 0; ic &lt; 50; ic += 1){
+/*for (ic = 0; ic &lt; 50; ic += 1){
    draw_set_color(c_white);
    if portrait = 0 {
    if ic &gt; 1 {
@@ -4103,6 +4311,39 @@ for (ic = 0; ic &lt; 50; ic += 1){
    if completeedition = 1 or ic &lt; 5 {
 if device_mouse_check_button_released(0, mb_left) {
 if point_distance(xxmouse,yymouse,xxconstellation[ic], yyconstellation[ic]) &lt; 40 {
+global.bioPage = 1
+scr_bioClearList();
+echelle = 1
+systemstellairenow = ic
+scr_echelle1();
+if surface_exists(surf){
+surface_set_target(surf);
+draw_set_color(c_black);
+draw_rectangle(0,room_width,0,room_height,true);
+surface_reset_target();
+surface_free(surf);}
+}}
+}
+}*/
+draw_sprite_ext(spr_galaxy,0,room_width/2,room_height/2,1.3*optiportabletaille,1.3*optiportabletaille,rotaplanet,c_white,1)
+
+draw_set_font(fnt_realylittle);
+for (ic = 1; ic &lt; 50; ic += 1){
+    draw_set_color(c_black);
+    draw_circle((room_width/2)+lengthdir_x(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet),
+    (room_height/2)+lengthdir_y(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet), 5*optiportabletaille, false);
+    draw_set_color(c_white);
+   if ic &lt; 2 {draw_set_color(c_red);}
+       if completeedition = 1 or ic &lt; 5 {
+            draw_circle((room_width/2)+lengthdir_x(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet),
+            (room_height/2)+lengthdir_y(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet), 3*optiportabletaille, false);
+       }
+   if completeedition = 1 or ic &lt; 5 {
+if device_mouse_check_button_released(0, mb_left) {
+if point_distance(xxmouse,yymouse,(room_width/2)+lengthdir_x(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet),
+    (room_height/2)+lengthdir_y(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet)) &lt; 40*optiportabletaille {
+global.bioPage = 1
+scr_bioClearList();
 echelle = 1
 systemstellairenow = ic
 scr_echelle1();
@@ -4115,26 +4356,23 @@ surface_free(surf);}
 }}
 }
 
-
-
-}
-
-
-for (ic = 0; ic &lt; 50; ic += 1){
 draw_set_alpha(alarm[5]/100);
 if alarm[5] &lt; 0 {}else{
 textinfo = ""
-/*if ds_grid_get(planetary,32,xxorbitdist1) = 1 {textinfo = "Your faction"}else
-if ds_grid_get(planetary,32,xxorbitdist1) = 2 {textinfo = "Dominion"}else
-if ds_grid_get(planetary,32,xxorbitdist1) = 3 {textinfo = "Xahor"}else
-if ds_grid_get(planetary,32,xxorbitdist1) = 4 {textinfo = "Céhènyth"}*/
 colortext = ds_grid_get(planetary,31,ic)
 draw_set_colour(colortext);
-draw_text(xxconstellation[ic], yyconstellation[ic],starname[ic]);}
+draw_text_outline((room_width/2)+lengthdir_x(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet),
+(room_height/2)+lengthdir_y(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet),starname[ic],c_black,500,fa_center,50,true);}
+//draw_text_outline((room_width/2)+lengthdir_x(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet),
+//(room_height/2)+lengthdir_y(lengthconstellation[ic]*optiportabletaille,angleconstellation[ic]+rotaplanet),ic,c_black,500,fa_center,50,true);}
+
 draw_set_alpha(1);
+
 }
+draw_set_font(fnt_poly);
 
 
+rotaplanet += 0.01;
 }
 //SYSTEM
 if echelle = 1 {
@@ -4177,7 +4415,7 @@ draw_circle(room_width/2,room_height/2,15,false);
    xxorbit9 = room_width/2+lengthdir_x((ds_grid_get(planetary,2,xxorbitdist9)/(150000000/200))/distanceadaptsyst,randomangleorbit9)
     yyorbit9 = room_height/2+lengthdir_y((ds_grid_get(planetary,2,xxorbitdist9)/(150000000/200))/distanceadaptsyst,randomangleorbit9)
     }
-if device_mouse_check_button(0, mb_left) {
+/*if device_mouse_check_button(0, mb_left) {
 draw_set_color(c_red);
 if idplanet[1] = xxorbitdist1 {draw_line(xxorbit1,yyorbit1,xxmouse,yymouse)}
 if idplanet[1] = xxorbitdist2 {draw_line(xxorbit2,yyorbit2,xxmouse,yymouse)}
@@ -4218,7 +4456,7 @@ if idplanet[4] = xxorbitdist6 {draw_line(xxorbit6,yyorbit6,xxmouse,yymouse)}
 if idplanet[4] = xxorbitdist7 {draw_line(xxorbit7,yyorbit7,xxmouse,yymouse)}
 if idplanet[4] = xxorbitdist8 {draw_line(xxorbit8,yyorbit8,xxmouse,yymouse)}
 if idplanet[4] = xxorbitdist9 {draw_line(xxorbit9,yyorbit9,xxmouse,yymouse)}
-}
+}*/
 part_type_size(particle1,0.05,0.05,-0.00001,0);//0.3,0.4,0.1,);
 part_type_speed(particle1,0,0,0,0);//,12,35,0.01,0);
 part_type_colour1(particle1,c_white);//33023,255,65535);
@@ -4626,7 +4864,7 @@ draw_set_alpha(1);
 luneangle1 += ds_grid_get(planetary,13,planetnowid)/110000
 xxlune1 = room_width/2+lengthdir_x((((ds_grid_get(planetary,7,planetnowid)/25)+ds_grid_get(planetary,84,planetnowid))*optiportabletaille),luneangle1)
 yylune1 = room_height/2+lengthdir_y((((ds_grid_get(planetary,7,planetnowid)/25)+ds_grid_get(planetary,84,planetnowid))*optiportabletaille),luneangle1)
-draw_set_halign(fa_center);
+/*draw_set_halign(fa_center);
 
 
 if shipencible = 1 {
@@ -4653,7 +4891,7 @@ draw_text(room_width/2,room_height-(room_height/15),"Colonize with Ship Type-V")
 
 }
 draw_set_halign(fa_left);
-draw_set_alpha(1);
+draw_set_alpha(1);*/
 
 if surface_exists(surf){draw_surface(surf, 0, 0);}
 
@@ -4753,7 +4991,7 @@ if planetnowid != 0 {
         ds_map_set(hiscore_map,'cu', global.idfixe);
         str = json_encode(hiscore_map);
         ds_map_destroy(hiscore_map); 
-        post = http_post_string(addr+"universe/addshipmultipleship" , str);
+        //post = http_post_string(addr+"universe/addshipmultipleship" , str);
     }
 }
     
@@ -4942,7 +5180,7 @@ if part_type_exists(particleg)
         test = 1;
       }
   }*/
-
+}
 </string>
           </argument>
         </arguments>
@@ -5205,39 +5443,19 @@ keyboardcheck = 1;
 keyboard_string = "";
 }
 if keyboardcheck2 = 0 {
-keyboardcheck2 = 1;
-with(obj_highscore){
-    var hiscore_map, i, str;
-    hiscore_map = ds_map_create();
-    //ds_map_set(hiscore_map,'id', global.travel);
-    ds_map_set(hiscore_map,'cu', global.idfixe);
-    ds_map_set(hiscore_map,'cun', global.name);
-    ds_map_set(hiscore_map,'cur', obj_planetary.scoreressvalid);
-    ds_map_set(hiscore_map,'cus', obj_planetary.scoreshipsvalid);
-    ds_map_set(hiscore_map,'cut', obj_planetary.scoresciencevalid);
-    ds_map_set(hiscore_map,'cud', obj_planetary.scoredefvalid);
-    ds_map_set(hiscore_map,'n', keyboard_string);
-    str = json_encode(hiscore_map);
-    ds_map_destroy(hiscore_map); 
-    postGuild = http_post_string(addr+"universe/addguild" , str);
-}
-scr_addinfo2(19,"",planetnowid)
-keyboard_string = "";
+    obj_planetary.keyboardcheck2 = 1;
+    with(instance_create(x,y,obj_areyousure)){
+        mode = 6
+    }
 }
 
-if menuplanet = 3 {
+if menuplanet = 3 &amp;&amp; !instance_exists(obj_areyousure){
 if menuplanet3 &gt; 0 {
-//show_message(menuplanet3)
 if keyboard_string = "" or keyboard_string = " " {}else{
-/*if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
-if menuplanet3 = 2 {send_message(keyboard_string,global.lastprivatemessage,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-else if menuplanet3 = 3 {send_message(keyboard_string,global.idguild,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-else {send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)}
-}*/}
-//keyboard_string = "";
+}
 if menuplanet3 = 3 {get_chat(global.idguild,menuplanet3);}
 if menuplanet3 &gt; 0 {
-roll = 450
+
 
 with(obj_highscore){
     var hiscore_map, i, str;
@@ -5260,18 +5478,14 @@ with(obj_highscore){
     ds_map_destroy(hiscore_map); 
     post2 = http_post_string(addr+"universe/addMessage" , str);
 }
- 
 
    get_chat(0,menuplanet3);}else{
-get_chat(global.idfixe,menuplanet3);}
-//showInputText("Title Text", "OK", "Cancel")
+    get_chat(global.idfixe,menuplanet3);}
+    keyboard_string = "";
 }
 with(obj_planetary){if scoreshipsvalid &gt; 0 {if global.name = "" or global.name = " " {}else{
-//update_score(global.name,scoretotal,global.idfixe,scoreressvalid,scoreshipsvalid,scoresciencevalid,scoredefvalid,global.idguildname,global.idguild,global.grade);
 }}}
-//if instance_exists(obj_highscore){with(obj_highscore){instance_destroy();}}
-}else
-if statschoosemenu = 5 {
+}else if statschoosemenu = 5 or statschoosemenu = 6{
 if keyboard_string = "" or keyboard_string = " " {}else{
 if keyboardcheck = 1 &amp;&amp; keyboardcheck2 = 1 {
 
@@ -5312,17 +5526,12 @@ if real(global.r) &gt; maxRessourceSended{global.r = maxRessourceSended
 }
 keyboard_string = "";
 }
-/*if menuplanet = 3 {
-if menuplanet3 &gt; 0 {
-send_message(keyboard_string,global.idfixe,floor(date_current_datetime()*100000),global.idfixe,"",global.name,menuplanet3)
-keyboard_string = "";
-get_chat(global.idfixe,menuplanet3);}}*/
 
 
 
 
-keyboard_string = "";
-
+//keyboard_string = "";
+scr_save();
 
 </string>
           </argument>
